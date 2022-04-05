@@ -13,5 +13,8 @@ namespace Xapp.Domain.Entities
         public string Email { get; private set; }
 
         public List<PTO>  PTOs { get; set; }
+
+        public List<evento> eventos { get; set; }
+
     }
 }
