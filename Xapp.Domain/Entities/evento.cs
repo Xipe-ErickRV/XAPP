@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xapp.Domain.Enums
+namespace Xapp.Domain.Entities
 {
-    public enum Status
+    public class evento : Entity
     {
-        Pending = 1,
-        Denied = 2,
-        Accepted = 3
     }
 }
