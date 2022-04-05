@@ -9,7 +9,7 @@ namespace Xapp.Domain.Enums
     public enum Status
     {
         Pending = 1,
-        BlaBla = 2,
-        BlaBla2 = 3
+        Denied = 2,
+        Accepted = 3
     }
 }
