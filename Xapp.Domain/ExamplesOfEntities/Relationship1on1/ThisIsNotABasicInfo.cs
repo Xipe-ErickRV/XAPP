@@ -10,7 +10,8 @@ namespace Xapp.Domain.ExamplesOfEntities
     public class ThisIsNotABasicInfo //As you can see this class is not inheriting from 'entity' because it is a 1:1 relationship so we have to add the missing properties like IsDeleted etc..
     {
         [ForeignKey("ThisIsNotAUser")] //this is a foreign key
-        public string Id { get; set; } //this too 
+        public string Id { get; set; } //this too
+                                       //
         public string Name { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }

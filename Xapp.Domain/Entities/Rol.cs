@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Xapp.Domain.Entities
+{
+    public class Rol : Entity
+    {
+        public string Nombre { get; private set; }
+        public string Descripcion { get; private set; }
+     
+    }
+}
