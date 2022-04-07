@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Xapp.Domain.ExamplesOfEntities;
 
 namespace Xapp.API.Data
 {
@@ -8,5 +9,10 @@ namespace Xapp.API.Data
         {
 
         }
+
+        //public DbSet<Country> Countries  { get; set; }
+        //public DbSet<Category> Categories  { get; set; }
+        //public DbSet<CountryCategories> CountryCategories { get; set; }
+
     }
 }
