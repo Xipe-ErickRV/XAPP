@@ -9,8 +9,8 @@ namespace Xapp.Domain.Entities
 {
     public class Skill : Entity
     {
-        public string Nombre { get; private set; }
-        public Nivel Nivel { get; private set; }
-        public string Descripcion { get; private set; }
+        public string Nombre { get; set; }
+        public Nivel Nivel { get; set; }
+        public string Descripcion { get; set; }
     }
 }

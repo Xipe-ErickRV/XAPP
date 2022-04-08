@@ -8,10 +8,10 @@ namespace Xapp.Domain.Entities
 {
     public class User
     {
-        public int IdUser { get; private set; }
-        public string Username { get; private set; }
-        public string Password { get; private set; }
-        public string Email { get; private set; }
+        public int UserId { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
 
         
         public List<PTO> PTOs { get; set; }
@@ -21,10 +21,10 @@ namespace Xapp.Domain.Entities
         public virtual Wallet WalletlUser { get; set; }
 
 
-        public DateTime CreationDate { get; private set; }
-        public DateTime LastUpdate { get; private set; }
-        public bool IsActive { get; private set; }
-        public bool IsDeleted { get; private set; }
+        public DateTime CreationDate { get; set; }
+        public DateTime LastUpdate { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; }
 
         public void CreateEntity()
         {

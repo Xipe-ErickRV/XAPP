@@ -8,6 +8,8 @@ namespace Xapp.Domain.Entities
 {
     public class Wallet : Entity
     {
-        public int Balance { get; private set; }
+        public int Balance { get; set; }
+
+        public virtual List<Transfer> Transfers{ get; set; }
     }
 }

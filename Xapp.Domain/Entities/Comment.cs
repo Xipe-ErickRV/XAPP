@@ -10,11 +10,11 @@ namespace Xapp.Domain.Entities
     public class Comment : Entity
     {
 
-        public string Content { get; private set; }
-        public int Likes { get; private set; }
-        public int PostId { get; private set; }
-        public virtual Post Post { get; private set; } 
-        public int UserId { get; private set; }
-        public virtual User User { get; private set; }
+        public string Content { get; set; }
+        public int Likes { get; set; }
+        public int PostId { get; set; }
+        public virtual Post Post { get; set; } 
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
     }
 }

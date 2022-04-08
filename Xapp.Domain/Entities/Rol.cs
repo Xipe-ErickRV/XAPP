@@ -8,8 +8,8 @@ namespace Xapp.Domain.Entities
 {
     public class Rol : Entity
     {
-        public string Nombre { get; private set; }
-        public string Descripcion { get; private set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
      
     }
 }
