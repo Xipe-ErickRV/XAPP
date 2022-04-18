@@ -10,7 +10,7 @@ namespace Xapp.Domain.Entities
     public class Perfil
     {
         [ForeignKey("User")]
-        public int IdUser { get; set; } //Perfil and User use the same id
+        public int Id { get; set; } //Perfil and User use the same id
         
         public string Telefono { get; set; }
         public string Nombre { get; set; }
@@ -54,5 +54,7 @@ namespace Xapp.Domain.Entities
             IsDeleted = true;
             EditEntity();
         }
+        public virtual User User { get; set; }
+
     }
 }

@@ -10,7 +10,7 @@ namespace Xapp.API.Data
 
         }
 
-        public DbSet<User> Countries { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Perfil> Perfiles { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Event> Eventos { get; set; }

@@ -14,9 +14,10 @@ namespace Xapp.Domain.Entities
         public string Email { get; set; }
 
         
-        public List<PTO> PTOs { get; set; }
-        public List<Rol> Roles { get; set; }
-        public List<Post> Posts { get; set; }
+        public virtual List<PTO> PTOs { get; set; }
+        public virtual List<Rol> Roles { get; set; }
+        public virtual List<Post> Posts { get; set; }
+        public virtual List<Comment> Comments { get; set; }
         public virtual Perfil PerfilUser { get; set; }
         public virtual Wallet WalletlUser { get; set; }
 
