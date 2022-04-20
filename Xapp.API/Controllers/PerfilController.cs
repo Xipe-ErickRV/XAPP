@@ -57,17 +57,19 @@ namespace Xapp.API.Controllers
         }
 
         [HttpPut("putPerfil")]
-        public async Task<IActionResult> putPerfil(Perfil actualizacion)
+        public async Task<IActionResult> putPerfil(string email, Perfil actualizacion)
         {
             var user = await _db.Users.FirstOrDefaultAsync(m => m.Email == email);
             var perfil = await _db.Perfiles.FirstOrDefaultAsync(m => m.Id == user.UserId);
             if (perfil != null)
             {
+                perfil = actualizacion;
+                _db.Update(perfil);
+                _db.SaveChanges();
                 return Ok(perfil);
             }
             else
             {
-
                 return Ok();
             }
         }
