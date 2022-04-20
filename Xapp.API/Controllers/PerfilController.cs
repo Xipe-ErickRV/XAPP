@@ -56,14 +56,14 @@ namespace Xapp.API.Controllers
             }
         }
 
-        [HttpPut("putPerfil")]
-        public async Task<IActionResult> PutPerfil(string email, ProfileUpdate dto)
+        [HttpPatch("patchPerfil")]
+        public async Task<IActionResult> PatchPerfil(string email, ProfileUpdate dto)
         {
             var user = await _db.Users.FirstOrDefaultAsync(m => m.Email == email);
             var perfil = await _db.Perfiles.FirstOrDefaultAsync(m => m.Id == user.UserId);
             if (perfil != null)
             {
-                
+                return Ok(); //this is NOT ok()
             }
             else
             {
