@@ -41,7 +41,7 @@ namespace Xapp.API.Controllers
         }
 
         [HttpGet("getPerfil")]
-        public async Task<IActionResult> getPerfil(string email)
+        public async Task<IActionResult> GetPerfil(string email)
         {
             var user = await _db.Users.FirstOrDefaultAsync(m => m.Email == email);
             var perfil = await _db.Perfiles.FirstOrDefaultAsync(m => m.Id == user.UserId);
@@ -57,16 +57,13 @@ namespace Xapp.API.Controllers
         }
 
         [HttpPut("putPerfil")]
-        public async Task<IActionResult> putPerfil(string email, Perfil actualizacion)
+        public async Task<IActionResult> PutPerfil(string email, ProfileUpdate dto)
         {
             var user = await _db.Users.FirstOrDefaultAsync(m => m.Email == email);
             var perfil = await _db.Perfiles.FirstOrDefaultAsync(m => m.Id == user.UserId);
             if (perfil != null)
             {
-                perfil = actualizacion;
-                _db.Update(perfil);
-                _db.SaveChanges();
-                return Ok(perfil);
+                
             }
             else
             {
