@@ -22,23 +22,6 @@ namespace Xapp.API.Controllers
         {
             _db = db;
         }
-        
-
-        [HttpPost("login")]
-
-        public async Task<IActionResult> Login(string email, string password)
-        {
-            var user = await _db.Users.FirstOrDefaultAsync(m => m.Email == email && m.Password == password);
-            if (user != null)
-            {
-                return Ok(user);
-            }
-            else
-            {
-                
-                return Ok();
-            } 
-        }
 
         [HttpGet("getPerfil")]
         public async Task<IActionResult> GetPerfil(string email)
@@ -56,6 +39,56 @@ namespace Xapp.API.Controllers
             }
         }
 
+        [HttpPost("login")]
+
+        public async Task<IActionResult> Login(string email, string password)
+        {
+            var user = await _db.Users.FirstOrDefaultAsync(m => m.Email == email && m.Password == password);
+            if (user != null)
+            {
+                return Ok(user);
+            }
+            else
+            {
+                
+                return Ok();
+            } 
+        }
+
+        [HttpPost("addUser")]
+        public async Task<IActionResult> addUser(UserInput dto)
+        {
+            var user = new User()
+            {
+                Username = dto.Username,
+                Email = dto.Email,
+                Password = dto.Password,
+                PerfilUser = new Perfil
+                {
+                    Nombre = dto.Nombre,
+                    Apellido = dto.Apellido,
+                    Area = dto.Area,
+                    Bio = dto.Bio,
+                    FechaCumple = dto.FechaCumple
+                },
+                WalletlUser = new Wallet(),
+                Comments = new List<Comment>(),
+                Posts = new List<Post>(),
+                PTOs = new List<PTO>(),
+                Roles = new List<Rol>()
+            };
+            user.CreateEntity();
+            user.PerfilUser.CreateEntity();
+            user.WalletlUser.CreateEntity();
+
+            await _db.Users.AddAsync(user);
+            await _db.Perfiles.AddAsync(user.PerfilUser);
+            await _db.Wallets.AddAsync(user.WalletlUser);
+            await _db.SaveChangesAsync();
+
+            return Ok();
+        }
+
         [HttpPatch("patchPerfil")]
         public async Task<IActionResult> PatchPerfil(string email, ProfileUpdate dto)
         {
@@ -69,6 +102,13 @@ namespace Xapp.API.Controllers
             {
                 return Ok();
             }
+        }
+
+        [HttpDelete("skillDelete")]
+        public async Task<IActionResult> DeletePerfil(string email)
+        {
+            var user = await _db.Users.FirstOrDefaultAsync(x => x.Email == email);
+            return Ok();
         }
     }
 }
