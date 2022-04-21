@@ -13,6 +13,8 @@ namespace Xapp.API
     {
         public static void Main(string[] args)
         {
+            //TEST
+            //Esto es una app de consola en realidad!
             CreateHostBuilder(args).Build().Run();
         }
 
