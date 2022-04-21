@@ -39,6 +39,23 @@ namespace Xapp.API.Controllers
             }
         }
 
+        //TEST PENDING
+        [HttpGet("getSkills")]
+        public async Task<IActionResult> GetSkills(string email)
+        {
+            var user = await _db.Users.FirstOrDefaultAsync(m => m.Email == email);
+            var skills = user.PerfilUser.Skills; 
+            if (user != null)
+            {
+                return Ok(skills);
+            }
+            else
+            {
+
+                return Ok();
+            }
+        }
+
         [HttpPost("login")]
 
         public async Task<IActionResult> Login(string email, string password)
@@ -89,6 +106,7 @@ namespace Xapp.API.Controllers
             return Ok();
         }
 
+        //SERVICES??
         [HttpPatch("patchPerfil")]
         public async Task<IActionResult> PatchPerfil(string email, ProfileUpdate dto)
         {
@@ -104,11 +122,15 @@ namespace Xapp.API.Controllers
             }
         }
 
+        //TEST PENDING
         [HttpDelete("skillDelete")]
-        public async Task<IActionResult> DeletePerfil(string email)
+        public async Task<IActionResult> SkillDelete(int ID, string email)
         {
             var user = await _db.Users.FirstOrDefaultAsync(x => x.Email == email);
-            return Ok();
+            var skill = user.PerfilUser.Skills.ElementAt(ID);
+            skill.Delete();
+            await _db.SaveChangesAsync();
+            return Ok(skill);
         }
     }
 }
