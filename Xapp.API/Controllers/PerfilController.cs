@@ -27,7 +27,7 @@ namespace Xapp.API.Controllers
         public async Task<IActionResult> GetPerfil(string email)
         {
             var user = await _db.Users.FirstOrDefaultAsync(m => m.Email == email);
-            var perfil = await _db.Perfiles.FirstOrDefaultAsync(m => m.Id == user.UserId);
+            var perfil = user.PerfilUser;
             if (perfil != null)
             {
                 return Ok(perfil);
@@ -111,7 +111,7 @@ namespace Xapp.API.Controllers
         public async Task<IActionResult> PatchPerfil(string email, ProfileUpdate dto)
         {
             var user = await _db.Users.FirstOrDefaultAsync(m => m.Email == email);
-            var perfil = await _db.Perfiles.FirstOrDefaultAsync(m => m.Id == user.UserId);
+            var perfil = user.PerfilUser;
             if (perfil != null)
             {
                 return Ok(); //this is NOT ok()
