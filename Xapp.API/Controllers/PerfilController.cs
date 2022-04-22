@@ -105,6 +105,30 @@ namespace Xapp.API.Controllers
             return Ok();
         }
 
+        //FALTA VINCULAR PERFIL-SKILL
+        [HttpPost("newSkill")]
+        public async Task<IActionResult> NewSkill(string email, SkillInput dto)
+        {
+            var user = await _db.Users
+                .Include(x => x.PerfilUser)
+                .ThenInclude(x => x.Skills)
+                .FirstOrDefaultAsync(x => x.Email == email);
+
+            if (user == null) return BadRequest();
+
+            var skill = new Skill()
+            {
+                Nombre = dto.Nombre,
+                Nivel = dto.Nivel,
+                Descripcion = dto.Descripcion
+            };
+
+            await _db.Skills.AddAsync(skill);
+            await _db.SaveChangesAsync();
+
+            return Ok();
+        }
+
         //SERVICES??
         [HttpPatch("patchPerfil")]
         public async Task<IActionResult> PatchPerfil(string email, ProfileUpdate dto)
