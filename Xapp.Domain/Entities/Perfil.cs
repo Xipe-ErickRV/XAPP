@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xapp.Domain.DTOs;
 
 namespace Xapp.Domain.Entities
 {
@@ -12,7 +13,7 @@ namespace Xapp.Domain.Entities
         [ForeignKey("User")]
         public int Id { get; set; } //Perfil and User use the same id
         
-        public string Telefono { get; set; }
+        public string Telefono { get;  set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Area { get; set; }
@@ -30,6 +31,15 @@ namespace Xapp.Domain.Entities
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
 
+        public void MetodoEdit(ProfileUpdate dto)
+        {
+            Nombre = dto.Nombre;
+            Apellido = dto.Apellido;
+            Telefono = dto.Telefono;
+            FechaCumple = dto.FechaCumple;
+            Area = dto.Area;
+            Bio = dto.Bio;
+        }
         public void CreateEntity()
         {
             CreationDate = DateTime.Now;

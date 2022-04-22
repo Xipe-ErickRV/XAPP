@@ -110,15 +110,18 @@ namespace Xapp.API.Controllers
         [HttpPatch("patchPerfil")]
         public async Task<IActionResult> PatchPerfil(string email, ProfileUpdate dto)
         {
-            var user = await _db.Users.FirstOrDefaultAsync(m => m.Email == email);
-            var perfil = user.PerfilUser;
-            if (perfil != null)
+            var user = await _db.Users
+                .Include(x=> x.PerfilUser)
+                .FirstOrDefaultAsync(m => m.Email == email);
+            if (user != null)
             {
-                return Ok(); //this is NOT ok()
+                user.PerfilUser.MetodoEdit(dto);
+                await _db.SaveChangesAsync();
+                return Ok();
             }
             else
             {
-                return Ok();
+                return BadRequest();
             }
         }
 
