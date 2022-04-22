@@ -1,0 +1,52 @@
+﻿@model Xapp.Domain.DTOs.Example.ExampleInput
+
+@*Aquí se puede poner los styles de cada página*@
+<style>
+    h1 {
+        color: blue;
+    }
+</style>
+
+
+<h1>HOLA, este es un ejemplo muy sencillo de vistas y formularios</h1>
+<form action="Example/Index" method="post">
+    <table>
+        <tr>
+            <td>Carro: </td>
+            <td><input type="text" name="Carro" /></td>
+        </tr>
+        <tr>
+            <td>Color: </td>
+            <td><input type="text" name="Color" /></td>
+        </tr>
+        <tr>
+            <td>Placas: </td>
+            <td><input type="text" name="Placas" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Submit Form" /></td>
+        </tr>
+    </table>
+</form>
+
+@if (string.IsNullOrEmpty(Model.Carro))
+{
+    <h1>Si llega vacio el carro, no mostramos nada</h1>
+
+}
+else
+{
+    <h1>Despues de hacer el post, el controller regresa el output:</h1>
+    <h1>Carro : @Model.Carro</h1>
+    <h1>Placas : @Model.Placas</h1>
+    <h1>Color : @Model.Color</h1>
+}
+
+
+@*Aquí se puede meter scripts*@
+@section Scripts{ 
+<script>
+    alert("esta es una alerta con javascript");
+</script>
+}
+

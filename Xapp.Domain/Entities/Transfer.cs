@@ -10,7 +10,8 @@ namespace Xapp.Domain.Entities
     {
         public int Receiver { get; set; }
         public int Sender { get; set; }
-
+        public string Concept { get; set; }
+        public decimal Amount { get; set; }
         //Declarar la llave fóranea
         public int WalletId { get; set; }
         public virtual Wallet Wallet { get; set; } //a space that will be use to store de entire object if we needed
