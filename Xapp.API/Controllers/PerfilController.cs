@@ -60,15 +60,14 @@ namespace Xapp.API.Controllers
 
         public async Task<IActionResult> Login(string email, string password)
         {
-            var user = await _db.Users.FirstOrDefaultAsync(m => m.Email == email && m.Password == password);
+            var user = await _db.Users.Include(m => m.PerfilUser).FirstOrDefaultAsync(m => m.Email == email && m.Password == password);
             if (user != null)
             {
                 return Ok(user);
             }
             else
             {
-                
-                return Ok();
+                return BadRequest();
             } 
         }
 
@@ -129,8 +128,16 @@ namespace Xapp.API.Controllers
         [HttpDelete("skillDelete")]
         public async Task<IActionResult> SkillDelete(int ID, string email)
         {
-            var user = await _db.Users.FirstOrDefaultAsync(x => x.Email == email);
-            var skill = user.PerfilUser.Skills.ElementAt(ID);
+            var user = await _db.Users
+                .Include(x=> x.PerfilUser)
+                .ThenInclude(x=> x.Skills)
+                .FirstOrDefaultAsync(x => x.Email == email);
+
+            //validación bla bla
+            // validación ...
+
+
+            var skill = user.PerfilUser.Skills.Find(m => m.Id == ID);
             skill.Delete();
             await _db.SaveChangesAsync();
             return Ok(skill);
