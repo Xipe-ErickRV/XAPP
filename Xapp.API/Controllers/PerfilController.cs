@@ -38,29 +38,25 @@ namespace Xapp.API.Controllers
                 return Ok();
             }
         }
-
-        //TEST PENDING
         [HttpGet("getSkills")]
         public async Task<IActionResult> GetSkills(string email)
         {
-            var user = await _db.Users.FirstOrDefaultAsync(m => m.Email == email);
-            var skills = user.PerfilUser.Skills; 
-            if (user != null)
-            {
-                return Ok(skills);
-            }
-            else
-            {
+            var user = await _db.Users
+                .Include(x => x.PerfilUser)
+                .ThenInclude(x => x.Skills)
+                .FirstOrDefaultAsync(m => m.Email == email);
 
-                return Ok();
-            }
+            if (user == null) return BadRequest();
+            
+            return Ok(user.PerfilUser.Skills);
         }
 
         [HttpPost("login")]
-
         public async Task<IActionResult> Login(string email, string password)
         {
-            var user = await _db.Users.Include(m => m.PerfilUser).FirstOrDefaultAsync(m => m.Email == email && m.Password == password);
+            var user = await _db.Users
+                .Include(m => m.PerfilUser)
+                .FirstOrDefaultAsync(m => m.Email == email && m.Password == password);
             if (user != null)
             {
                 return Ok(user);
@@ -72,7 +68,7 @@ namespace Xapp.API.Controllers
         }
 
         [HttpPost("addUser")]
-        public async Task<IActionResult> addUser(UserInput dto)
+        public async Task<IActionResult> AddUser(UserInput dto)
         {
             var user = new User()
             {
@@ -104,8 +100,6 @@ namespace Xapp.API.Controllers
 
             return Ok();
         }
-
-        //FALTA VINCULAR PERFIL-SKILL
         [HttpPost("newSkill")]
         public async Task<IActionResult> NewSkill(string email, SkillInput dto)
         {
@@ -123,6 +117,8 @@ namespace Xapp.API.Controllers
                 Nivel = dto.Nivel,
                 Descripcion = dto.Descripcion
             };
+            skill.CreateEntity();
+            user.PerfilUser.Skills.Add(skill);
 
             await _db.Skills.AddAsync(skill);
             await _db.SaveChangesAsync();
@@ -148,7 +144,6 @@ namespace Xapp.API.Controllers
             }
         }
 
-        //TEST PENDING
         [HttpDelete("skillDelete")]
         public async Task<IActionResult> SkillDelete(int ID, string email)
         {
@@ -160,8 +155,10 @@ namespace Xapp.API.Controllers
             //validación bla bla
             // validación ...
 
+            var skill = user.PerfilUser.Skills
+                .Find(x => x.User == user.UserId && x.Id == ID);
+            if (skill == null) return BadRequest();
 
-            var skill = user.PerfilUser.Skills.Find(m => m.Id == ID);
             skill.Delete();
             await _db.SaveChangesAsync();
             return Ok(skill);
