@@ -118,6 +118,7 @@ namespace Xapp.API.Controllers
 
             var skill = new Skill()
             {
+                User = user.UserId,
                 Nombre = dto.Nombre,
                 Nivel = dto.Nivel,
                 Descripcion = dto.Descripcion
@@ -129,7 +130,6 @@ namespace Xapp.API.Controllers
             return Ok();
         }
 
-        //SERVICES??
         [HttpPatch("patchPerfil")]
         public async Task<IActionResult> PatchPerfil(string email, ProfileUpdate dto)
         {
