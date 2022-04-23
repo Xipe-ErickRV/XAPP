@@ -22,21 +22,27 @@ namespace Xapp.API.Controllers
         {
             _db = db;
         }
+        
+        [HttpGet("getUser")]
+        public async Task<IActionResult> GetUser(string email)
+        {
+            var user = await _db.Users
+                .FirstOrDefaultAsync(x => x.Email == email);
+            if (user == null) return BadRequest();
 
+            return Ok(user);
+        }
         [HttpGet("getPerfil")]
         public async Task<IActionResult> GetPerfil(string email)
         {
-            var user = await _db.Users.FirstOrDefaultAsync(m => m.Email == email);
-            var perfil = user.PerfilUser;
-            if (perfil != null)
-            {
-                return Ok(perfil);
-            }
-            else
-            {
+            var user = await _db.Users
+                .Include(x => x.PerfilUser)
+                .FirstOrDefaultAsync(x => x.Email == email);
 
-                return Ok();
-            }
+            var perfil = user.PerfilUser;
+            if (perfil != null) return BadRequest();
+            
+            return Ok(perfil);
         }
         [HttpGet("getSkills")]
         public async Task<IActionResult> GetSkills(string email)
@@ -66,7 +72,6 @@ namespace Xapp.API.Controllers
                 return BadRequest();
             } 
         }
-
         [HttpPost("addUser")]
         public async Task<IActionResult> AddUser(UserInput dto)
         {
@@ -125,7 +130,21 @@ namespace Xapp.API.Controllers
 
             return Ok();
         }
+        [HttpPatch("patchUsuario")]
+        public async Task<IActionResult> PatchUsuario(string email, PatchUser dto)
+        {
+            var user = await _db.Users
+                .FirstOrDefaultAsync(x => x.Email == email);
 
+            if (user == null) return BadRequest();
+
+            user.Username = dto.Username;
+            user.Password = dto.Password;
+            user.Email = dto.Email;
+
+            await _db.SaveChangesAsync();
+            return Ok();
+        }
         [HttpPatch("patchPerfil")]
         public async Task<IActionResult> PatchPerfil(string email, ProfileUpdate dto)
         {
@@ -143,7 +162,26 @@ namespace Xapp.API.Controllers
                 return BadRequest();
             }
         }
+        
+        //INCOMPLETE?
+        [HttpDelete("userDelete")]
+        public async Task<IActionResult> UserDelete(string email)
+        {
+            var user = await _db.Users
+                .Include(x => x.PerfilUser)
+                .Include(x=>x.WalletlUser)
+                .FirstOrDefaultAsync(x => x.Email == email);
 
+            if (user == null) return BadRequest();
+
+            user.Delete();
+            user.PerfilUser.Delete();
+            user.WalletlUser.Delete();
+            //Execute every Delete() in child entities like PTO?
+
+            await _db.SaveChangesAsync();
+            return Ok(user);
+        }
         [HttpDelete("skillDelete")]
         public async Task<IActionResult> SkillDelete(int ID, string email)
         {
