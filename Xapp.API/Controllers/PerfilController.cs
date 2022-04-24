@@ -130,6 +130,23 @@ namespace Xapp.API.Controllers
 
             return Ok();
         }
+
+        [HttpPatch("passwordChange")]
+        public async Task<IActionResult> PasswordChange(string email, string old, string newP, string confirmP)
+        {
+            var user = await _db.Users
+                .FirstOrDefaultAsync(x => x.Email == email);
+
+            if (user == null) return NotFound();
+
+            if (user.Password != old) return BadRequest();
+
+            if (confirmP != newP) return BadRequest();
+
+            user.Password = newP;
+            await _db.SaveChangesAsync();
+            return Ok();
+        }
         [HttpPatch("patchUsuario")]
         public async Task<IActionResult> PatchUsuario(string email, PatchUser dto)
         {
@@ -139,7 +156,7 @@ namespace Xapp.API.Controllers
             if (user == null) return BadRequest();
 
             user.Username = dto.Username;
-            user.Password = dto.Password;
+            //user.Password = dto.Password;
             user.Email = dto.Email;
 
             await _db.SaveChangesAsync();
