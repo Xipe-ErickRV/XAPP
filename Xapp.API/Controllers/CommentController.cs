@@ -13,22 +13,22 @@ namespace Xapp.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostController : ControllerBase
+    public class CommentController : ControllerBase
     {
         private readonly DbService _db;
 
-        public PostController(DbService db)
+        public CommentController(DbService db)
         {
             _db = db;
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(Post post)
+        public async Task<IActionResult> Create(Comment comment)
         {
 
-            post.CreateEntity();
+            comment.CreateEntity();
 
-            await _db.Posts.AddAsync(post);
+            await _db.Comments.AddAsync(comment);
             await _db.SaveChangesAsync();
 
             return Ok();
@@ -37,20 +37,19 @@ namespace Xapp.API.Controllers
 
 
         [HttpPost("Createdto")]
-        public async Task<IActionResult> Createdto(PostInput dto)
+        public async Task<IActionResult> Createdto(CommentInput dto)
         {
-            var post = new Post()
+            var comment = new Comment()
             {
-                Title = dto.Title,
                 Content = dto.Content,
-                Multimedia = dto.Multimedia,
-                Tag = dto.Tag,
+                PostId = dto.PostId,
                 UserId = dto.UserId,
                 
+                
             };
-            post.CreateEntity();
+            comment.CreateEntity();
 
-            await _db.Posts.AddAsync(post);
+            await _db.Comments.AddAsync(comment);
             await _db.SaveChangesAsync();
 
             return Ok();
@@ -59,9 +58,9 @@ namespace Xapp.API.Controllers
         [HttpDelete("Delete")]
         public async Task<IActionResult> Delete(int id)
         {
-            var post = await _db.Posts
+            var comment = await _db.Comments
                 .FirstOrDefaultAsync(x => x.Id == id);
-            _db.Posts.Remove(post);
+            _db.Comments.Remove(comment);
             await _db.SaveChangesAsync();
 
             return Ok();
@@ -69,22 +68,20 @@ namespace Xapp.API.Controllers
         [HttpGet("Get")]
         public async Task<IActionResult> Get(int id)
         {
-            var post = await _db.Posts
+            var comment = await _db.Comments
                 .FirstOrDefaultAsync(x => x.Id == id);
-            return Ok(post);
+            return Ok(comment);
 
         }
         [HttpPatch("Update")]
-        public async Task<IActionResult> Update(int id, PostInput npost)
+        public async Task<IActionResult> Update(int id, CommentInput ncomment)
         {
-            var post = await _db.Posts
+            var comment = await _db.Comments
                 .FirstOrDefaultAsync(x => x.Id == id);
 
-            post.Title = npost.Title;
-            post.Content = npost.Content;
-            post.Multimedia = npost.Multimedia;
+            comment.Content = ncomment.Content;
 
-            post.EditEntity();
+            comment.EditEntity();
 
             await _db.SaveChangesAsync();
             return Ok();
@@ -93,15 +90,16 @@ namespace Xapp.API.Controllers
         [HttpPatch("Like")]
         public async Task<IActionResult> Like(int id)
         {
-            var post = await _db.Posts
+            var comment = await _db.Comments
                 .FirstOrDefaultAsync(x => x.Id == id);
 
-            post.Likes = ++post.Likes;
+            comment.Likes = ++comment.Likes;
 
-            post.EditEntity();
+            comment.EditEntity();
 
             await _db.SaveChangesAsync();
             return Ok();
         }
+
     }
 }
