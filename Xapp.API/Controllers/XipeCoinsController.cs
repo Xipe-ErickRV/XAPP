@@ -41,6 +41,31 @@ namespace Xapp.API.XipeCoinsController
             return Ok(balance);
         }
 
+        [HttpPatch("TransferXipeCoins")]
+        public async Task<IActionResult> TranferXipeCoins(decimal amount, int idReceiver, int idSender)
+        {
+            var receiver = await _db.Transfers
+                .FirstOrDefaultAsync(x => x.Receiver == idReceiver);
 
-    }
+            var sender = await _db.Transfers
+                .FirstOrDefaultAsync(x => x.Sender == idSender);
+
+            var amountTransfer = await _db.Transfers.FirstOrDefaultAsync(x => x.Amount == amount);
+
+            if (receiver == null) return BadRequest();
+            else if (sender == null) return BadRequest();
+            else if (amountTransfer == null) return BadRequest();
+            else
+            {
+               // receiver.Amount = receiver.Amount + amountTransfer;
+               // sender.Amount = sender.Amount - amountTransfer;
+            }
+
+            await _db.SaveChangesAsync();
+
+            return Ok();
+        }
+
+
+}
 }
