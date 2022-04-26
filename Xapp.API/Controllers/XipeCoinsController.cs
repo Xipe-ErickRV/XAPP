@@ -9,15 +9,15 @@ using Xapp.API.Data;
 using Xapp.Domain.DTOs;
 using Xapp.Domain.Entities;
 
-namespace Xapp.API.Controllers
+namespace Xapp.API.XipeCoinsController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ExampleController : ControllerBase
+    public class XipeCoinsController : ControllerBase
     {
         private readonly DbService _db;
 
-        public ExampleController(DbService db)
+        public XipeCoinsController(DbService db)
         {
             _db = db;
         }
@@ -126,8 +126,13 @@ namespace Xapp.API.Controllers
         [HttpGet("GetXipeCoins")]
         public async Task<IActionResult> GetXipeCoins(int id)
         {
-            var xipecoins = await _db.XipeCoins.ToListAsync();
-            return Ok(xipecoins);
+
+            var balance = await _db.Wallets
+                .Include(x => x.UserId)
+                .Include(x => x.Balance)
+                .FirstOrDefaultAsync(x => x.UserId == id);
+
+            return Ok(balance);
         }
 
 
