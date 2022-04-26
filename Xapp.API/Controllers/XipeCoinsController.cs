@@ -116,19 +116,20 @@ namespace Xapp.API.Controllers
             return Ok();
         }
 
-
-
-
-
-
-
-
-
         [HttpGet("GetWallets")]
         public async Task<IActionResult> GetWallets( )
         {
             var list = await _db.Wallets.ToListAsync();
             return Ok(list);
         }
+
+        [HttpGet("GetXipeCoins")]
+        public async Task<IActionResult> GetXipeCoins(int id)
+        {
+            var xipecoins = await _db.XipeCoins.ToListAsync();
+            return Ok(xipecoins);
+        }
+
+
     }
 }
