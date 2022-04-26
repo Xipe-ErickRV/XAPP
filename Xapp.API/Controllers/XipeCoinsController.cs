@@ -82,5 +82,18 @@ namespace Xapp.API.XipeCoinsController
 
             return Ok(list);
         }
+
+        [HttpGet("GetEarnings")]
+        public async Task<IActionResult> GetEarnings(int id)
+        {
+            var earnings = await _db.Transfers
+                .Include(x => x.Amount)
+                .FirstOrDefaultAsync(x => x.Receiver == id);
+
+            // Falta hacer que sumen las ganancias, que no sea una lista
+
+            return Ok(earnings);
+        }
+
     }
 }
