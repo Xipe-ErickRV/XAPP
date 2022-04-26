@@ -69,9 +69,15 @@ namespace Xapp.API.Controllers
             }
             else
             {
-                return BadRequest();
+                var output = new ApiResponse
+                {
+                     StatusCode = 400,
+                     Message ="Verifica tus campos... blabla"
+                };
+                return BadRequest(output);
             } 
         }
+
         [HttpPost("addUser")]
         public async Task<IActionResult> AddUser(UserInput dto)
         {
