@@ -42,7 +42,7 @@ namespace Xapp.API.XipeCoinsController
         }
 
         [HttpPatch("TransferXipeCoins")]
-        public async Task<IActionResult> TranferXipeCoins(decimal amount, int idReceiver, int idSender)
+        public async Task<IActionResult> TranferXipeCoins(decimal amount, int idReceiver, int idSender, string concepto)
         {
             var receiver = await _db.Transfers
                 .FirstOrDefaultAsync(x => x.Receiver == idReceiver);
@@ -52,6 +52,8 @@ namespace Xapp.API.XipeCoinsController
 
             var amountTransfer = await _db.Transfers.FirstOrDefaultAsync(x => x.Amount == amount);
 
+            var conceptoTransfer = await _db.Transfers.FirstOrDefaultAsync(x => x.Concept == concepto);
+
             if (receiver == null) return BadRequest();
             else if (sender == null) return BadRequest();
             else if (amountTransfer == null) return BadRequest();
@@ -59,6 +61,7 @@ namespace Xapp.API.XipeCoinsController
             {
                // receiver.Amount = receiver.Amount + amountTransfer;
                // sender.Amount = sender.Amount - amountTransfer;
+               // Transfer.Concept = conceptoTransfer;
             }
 
             await _db.SaveChangesAsync();
@@ -66,6 +69,18 @@ namespace Xapp.API.XipeCoinsController
             return Ok();
         }
 
+        [HttpGet("GetTransfers")]
+        public async Task<IActionResult> GetTransfers(int id)
+        {
 
-}
+            var list = await _db.Transfers
+                .Include(x => x.Sender)
+                .Include(x => x.Receiver)
+                .Include(x => x.Amount)
+                .Include(x => x.Concept)
+                .FirstOrDefaultAsync(x => x.Sender == id || x.Receiver == id);
+
+            return Ok(list);
+        }
+    }
 }
