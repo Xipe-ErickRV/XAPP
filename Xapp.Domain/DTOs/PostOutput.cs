@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xapp.Domain.Entities;
 
 namespace Xapp.Domain.DTOs
 {
-    public class PostInput
+    public class PostOutput
     {
         //Post
         public string Title { get; set; }
@@ -14,5 +15,9 @@ namespace Xapp.Domain.DTOs
         public string Multimedia { get; set; }
         public Enums.Tags Tag { get; set; }
         public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string URLProfile { get; set; }
+        public int Likes { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }

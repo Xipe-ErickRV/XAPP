@@ -70,8 +70,32 @@ namespace Xapp.API.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var post = await _db.Posts
+                .Include(x => x.User)
+                .ThenInclude(x => x.PerfilUser)
                 .FirstOrDefaultAsync(x => x.Id == id);
-            return Ok(post);
+            var outpost = new PostOutput();
+            
+            outpost.Title = post.Title;
+            outpost.Content = post.Content;
+            outpost.Multimedia = post.Multimedia;
+            outpost.Tag = post.Tag;
+            outpost.UserId = post.UserId;
+            outpost.URLProfile = post.User.PerfilUser.UrlFoto;
+            outpost.Likes = post.Likes;
+            outpost.Comments = post.Comments;
+
+            if(outpost == null)
+            {
+                var outputError = new ApiResponse<string>
+                {
+                    StatusCode = 400,
+                    Message = "Error",
+                    Result = "No existe el Post"
+                };
+                return BadRequest(outputError);
+
+            }
+            return Ok(outpost);
 
         }
         [HttpPatch("Update")]
