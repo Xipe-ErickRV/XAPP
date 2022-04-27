@@ -24,9 +24,32 @@ namespace Xapp.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetAsync()
         {
-            return new string[] { "value1", "value2" };
+            var events = await _db.Eventos
+                .Where(x => x.IsPublish).ToListAsync();
+
+            if (events == null)
+            {
+                var outputError = new ApiResponse<string>
+                {
+                    StatusCode = 400,
+                    Message = "Error",
+                    Result = "No existe el usuario"
+                };
+                return BadRequest(outputError);
+            }
+            //misma logica pero para PTOs
+
+
+            var listOfEvent = events.Select(X => X.Output()).ToList();
+            var output = new ApiResponse<List<EventInput>>
+            {
+                StatusCode = 200,
+                Message = "",
+                Result = listOfEvent
+            };
+            return Ok(output);
         }
 
         // GET api/<CalendarController>/5
@@ -46,9 +69,11 @@ namespace Xapp.API.Controllers
                 };
                 return BadRequest(outputError);
             }
+            //misma logica pero para PTOs
+
 
             var listOfEvent = events.Select(X => X.Output()).ToList();
-            var output= new ApiResponse<List<EventInput>>
+            var output = new ApiResponse<List<EventInput>>
             {
                 StatusCode = 200,
                 Message = "",
