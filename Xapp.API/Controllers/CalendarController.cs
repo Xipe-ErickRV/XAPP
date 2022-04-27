@@ -30,10 +30,31 @@ namespace Xapp.API.Controllers
         }
 
         // GET api/<CalendarController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("GetEventsByUser")]
+        public async Task<IActionResult> Get(int userId)
         {
-            return "value";
+            var events = await _db.Eventos
+                .Where(x => x.UserId == userId).ToListAsync();
+
+            if (events == null)
+            {
+                var outputError = new ApiResponse<string>
+                {
+                    StatusCode = 400,
+                    Message = "Error",
+                    Result = "No existe el usuario"
+                };
+                return BadRequest(outputError);
+            }
+
+            var listOfEvent = events.Select(X => X.Output()).ToList();
+            var output= new ApiResponse<List<EventInput>>
+            {
+                StatusCode = 200,
+                Message = "",
+                Result = listOfEvent
+            };
+            return Ok(output);
         }
 
         [HttpPost("addEvent")]
