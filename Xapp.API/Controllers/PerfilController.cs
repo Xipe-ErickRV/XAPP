@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xapp.Domain.DTOs;
 using Xapp.Domain.Entities;
+using Xapp.Domain.DTOs.Perfil;
 
 namespace Xapp.API.Controllers
 {
@@ -58,18 +59,24 @@ namespace Xapp.API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(string email, string password)
+        public async Task<IActionResult> Login(LoginInput dto)
         {
             var user = await _db.Users
                 .Include(m => m.PerfilUser)
-                .FirstOrDefaultAsync(m => m.Email == email && m.Password == password);
+                .FirstOrDefaultAsync(m => m.Email == dto.Email && m.Password == dto.Password);
             if (user != null)
             {
-                return Ok(user);
+                var output = new ApiResponse<User>
+                {
+                    StatusCode = 200,
+                    Message = "Bienvenido...",
+                    Result = user
+                };
+                return Ok(output);
             }
             else
             {
-                var output = new ApiResponse
+                var output = new ApiResponse<User>
                 {
                      StatusCode = 400,
                      Message ="Verifica tus campos... blabla"

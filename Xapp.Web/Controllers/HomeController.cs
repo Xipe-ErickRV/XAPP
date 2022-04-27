@@ -5,7 +5,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Xapp.Domain.DTOs.Perfil;
+using Xapp.Domain.Entities;
 using Xapp.Web.Models;
+using Xapp.Web.Services;
 
 namespace Xapp.Web.Controllers
 {
@@ -18,9 +21,29 @@ namespace Xapp.Web.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var output = new LoginInput();
+            return View(output);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Index(LoginInput dto)
+        {
+            //consumir API
+            var obj = new PerfilService();
+            var output = await obj.LogInAsync(dto);
+
+            if (output.StatusCode == 200) //si se pudo
+            {
+                var user = (User)output.Result; //esto mandarlo al feed , creo
+                return Redirect("/Home/Privacy");
+            }
+            else //no se pudo
+            {
+                var message = output.Message; //mostrar esta alerta con sweet alert
+                return View();
+            }
         }
 
         public IActionResult Privacy()

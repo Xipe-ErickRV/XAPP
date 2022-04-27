@@ -3,6 +3,8 @@
     Layout = null;
 
 }
+@model Xapp.Domain.DTOs.Perfil.LoginInput
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,19 +27,19 @@
 
 
                         <div class="login-form">
-                            <form action="">
+                            <form action="Home/Index" method="post">
                                 <label for="">Correo electrónico</label>
-                                <input type="email" placeholder="">
+                                <input name="email" type="email" placeholder="">
                                 <label for="">Contraseña</label>
-                                <input type="password" placeholder="">
+                                <input name="password" type="password" placeholder="">
                                 <div class="stayconnected">
-                                    
-                                    <div class="remember-form"> 
+
+                                    <div class="remember-form">
                                         <input type="checkbox" checked="checked">
-                                      
+
                                         <h2>Mantenerme Conectado</h2>
                                     </div>
-                                    
+
                                 </div>
 
                                 <button type="submit">Log In</button>
