@@ -54,8 +54,16 @@ namespace Xapp.API.Controllers
                 .FirstOrDefaultAsync(m => m.Email == email);
 
             if (user == null) return BadRequest();
-            
-            return Ok(user.PerfilUser.Skills);
+
+
+
+            var output = new ApiResponse<List<Skill>>
+            {
+                StatusCode = 200,
+                Message = "Bienvenido...",
+                Result = user.PerfilUser.Skills
+            };
+            return Ok(output);
         }
 
         [HttpPost("login")]

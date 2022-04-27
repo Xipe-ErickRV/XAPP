@@ -13,7 +13,7 @@ namespace Xapp.Web.Services
     public class PerfilService
     {
         private readonly string _baseUrl = "https://localhost:44331/api/Perfil";
-        
+
         public async Task<ApiResponse<User>> LogInAsync(LoginInput dto)
         {
             var url = $"{_baseUrl}/login";
@@ -22,6 +22,27 @@ namespace Xapp.Web.Services
             request.RequestFormat = RestSharp.DataFormat.Json;
             request.AddHeader("Content-Type", "application/json");
             request.AddJsonBody(dto);
+            var response = await client.ExecuteAsync(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var output = JsonConvert.DeserializeObject<ApiResponse<User>>(response.Content);
+                return output;
+            }
+            else
+            {
+                var output = JsonConvert.DeserializeObject<ApiResponse<User>>(response.Content);
+                return output;
+            }
+        }
+
+        public async Task<ApiResponse<User>> GetSkills(string email)
+        {
+            var url = $"{_baseUrl}/getSkills?email={email}";
+            var client = new RestClient(url);
+            var request = new RestRequest() { Method = Method.Get };
+            request.RequestFormat = RestSharp.DataFormat.Json;
+            request.AddHeader("Content-Type", "application/json");
+            //request.AddJsonBody(dto);
             var response = await client.ExecuteAsync(request);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
