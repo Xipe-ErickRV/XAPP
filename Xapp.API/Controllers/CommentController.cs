@@ -28,6 +28,10 @@ namespace Xapp.API.Controllers
 
             comment.CreateEntity();
 
+            var post = await _db.Posts.FirstOrDefaultAsync(x => x.Id == comment.Id);
+
+            post.Comments.Add(comment);
+
             await _db.Comments.AddAsync(comment);
             await _db.SaveChangesAsync();
 
@@ -48,6 +52,10 @@ namespace Xapp.API.Controllers
                 
             };
             comment.CreateEntity();
+
+            var post = await _db.Posts.FirstOrDefaultAsync(x => x.Id == comment.Id);
+
+            post.Comments.Add(comment);
 
             await _db.Comments.AddAsync(comment);
             await _db.SaveChangesAsync();
