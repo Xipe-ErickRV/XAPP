@@ -1,0 +1,380 @@
+﻿﻿* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+/**COLORS**/
+:root {
+    --grey: #f2f0f0;
+    --lightgrey: #f6f6f6;
+    --red: #e22432;
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+    background-color: white;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+}
+
+/*Box Model code snippet*/
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+
+body {
+    overflow-x: hidden;
+    font-size: 16px; /* 1rem = 10px*/
+}
+
+article,
+aside,
+details,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {
+    display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+    text-decoration: none;
+}
+
+
+
+img {
+    border: none;
+}
+
+*:focus {
+    outline: none;
+}
+
+/***LOGIN and IMAGE SECTION*/
+.loginandimg {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 50% 50%;
+    column-gap: 8%;
+}
+
+/**LOGIN**/
+.login {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    grid-column: 1;
+}
+
+.loginabsolute {
+    position: absolute;
+    top: 12%;
+    left: 7%;
+    align-items: flex-start;
+}
+
+/*Login titles*/
+.login-title {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 9%;
+}
+
+.login-welcome {
+    font-size: 2.3rem;
+    font-weight: normal;
+    margin: 0;
+    margin-bottom: 26%;
+}
+
+
+/*Login form*/
+.login-form label {
+    font-size: 2rem;
+    display: block;
+}
+
+input[type=email], input[type=password] {
+    width: 200%;
+    padding: 6% 20px;
+    margin: 8px 0;
+    display: block;
+    box-sizing: border-box;
+    box-shadow: 0.3px 0.3px 1.3px rgba(0, 0, 0, 0.028), 0.9px 1.1px 4.5px rgba(0, 0, 0, 0.042), 4px 5px 20px rgba(0, 0, 0, 0.07);
+    border-radius: 15px;
+    border: none;
+    font-size: 1.8rem;
+    background-color: var(--lightgrey);
+    box-shadow: 3px 1px 10px lightgrey;
+}
+
+label, input[type=email], input[type=password] {
+    margin-bottom: 5%;
+}
+
+button[type=submit] {
+    background: rgba(226, 36, 50, 1);
+    border: none;
+    margin-top: 17%;
+    margin-left: 36%;
+    width: 120%;
+    height: 58px;
+    color: rgb(255, 255, 255);
+    border-radius: 40px;
+    z-index: -1;
+    font-weight: normal;
+    font-size: 20px;
+}
+
+    button[type=submit]:hover {
+        transform: scale(1.05);
+    }
+
+.contra-button {
+    width: 100%;
+    font-size: 1.8rem;
+    position: absolute;
+    top: 105%;
+    left: 45%;
+    background: white;
+    color: rgba(0, 0, 0);
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+}
+
+    .contra-button:hover {
+        background: white;
+        color: rgba(0, 0, 0, 0.5);
+        box-shadow: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .contra-button:focus {
+        background: white;
+        color: rgba(0, 0, 0, 0.5);
+        box-shadow: none;
+        border: none;
+        cursor: pointer;
+    }
+
+/* POPUP TO CHANGE PASSWORD */
+/*Background of PopUp*/
+
+.modal-box input[type=email], .modal-box input[type=password] {
+    width: 100%;
+    padding: 4%;
+    padding-bottom: 1%;
+    height: 1%;
+    display: block;
+    box-sizing: border-box;
+    box-shadow: 0.3px 0.3px 1.3px rgba(0, 0, 0, 0.028), 0.9px 1.1px 4.5px rgba(0, 0, 0, 0.042), 4px 5px 20px rgba(0, 0, 0, 0.07);
+    border-radius: 15px;
+    border: none;
+    font-size: 1.8rem;
+    background-color: var(--lightgrey);
+    box-shadow: 3px 1px 10px lightgrey;
+    margin-bottom: 3%;
+}
+
+@media(min-width:768px) {
+    .modal-box input[type=email], .modal-box input[type=password] {
+        padding-bottom: 4%;
+    }
+}
+
+.modal-box label {
+    margin-bottom: 3%;
+}
+
+.modal-cont {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 100;
+}
+
+/*PopUp*/
+.modal-box {
+    width: 60%;
+    height: 65%;
+    margin: 1.5% auto;
+    position: center;
+    text-align: left;
+    top: 45%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    position: relative;
+}
+
+    .modal-box .close {
+        position: absolute;
+        right: 5%;
+        top: 3.5%;
+        font-size: 320%;
+        font-weight: lighter;
+        cursor: pointer
+    }
+
+        .modal-box .close:hover,
+        .modal-box .close:focus {
+            color: #c6c6c6
+        }
+
+/*Content of the PopUp*/
+
+.login-box {
+    width: 85%;
+    position: absolute;
+    left: 10%;
+    top: 0%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--grey);
+    height: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    border-radius: 30px;
+    margin-bottom: 0;
+}
+
+@media(max-height:800px) {
+    .login-box {
+        height: 120%;
+    }
+
+        .login-box contra_nueva {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+}
+
+.changepwd {
+    margin-top: 5%;
+    font-size: 3.5rem;
+    width: 120%;
+}
+
+label.modal-cont, input[type="email"].modal-cont, input[type="password"].modal-cont {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    box-shadow: 0.3px 0.3px 1.3px rgba(0, 0, 0, 0.028), 0.9px 1.1px 4.5px rgba(0, 0, 0, 0.042), 4px 5px 20px rgba(0, 0, 0, 0.07);
+    border-radius: 15px;
+    border: none;
+    font-size: 1.8rem;
+    background-color: var(--lightgrey);
+    box-shadow: 3px 1px 10px lightgrey;
+}
+
+.modal-box .save-button {
+    display: block;
+    cursor: pointer;
+    width: 25%;
+    padding: 2% 0;
+    border: none;
+    border-radius: 15px;
+    font-size: 25px;
+    background-color: var(--red);
+    color: white;
+    margin-top: 0;
+    position: absolute;
+    bottom: 2%;
+    right: 4%;
+}
+
+button::before,
+button::after {
+    content: '';
+    flex: 1 0 auto;
+}
+
+.modal-cont {
+    display: none
+}
+
+@media(max-height:800px) {
+    .login-box {
+        height: 120%;
+    }
+
+    .modal-box .save-button {
+        bottom: 3%;
+        right: 4%;
+    }
+}
+
+.changepwd {
+    font-size: 3.5rem;
+    width: 120%;
+}
+
+/**IMAGE**/
+.imglogin {
+    grid-column: 2;
+    position: absolute;
+    top: 0;
+    right: 0px;
+    max-width: 55%;
+    background-position: left;
+    background-size: auto 100%;
+    height: 100%; /*max-height: auto%;*/
+    overflow: hidden;
+}
+
+img {
+    object-fit: contain;
+    width: 100%;
+    height: auto;
+}
+
+/**CHECKBOX**/
+.stayconnected {
+    display: flex;
+    align-self: center;
+}
+
+    .stayconnected h2 {
+        font-size: 1.8rem;
+        font-weight: normal;
+        margin-left: 5%;
+    }
+
+.remember-form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+input[type=checkbox] {
+    align-self: center;
+}
