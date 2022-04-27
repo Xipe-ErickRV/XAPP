@@ -23,21 +23,7 @@ namespace Xapp.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(Post post)
-        {
-
-            post.CreateEntity();
-
-            await _db.Posts.AddAsync(post);
-            await _db.SaveChangesAsync();
-
-            return Ok();
-
-        }
-
-
-        [HttpPost("Createdto")]
-        public async Task<IActionResult> Createdto(PostInput dto)
+        public async Task<IActionResult> Create(PostInput dto)
         {
             var post = new Post()
             {
@@ -61,6 +47,18 @@ namespace Xapp.API.Controllers
         {
             var post = await _db.Posts
                 .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (post == null)
+            {
+                var outputError = new ApiResponse<string>
+                {
+                    StatusCode = 400,
+                    Message = "Error",
+                    Result = "No existe el Post"
+                };
+                return BadRequest(outputError);
+            }
+
             _db.Posts.Remove(post);
             await _db.SaveChangesAsync();
 
@@ -103,6 +101,17 @@ namespace Xapp.API.Controllers
         {
             var post = await _db.Posts
                 .FirstOrDefaultAsync(x => x.Id == id);
+
+            if(post == null)
+            {
+                var outputError = new ApiResponse<string>
+                {
+                    StatusCode = 400,
+                    Message = "Error",
+                    Result = "No existe el Post"
+                };
+                return BadRequest(outputError);
+            }
 
             post.Title = npost.Title;
             post.Content = npost.Content;
