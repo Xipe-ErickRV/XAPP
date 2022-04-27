@@ -33,14 +33,14 @@ namespace Xapp.API.XipeCoinsController
         public async Task<IActionResult> GetXipeCoins(int id)
         {
 
-            var balance = await _db.Users
+            var balance = await _db.Users 
                 .Include(x => x.WalletlUser)
                 .FirstOrDefaultAsync(x => x.UserId == id);
 
-            return Ok(balance.WalletlUser.Balance);
+            return Ok(balance.WalletlUser.Balance); 
         }
 
-        [HttpPatch("TransferXipeCoins")]
+        [HttpPatch("TransferXipeCoins")] //Sin completar
         public async Task<IActionResult> TranferXipeCoins(decimal amount, int idReceiver, int idSender, string concepto)
         {
             var receiver = await _db.Transfers
@@ -49,23 +49,25 @@ namespace Xapp.API.XipeCoinsController
             var sender = await _db.Transfers
                 .FirstOrDefaultAsync(x => x.Sender == idSender);
 
-            var amountTransfer = await _db.Transfers.FirstOrDefaultAsync(x => x.Amount == amount);
+            var amountTransfer = await _db.Transfers
+                .FirstOrDefaultAsync(x => x.Amount == amount);
 
-            var conceptoTransfer = await _db.Transfers.FirstOrDefaultAsync(x => x.Concept == concepto);
+            var conceptoTransfer = await _db.Transfers
+                .FirstOrDefaultAsync(x => x.Concept == concepto);
 
-            if (receiver == null) return BadRequest();
-            else if (sender == null) return BadRequest();
+            if (receiver == null || sender == null) return BadRequest();
+            if (receiver == sender) return BadRequest();
+            //revisar caso en caso que las monedas no sean suficientes
             else if (amountTransfer == null) return BadRequest();
             else
             {
-               // receiver.Amount = receiver.Amount + amountTransfer;
-               // sender.Amount = sender.Amount - amountTransfer;
-               // Transfer.Concept = conceptoTransfer;
+                receiver.Amount = receiver.Amount + amount;
+                sender.Amount = sender.Amount - amount;
+                //Transfer.Concept = conceptoTransfer; 
             }
 
             await _db.SaveChangesAsync();
-
-            return Ok();
+            return Ok(sender.Amount);
         }
 
         [HttpGet("GetTransfers")]
