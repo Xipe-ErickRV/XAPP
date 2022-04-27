@@ -29,16 +29,15 @@ namespace Xapp.API.XipeCoinsController
             return Ok(list);
         }
 
-        [HttpGet("GetXipeCoins")]
+        [HttpGet("GetXipeCoins")]// Checao
         public async Task<IActionResult> GetXipeCoins(int id)
         {
 
-            var balance = await _db.Wallets
-                .Include(x => x.UserId)
-                .Include(x => x.Balance)
+            var balance = await _db.Users
+                .Include(x => x.WalletlUser)
                 .FirstOrDefaultAsync(x => x.UserId == id);
 
-            return Ok(balance);
+            return Ok(balance.WalletlUser.Balance);
         }
 
         [HttpPatch("TransferXipeCoins")]
