@@ -22,26 +22,11 @@ namespace Xapp.API.Controllers
             _db = db;
         }
 
+
+
+
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(Comment comment)
-        {
-
-            comment.CreateEntity();
-
-            var post = await _db.Posts.FirstOrDefaultAsync(x => x.Id == comment.Id);
-
-            post.Comments.Add(comment);
-
-            await _db.Comments.AddAsync(comment);
-            await _db.SaveChangesAsync();
-
-            return Ok();
-
-        }
-
-
-        [HttpPost("Createdto")]
-        public async Task<IActionResult> Createdto(CommentInput dto)
+        public async Task<IActionResult> Create(CommentInput dto)
         {
             var comment = new Comment()
             {
