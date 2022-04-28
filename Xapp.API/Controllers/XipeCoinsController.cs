@@ -44,6 +44,7 @@ namespace Xapp.API.XipeCoinsController
         public async Task<IActionResult> TranferXipeCoins(TransferInput dto)
         {
             var receiver = await _db.Wallets
+                .Include(x => x.Transfers)
                 .FirstOrDefaultAsync(x => x.UserId == dto.IdReceiver);
             if (receiver == null)
             {
@@ -51,21 +52,20 @@ namespace Xapp.API.XipeCoinsController
                 {
                     StatusCode = 400,
                     Message = "No se encontró el receptor",
-                  //  Result = ""
                 };
                 return BadRequest(output);
             }
 
-
             var sender = await _db.Wallets
+                .Include(x => x.Transfers)
                 .FirstOrDefaultAsync(x => x.UserId == dto.IdSender);
             if (sender == null)
             {
-                var output = new ApiResponse <string> ()
+                var output = new ApiResponse 
                 {
                     StatusCode = 400,
                     Message = "No se encontró el emisor",
-                    Result = ""
+                    //Result = ""
                 };
                 return BadRequest(output);
             }
@@ -107,7 +107,7 @@ namespace Xapp.API.XipeCoinsController
             transferReceiver.CreateEntity();
             transferSender.CreateEntity();
 
-            receiver.Transfers.Add(transferReceiver);
+            receiver.Transfers.Add(transferReceiver); //Aquí peta, marca nulo
             sender.Transfers.Add(transferSender);
 
             await _db.Transfers.AddAsync(transferReceiver);
@@ -119,7 +119,6 @@ namespace Xapp.API.XipeCoinsController
             {
                 StatusCode = 200,
                 Message = "Se transfirió correctamente",
-              //  Result = "Se transfirió correctamente"
             };
             return Ok(outputOk);
         }
