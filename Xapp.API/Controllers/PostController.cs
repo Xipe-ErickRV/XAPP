@@ -59,7 +59,7 @@ namespace Xapp.API.Controllers
                 return BadRequest(outputError);
             }
 
-            _db.Posts.Remove(post);
+            post.Delete();
             await _db.SaveChangesAsync();
 
             return Ok();
@@ -68,6 +68,7 @@ namespace Xapp.API.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var post = await _db.Posts
+                .Include(x => x.Comments)
                 .Include(x => x.User)
                 .ThenInclude(x => x.PerfilUser)
                 .FirstOrDefaultAsync(x => x.Id == id);
@@ -81,6 +82,7 @@ namespace Xapp.API.Controllers
             outpost.URLProfile = post.User.PerfilUser.UrlFoto;
             outpost.Likes = post.Likes;
             outpost.Comments = post.Comments;
+            outpost.UserName = post.User.Username;
 
             if(outpost == null)
             {

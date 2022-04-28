@@ -38,7 +38,9 @@ namespace Xapp.API.Controllers
             };
             comment.CreateEntity();
 
-            var post = await _db.Posts.FirstOrDefaultAsync(x => x.Id == comment.Id);
+            var post = await _db.Posts
+                .Include(x => x.Comments)
+                .FirstOrDefaultAsync(x => x.Id == comment.PostId);
             if (post == null)
             {
                 var output = new ApiResponse<string>
@@ -74,7 +76,7 @@ namespace Xapp.API.Controllers
                 };
                 return BadRequest(output);
             }
-            _db.Comments.Remove(comment);
+            comment.Delete();
             await _db.SaveChangesAsync();
 
             return Ok();
