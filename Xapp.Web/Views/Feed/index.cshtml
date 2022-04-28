@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- w3css library -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <!--Poppins font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- <link href="https://fonts.googleapis.com/css2?Poppins:wght@400;700&display=swap" rel=" stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <!-- Icons link -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!--link to stylesheet-->
+    <link href="styles.css" rel="stylesheet">
+
+    <title>Xipe Feed</title>
+</head>
+
+<body>
+    <!--side bar-->
+    <div class="sidebar">
+        <img src="https://drive.google.com/uc?export=view&id=17qRly_RNtO7moC4aSQkWyQjI5xKTv4Ft" id="logo">
+        <a href="#Profile"> Profile</a>
+        <a href="#Feed"> Feed</a>
+        <a href="#XipeCoins"> XipeCoins</a>
+        <a href="#Calendar"> Calendar</a>
+    </div>
+
+    <!-- main code -->
+    <div class="main">
+        <h1 id="title">FORUM</h1>
+        <button type="button" id="btn_create_post" onclick=show_popup()>+</button>
+
+        <!-- post miniature container -->
+        <div id="post_mini_container">
+            <div class="post_mini">
+                <div class="post_elements">
+                    <div class="btn_icons">
+                        <div class="interactions_container">
+                            <button class="like_btn" onclick=change_like_color(like01)>
+                                <i class="material-icons thumbs_up" id="like01">thumb_up</i>
+                            </button>
+                            <span>7</span>
+                        </div>
+                        <div class="interactions_container">
+                            <i class="material-icons">chat</i>
+                            <span>2</span>
+                        </div>
+                    </div>
+
+                    <div class="post_title_tag">
+                        <h2 class="post_title">Title #1</h2>
+                        <span class="post_tag">Tag Name</span>
+                    </div>
+
+                    <div class="profile_elements">
+                        <img src="pic_example.jpg" class="user_pic">
+                        <h3 class="author">Author Name</h3>
+                    </div>
+
+                    <p class="post_content">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                </div>
+            </div>
+
+            <div class="post_mini">
+                <div class="post_elements">
+                    <div class="btn_icons">
+                        <div class="interactions_container">
+                            <button class="like_btn" onclick=change_like_color(like02)>
+                                <i class="material-icons thumbs_up" id="like02">thumb_up</i>
+                            </button>
+                            <span>7</span>
+                        </div>
+                        <div class="interactions_container">
+                            <i class="material-icons">chat</i>
+                            <span>2</span>
+                        </div>
+                    </div>
+
+                    <div class="post_title_tag">
+                        <h2 class="post_title">Title #2</h2>
+                        <span class="post_tag">Tag Name</span>
+                    </div>
+
+                    <div class="profile_elements">
+                        <img src="pic_example.jpg" class="user_pic">
+                        <h3 class="author">Author Name</h3>
+                    </div>
+
+                    <p class="post_content">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                </div>
+            </div>
+
+            <div class="post_mini">
+                <div class="post_elements">
+                    <div class="btn_icons">
+                        <div class="interactions_container">
+                            <button class="like_btn" onclick=change_like_color(like03)>
+                                <i class="material-icons thumbs_up" id="like03">thumb_up</i>
+                            </button>
+                            <span>7</span>
+                        </div>
+                        <div class="interactions_container">
+                            <i class="material-icons">chat</i>
+                            <span>2</span>
+                        </div>
+                    </div>
+
+                    <div class="post_title_tag">
+                        <h2 class="post_title">Title #3</h2>
+                        <span class="post_tag">Tag Name</span>
+                    </div>
+
+                    <div class="profile_elements">
+                        <img src="pic_example.jpg" class="user_pic">
+                        <h3 class="author">Author Name</h3>
+                    </div>
+
+                    <p class="post_content">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                </div>
+            </div>
+
+            <div class="post_mini">
+                <div class="post_elements">
+                    <div class="btn_icons">
+                        <div class="interactions_container">
+                            <button class="like_btn" onclick=change_like_color(like04)>
+                                <i class="material-icons thumbs_up" id="like04">thumb_up</i>
+                            </button>
+                            <span>7</span>
+                        </div>
+                        <div class="interactions_container">
+                            <i class="material-icons">chat</i>
+                            <span>2</span>
+                        </div>
+                    </div>
+
+                    <div class="post_title_tag">
+                        <h2 class="post_title">Title #4</h2>
+                        <span class="post_tag">Tag Name</span>
+                    </div>
+
+                    <div class="profile_elements">
+                        <img src="pic_example.jpg" class="user_pic">
+                        <h3 class="author">Author Name</h3>
+                    </div>
+
+                    <p class="post_content">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- create post popup -->
+    <div class="hover_bkgr_fricc" id="yeet">
+        <div id="modal">
+            <span onclick="close_popup()"
+                  class="w3-button w3-xlarge w3-round-xxlarge w3-display-topright">&times;</span>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+
+                        <h1>Create post</h1>
+
+                        <form action="" method="POST">
+
+                            <div class="form-group">
+                                <label for="title">Title<span class="require">*</span></label>
+                                <input type="text" class="form-control" name="title" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tag">Tag</label>
+                                <select name="tag" class="form-control" id="tag_select">
+                                    <option value="default">Select Tag</option>
+                                    <option value="help">Help</option>
+                                    <option value="tutorial">Tutorial</option>
+                                    <option value="none">None</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contenido">Contenido</label>
+                                <textarea rows="7" class="form-control" name="contenido"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="multimedia">Multimedia</label>
+                                <input type="file" class="form-control" id="multimedia_input">
+                            </div>
+
+                            <div class="form-group">
+                                <p><span class="require">*</span> - required fields</p>
+                            </div>
+
+                            <div class="form-group" style="text-align:center;">
+                                <button type="submit" class="btn btn-primary" id="submit_post_btn">
+                                    Create
+                                </button>
+                                <button class="btn btn-default">
+                                    Cancel
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- link to js file -->
+    <script src="script.js"></script>
+
+</body>
+
+
+
+</html>
