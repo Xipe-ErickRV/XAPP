@@ -126,14 +126,24 @@ namespace Xapp.API.XipeCoinsController
         public async Task<IActionResult> GetTransfers(int id)
         {
 
-            var list = await _db.Transfers
-                .Include(x => x.Sender)
-                .Include(x => x.Receiver)
-                .Include(x => x.Amount)
-                .Include(x => x.Concept)
-                .FirstOrDefaultAsync(x => x.Sender == id || x.Receiver == id);
+            var lista = await _db.Users
+                .Include(x => x.WalletlUser)
+                .ThenInclude(x => x.Transfers)
+                .FirstOrDefaultAsync(x => x.UserId == id);
 
-            return Ok(list);
+            if (lista == null) 
+            {
+                var output = new ApiResponse
+                {
+                    StatusCode = 400,
+                    Message = "El Usuario no tiene movimientos registrados",
+                };
+                return BadRequest(output);
+            };
+
+            List<Transfer> ab = lista.WalletlUser.Transfers;
+
+            return Ok(ab);
         }
 
         [HttpGet("GetEarnings")]
