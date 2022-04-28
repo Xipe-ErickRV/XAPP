@@ -89,7 +89,7 @@ namespace Xapp.API.Controllers
                 var output = new ApiResponse<User>
                 {
                      StatusCode = 400,
-                     Message ="Verifica tus campos... blabla"
+                     Message ="Verifica tus campos."
                 };
                 return BadRequest(output);
             } 
