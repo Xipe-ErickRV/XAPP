@@ -40,7 +40,7 @@ namespace Xapp.API.XipeCoinsController
             return Ok(balance.WalletlUser.Balance); 
         }
 
-        [HttpPatch("TransferXipeCoins")] //Sin completar¿?
+        [HttpPatch("TransferXipeCoins")] //Checao:)
         public async Task<IActionResult> TranferXipeCoins(TransferInput dto)
         {
             var receiver = await _db.Wallets
@@ -65,7 +65,6 @@ namespace Xapp.API.XipeCoinsController
                 {
                     StatusCode = 400,
                     Message = "No se encontró el emisor",
-                    //Result = ""
                 };
                 return BadRequest(output);
             }
@@ -76,7 +75,6 @@ namespace Xapp.API.XipeCoinsController
                 {
                     StatusCode = 400,
                     Message = "El emisor no tiene saldo suficinente",
-                   // Result = ""
                 };
                 return BadRequest(output);
             }
