@@ -14,5 +14,15 @@ namespace Xapp.Domain.Entities
         public int Balance { get; set; }
 
         public virtual List<Transfer> Transfers{ get; set; }
+
+        public void Sum(int amount)  //Sumar transferencia a balance
+        {
+            Balance += amount;
+        }
+
+        public void Sub(int amount) //Restar al balance
+        {
+            Balance += amount;
+        }
     }
 }
