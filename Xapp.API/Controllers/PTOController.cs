@@ -24,18 +24,21 @@ namespace Xapp.API.Controllers
             _db = db;
         }
         // GET: PTOController
+        [HttpGet("Index")]
         public ActionResult Index()
         {
             return View();
         }
 
         // GET: PTOController/Details/5
+        [HttpGet("Details")]
         public ActionResult Details(int id)
         {
             return View();
         }
 
         // GET: PTOController/Create
+        [HttpGet("Create")]
         public ActionResult Create()
         {
             return View();
@@ -93,15 +96,16 @@ namespace Xapp.API.Controllers
         }
 
         // GET: PTOController/Edit/5
+        [HttpGet("Edit")]
         public ActionResult Edit(int id)
         {
             return View();
         }
 
         // POST: PTOController/Edit/5
-        [HttpPost]
+        [HttpPost("EditPost")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult EditPost(int id, IFormCollection collection)
         {
             try
             {
@@ -114,15 +118,16 @@ namespace Xapp.API.Controllers
         }
 
         // GET: PTOController/Delete/5
+        [HttpGet("Delete")]
         public ActionResult Delete(int id)
         {
             return View();
         }
 
         // POST: PTOController/Delete/5
-        [HttpPost]
+        [HttpPost("DeletePost")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult DeletePost(int id, IFormCollection collection)
         {
             try
             {
