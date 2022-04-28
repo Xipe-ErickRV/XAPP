@@ -8,5 +8,10 @@ namespace Xapp.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult Post()
+        {
+            return View();
+        }
     }
 }
