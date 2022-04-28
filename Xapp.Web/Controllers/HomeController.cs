@@ -37,12 +37,13 @@ namespace Xapp.Web.Controllers
             if (output.StatusCode == 200) //si se pudo
             {
                 var user = (User)output.Result; //esto mandarlo al feed , creo
-                return Redirect("/Home/Profile_html");
+                string page = $"/Home/Profile_html?email={user.Email}";
+                return Redirect(page);
             }
             else //no se pudo
             {
                 var message = output.Message; //mostrar esta alerta con sweet alert
-                return View();
+                return Redirect("/");
             }
         }
 
@@ -51,9 +52,22 @@ namespace Xapp.Web.Controllers
             return View();
         }
 
-        public IActionResult Profile_html()
+        [HttpGet]
+        public async Task<IActionResult> Profile_html(string email)
         {
-            return View();
+            var obj = new PerfilService();
+            var output = await obj.GetPerfil(email);
+
+            if (output.StatusCode == 200) //si se pudo
+            {
+                var perfil = (Perfil)output.Result; //esto mandarlo al feed , creo
+                return View(perfil);
+            }
+            else //no se pudo
+            {
+                var message = output.Message; //mostrar esta alerta con sweet alert
+                return View();
+            }
         }
 
         public IActionResult Profile()

@@ -42,9 +42,27 @@ namespace Xapp.API.Controllers
                 .FirstOrDefaultAsync(x => x.Email == email);
 
             var perfil = user.PerfilUser;
-            if (perfil != null) return BadRequest();
-            
-            return Ok(perfil);
+
+            if (user != null)
+            {
+                var output = new ApiResponse<Perfil>
+                {
+                    StatusCode = 200,
+                    Message = "Perfil de usuario",
+                    Result = perfil
+                };
+                return Ok(output);
+            }
+            else
+            {
+                var output = new ApiResponse<Perfil>
+                {
+                    StatusCode = 400,
+                    Message = "Usuario no encontrado.",
+                    Result = null
+                };
+                return BadRequest(output);
+            };
         }
         [HttpGet("getSkills")]
         public async Task<IActionResult> GetSkills(string email)
@@ -54,17 +72,26 @@ namespace Xapp.API.Controllers
                 .ThenInclude(x => x.Skills)
                 .FirstOrDefaultAsync(m => m.Email == email);
 
-            if (user == null) return BadRequest();
-
-
-
-            var output = new ApiResponse<List<Skill>>
+            if (user != null)
             {
-                StatusCode = 200,
-                Message = "Bienvenido...",
-                Result = user.PerfilUser.Skills.ToList()
+                var output = new ApiResponse<List<Skill>>
+                {
+                    StatusCode = 200,
+                    Message = "Lista de skills",
+                    Result = user.PerfilUser.Skills.ToList()
+                };
+                return Ok(output);
+            } 
+            else
+            {
+                var output = new ApiResponse<List<Skill>>
+                {
+                    StatusCode = 400,
+                    Message = "Usuario no encontrado.",
+                    Result = null
+                };
+                return BadRequest(output);
             };
-            return Ok(output);
         }
 
         [HttpPost("login")]
