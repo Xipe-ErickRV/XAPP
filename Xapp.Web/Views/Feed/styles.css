@@ -9,6 +9,9 @@ textarea {
     resize: none;
 }
 
+h1 {
+    font-weight: bold;
+}
 
 /* SIDEBAR */
 
@@ -61,7 +64,6 @@ textarea {
 #title {
     margin: 1% 0%;
     font-size: 36px;
-    font-weight: bold;
 }
 
 /* MAIN */
@@ -153,7 +155,7 @@ textarea {
 
 #post_container {
     /* background-color: rgb(255, 255, 255); */
-    margin-top: 25px;
+    margin-top: 5px;
     width: 90%;
 }
 
@@ -211,7 +213,7 @@ textarea {
     cursor: pointer;
 }
 
-.thumbs_up {
+.material-icons {
     color: rgb(52, 52, 52);
 }
 
@@ -299,5 +301,32 @@ textarea {
     color: rgb(255, 255, 255);
 }
 
+
+/* RESPONSIVE */
 @media (max-width: 768px) {
+
+    .sidebar a {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    #title {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+
+    p,
+    span {
+        font-size: 12px;
+    }
 }
