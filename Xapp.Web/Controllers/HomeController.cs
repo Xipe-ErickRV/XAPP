@@ -37,7 +37,7 @@ namespace Xapp.Web.Controllers
             if (output.StatusCode == 200) //si se pudo
             {
                 var user = (User)output.Result; //esto mandarlo al feed , creo
-                return Redirect("/Home/Privacy");
+                return Redirect("/Home/Profile_html");
             }
             else //no se pudo
             {
@@ -47,6 +47,11 @@ namespace Xapp.Web.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult Profile_html()
         {
             return View();
         }

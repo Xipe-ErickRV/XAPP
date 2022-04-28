@@ -62,7 +62,7 @@ namespace Xapp.API.Controllers
             {
                 StatusCode = 200,
                 Message = "Bienvenido...",
-                Result = user.PerfilUser.Skills
+                Result = user.PerfilUser.Skills.ToList()
             };
             return Ok(output);
         }
