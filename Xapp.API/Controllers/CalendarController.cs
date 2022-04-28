@@ -27,7 +27,7 @@ namespace Xapp.API.Controllers
         public async Task<IActionResult> GetAsync()
         {
             var events = await _db.Eventos
-                .Where(x => x.IsPublish).ToListAsync();
+                .Where(x => x.IsPublic).ToListAsync();
 
             if (events == null)
             {
