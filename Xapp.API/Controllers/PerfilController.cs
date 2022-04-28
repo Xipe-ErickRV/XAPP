@@ -10,6 +10,7 @@ using System.Linq;
 using Xapp.Domain.DTOs;
 using Xapp.Domain.Entities;
 using Xapp.Domain.DTOs.Perfil;
+using Xapp.API.Hash;
 
 namespace Xapp.API.Controllers
 {
@@ -69,9 +70,10 @@ namespace Xapp.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginInput dto)
         {
+            Encrypt hash = new Encrypt();
             var user = await _db.Users
                 .Include(m => m.PerfilUser)
-                .FirstOrDefaultAsync(m => m.Email == dto.Email && m.Password == dto.Password);
+                .FirstOrDefaultAsync(m => m.Email == dto.Email && m.Password == hash.EncryptPwd(dto.Password));
             if (user != null)
             {
                 var output = new ApiResponse<User>
@@ -96,11 +98,13 @@ namespace Xapp.API.Controllers
         [HttpPost("addUser")]
         public async Task<IActionResult> AddUser(UserInput dto)
         {
+            Encrypt hash = new Encrypt();
+
             var user = new User()
             {
                 Username = dto.Username,
                 Email = dto.Email,
-                Password = dto.Password,
+                Password = hash.EncryptPwd(dto.Password),
                 PerfilUser = new Perfil
                 {
                     Nombre = dto.Nombre,
