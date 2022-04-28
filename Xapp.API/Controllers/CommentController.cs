@@ -22,22 +22,11 @@ namespace Xapp.API.Controllers
             _db = db;
         }
 
+
+
+
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(Comment comment)
-        {
-
-            comment.CreateEntity();
-
-            await _db.Comments.AddAsync(comment);
-            await _db.SaveChangesAsync();
-
-            return Ok();
-
-        }
-
-
-        [HttpPost("Createdto")]
-        public async Task<IActionResult> Createdto(CommentInput dto)
+        public async Task<IActionResult> Create(CommentInput dto)
         {
             var comment = new Comment()
             {
@@ -48,6 +37,20 @@ namespace Xapp.API.Controllers
                 
             };
             comment.CreateEntity();
+
+            var post = await _db.Posts.FirstOrDefaultAsync(x => x.Id == comment.Id);
+            if (post == null)
+            {
+                var output = new ApiResponse<string>
+                {
+                    StatusCode = 400,
+                    Message = "Error",
+                    Result = "No existe el post"
+                };
+                return BadRequest(output);
+            }
+
+            post.Comments.Add(comment);
 
             await _db.Comments.AddAsync(comment);
             await _db.SaveChangesAsync();
@@ -60,6 +63,17 @@ namespace Xapp.API.Controllers
         {
             var comment = await _db.Comments
                 .FirstOrDefaultAsync(x => x.Id == id);
+
+            if(comment == null)
+            {
+                var output = new ApiResponse<string>
+                {
+                    StatusCode = 400,
+                    Message = "Error",
+                    Result = "No existe el comentario"
+                };
+                return BadRequest(output);
+            }
             _db.Comments.Remove(comment);
             await _db.SaveChangesAsync();
 
@@ -70,6 +84,17 @@ namespace Xapp.API.Controllers
         {
             var comment = await _db.Comments
                 .FirstOrDefaultAsync(x => x.Id == id);
+
+            if(comment == null)
+            {
+                var output = new ApiResponse<string>
+                {
+                    StatusCode = 400,
+                    Message = "Error",
+                    Result = "No existe el comentario"
+                };
+                return BadRequest(output);
+            }
             return Ok(comment);
 
         }
@@ -78,6 +103,17 @@ namespace Xapp.API.Controllers
         {
             var comment = await _db.Comments
                 .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (comment == null)
+            {
+                var output = new ApiResponse<string>
+                {
+                    StatusCode = 400,
+                    Message = "Error",
+                    Result = "No existe el comentario"
+                };
+                return BadRequest(output);
+            }
 
             comment.Content = ncomment.Content;
 

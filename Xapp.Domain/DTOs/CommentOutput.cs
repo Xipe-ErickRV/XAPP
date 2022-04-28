@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace Xapp.Domain.DTOs
 {
-    public class PostInput
+    public class CommentOutput
     {
-        //Post
-        public string Title { get; set; }
+        //Comment
         public string Content { get; set; }
-        public string Multimedia { get; set; }
-        public Enums.Tags Tag { get; set; }
+        public int PostId { get; set; }
         public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string URLProfile { get; set; }
+        public int Likes { get; set; }
     }
 }
