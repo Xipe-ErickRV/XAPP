@@ -162,7 +162,7 @@ namespace Xapp.API.XipeCoinsController
 
             List<Transfer> ab = lista.WalletlUser.Transfers;
 
-            return Ok(list2);
+            return Ok(ab);
         }
 
         [HttpGet("GetEarnings")]
