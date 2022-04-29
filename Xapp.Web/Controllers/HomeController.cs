@@ -75,9 +75,21 @@ namespace Xapp.Web.Controllers
             return View();
         }
 
-        public IActionResult ProfileModoVista()
+        public async Task<IActionResult> ProfileModoVista(string email)
         {
-            return View();
+            var obj = new PerfilService();
+            var output = await obj.GetPerfil(email);
+
+            if (output.StatusCode == 200)
+            {
+                var perfil = (Perfil)output.Result; 
+                return View(perfil);
+            }
+            else 
+            {
+                var message = output.Message; 
+                return View();
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

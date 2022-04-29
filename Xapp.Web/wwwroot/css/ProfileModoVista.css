@@ -566,12 +566,15 @@ input[type=text], input[type=tel], input[type=email], textarea[type=input-field]
         height: 120%;
     }
 
-    .modal-box .save-button {
-        bottom: 10%;
-        right: 4%;
+    .modal-box {
+        height: 55%;
     }
-}
 
+        .modal-box .save-button {
+            bottom: 10%;
+            right: 4%;
+        }
+}
 
 .skilltitle {
     margin-top: 0%;

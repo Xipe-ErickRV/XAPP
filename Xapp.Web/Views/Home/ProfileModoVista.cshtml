@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Xapp.Domain.Entities.Perfil
+@{
     ViewData["Title"] = "My Profile";
     Layout = null;
 
@@ -44,9 +45,9 @@
                                 <label for="file" id="uploadBtn"> Change Photo </label>
 
                             </div>
-                            <div class="profileInfo-personal-data-afterimg">
+                            <form  action="Home/ProfileModoVista" method="get" class="profileInfo-personal-data-afterimg">
                                 <div class="col-md-12 afterimg"><label class="labels">First Name</label>
-                                    <p> Miguel </p>
+                                    <p>@Model.Nombre</p>
                                 </div><br>
                                 <div class="col-md-12 afterimg"><label class="labels">Last Name</label>
                                     <p> Herrera </p>
@@ -63,7 +64,7 @@
                                 <div class="col-md-12 afterimg"><label class="labels">Bio</label>
                                     <p> Soy estudiante del Tecnologico de Monterrey </p>
                                 </div><br>
-                            </div>
+                            </form>
                         </div>
 
                     </div>
