@@ -131,6 +131,25 @@ namespace Xapp.API.XipeCoinsController
                 .ThenInclude(x => x.Transfers)
                 .FirstOrDefaultAsync(x => x.UserId == id);
 
+            //var wallet = await _db.Wallets.FirstOrDefaultAsync(m => m.UserId == id);
+            //var list1 = await _db.Transfers.Where(m => m.WalletId == wallet.Id).Select(x => new Transfer
+            //{
+            //    Id = x.Id,
+            //    Amount = x.Amount,
+            //    Concept = x.Concept,
+            //    Receiver = x.Receiver,
+            //    Sender = x.Sender
+            //}).ToListAsync();
+
+            //var list2 = await _db.Transfers.Include(m => m.Wallet).Where(m => m.Wallet.UserId == id).Select(x => new Transfer
+            //{
+            //    Id = x.Id,
+            //    Amount = x.Amount,
+            //    Concept = x.Concept,
+            //    Receiver = x.Receiver,
+            //    Sender = x.Sender
+            //}).ToListAsync();
+
             if (lista == null) 
             {
                 var output = new ApiResponse
@@ -143,7 +162,7 @@ namespace Xapp.API.XipeCoinsController
 
             List<Transfer> ab = lista.WalletlUser.Transfers;
 
-            return Ok(ab);
+            return Ok(list2);
         }
 
         [HttpGet("GetEarnings")]
