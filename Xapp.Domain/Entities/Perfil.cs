@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xapp.Domain.DTOs;
+using Xapp.Domain.DTOs.Perfil;
 
 namespace Xapp.Domain.Entities
 {
@@ -65,6 +66,21 @@ namespace Xapp.Domain.Entities
             EditEntity();
         }
         public virtual User User { get; set; }
+
+        public ProfileOutput Output()
+        {
+            return new ProfileOutput
+            {
+                Telefono = Telefono,
+                Nombre = Nombre,
+                Apellido = Apellido,
+                Area = Area,
+                Bio = Bio,
+                FechaCumple = FechaCumple,
+                Skills = Skills
+            };
+
+        }
 
     }
 }

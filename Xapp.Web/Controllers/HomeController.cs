@@ -82,8 +82,9 @@ namespace Xapp.Web.Controllers
 
             if (output.StatusCode == 200)
             {
-                var perfil = (Perfil)output.Result; 
-                return View(perfil);
+                var perfil = (Perfil)output.Result;
+                var resultOutput = perfil.Output();
+                return View(resultOutput);
             }
             else 
             {

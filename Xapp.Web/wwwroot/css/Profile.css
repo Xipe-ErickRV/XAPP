@@ -183,14 +183,14 @@ body {
     margin: 0 auto;
 }
 
-input[type=text], input[type=tel], input[type=email], textarea[type=input-field] {
+input[type=text], input[type=tel], input[type=email], input[type=date], textarea[type=input-field] {
     width: 100%;
     border: 1px solid #d0d0d0;
     display: block;
     padding: 8px;
     margin: 5px 0;
     margin-bottom: 0.5%;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 500;
     color: black;
 }

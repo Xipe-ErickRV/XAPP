@@ -1,4 +1,4 @@
-﻿@model Xapp.Domain.Entities.Perfil
+﻿@model Xapp.Domain.DTOs.Perfil.ProfileOutput
 @{
     ViewData["Title"] = "My Profile";
     Layout = null;
@@ -50,19 +50,22 @@
                                     <p>@Model.Nombre</p>
                                 </div><br>
                                 <div class="col-md-12 afterimg"><label class="labels">Last Name</label>
-                                    <p> Herrera </p>
+                                    <p> @Model.Apellido </p>
                                 </div><br>
                                 <div class="col-md-12 afterimg"><label class="labels">Area</label>
-                                    <p> Desarrollador </p>
+                                    <p> @Model.Area </p>
                                 </div><br>
                                 <div class="col-md-12 afterimg"><label class="labels">Phone Number</label>
-                                    <p> 662 123 4567 </p>
+                                    <p> @Model.Telefono </p>
                                 </div><br>
                                 <div class="col-md-12 afterimg"><label class="labels">Email</label>
-                                    <p> miguel_herrera@gmail.com </p>
+                                    <p> email </p>
+                                </div><br>
+                                <div class="col-md-12 afterimg"><label class="labels">Birthday</label>
+                                    <p> @Model.FechaCumple.ToShortDateString() </p>
                                 </div><br>
                                 <div class="col-md-12 afterimg"><label class="labels">Bio</label>
-                                    <p> Soy estudiante del Tecnologico de Monterrey </p>
+                                    <p> @Model.Bio </p>
                                 </div><br>
                             </form>
                         </div>
