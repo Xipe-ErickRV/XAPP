@@ -139,7 +139,6 @@ namespace Xapp.API.XipeCoinsController
             outtransfer.DateTime = lista.CreationDate;
 
 
-
             //var wallet = await _db.Wallets.FirstOrDefaultAsync(m => m.UserId == id);
             //var list1 = await _db.Transfers.Where(m => m.WalletId == wallet.Id).Select(x => new Transfer
             //{
@@ -170,6 +169,15 @@ namespace Xapp.API.XipeCoinsController
             };
 
             //List<Transfer> ab = lista.WalletlUser.Transfers;
+
+            //for (int i = 0; i < ab.Count; i++)
+            //{
+            //    Console.WriteLine(ab[i].Receiver);
+            //    Console.WriteLine(ab[i].Sender);
+            //    Console.WriteLine(ab[i].Concept);
+            //    Console.WriteLine(ab[i].Amount);
+            //    Console.WriteLine(ab[i].WalletId);
+            //}
 
             return Ok(outtransfer);
         }
