@@ -37,13 +37,7 @@ namespace Xapp.API.Controllers
         }
 
         [HttpPost("addEvent")]
-        public async Task<IActionResult> addEvent(EventInput dto)
-        {
-            var evento = new Event();
-            {
-
-            }
-        }
+        
 
         // PUT api/<CalendarController>/5
         [HttpPut("{id}")]
@@ -53,8 +47,15 @@ namespace Xapp.API.Controllers
 
         // DELETE api/<CalendarController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> EventDelete(int id)
         {
+            var events = await _db.Eventos.FindAsync(id);
+            if (events == null)
+                return BadRequest();
+
+            _db.Eventos.Remove(events);
+            return Ok();
         }
+
     }
 }
