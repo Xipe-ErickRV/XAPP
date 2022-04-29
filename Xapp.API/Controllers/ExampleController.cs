@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +18,13 @@ namespace Xapp.API.Controllers
     [ApiController]
     public class ExampleController : ControllerBase
     {
+        private IConfiguration _config { get; }
+
         private readonly DbService _db;
 
-        public ExampleController(DbService db)
+        public ExampleController(IConfiguration config,DbService db)
         {
+            _config = config;
             _db = db;
         }
 
@@ -130,5 +136,43 @@ namespace Xapp.API.Controllers
             var list = await _db.Wallets.ToListAsync();
             return Ok(list);
         }
+
+
+
+
+
+        [HttpPost("UploadAsync")]
+        public async Task<IActionResult> UploadAsync(IFormFile file)
+        {
+            try
+            {
+                if (file == null)
+                    file = Request.Form.Files["uploadfile"];
+                if (file == null)
+                {
+                    return BadRequest();
+                }
+                var blobSection = _config.GetSection("BlobSettings");
+                var connectionString = blobSection.GetSection("ConnectionString").Value;
+                var sourceContainerName = blobSection.GetSection("Container").Value;
+                var fileName = $"{file.FileName}";
+                BlobServiceClient blobServiceClient = new(connectionString);
+                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(sourceContainerName);
+                BlobHttpHeaders blobHttpHeader = new()
+                {
+                    ContentType = file.ContentType
+                };
+                BlobClient blobClient = containerClient.GetBlobClient(fileName);
+                await blobClient.UploadAsync(file.OpenReadStream(), blobHttpHeader);
+                string url = $"https://xipeappstorgae.blob.core.windows.net/xapp/{fileName}";
+                return Ok(new ApiResponse<string> {  StatusCode = 200 , Result= url, Message="Ok" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+
+        }
+
     }
 }
