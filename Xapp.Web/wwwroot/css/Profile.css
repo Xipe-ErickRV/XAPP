@@ -183,7 +183,11 @@ body {
     margin: 0 auto;
 }
 
-input[type=text], input[type=tel], input[type=email], input[type=date], textarea[type=input-field] {
+input[type=text].profileInfo-personal-data-afterimg,
+input[type=tel].profileInfo-personal-data-afterimg,
+input[type=email].profileInfo-personal-data-afterimg,
+input[type=date].profileInfo-personal-data-afterimg,
+textarea[type=input-field].profileInfo-personal-data-afterimg {
     width: 100%;
     border: 1px solid #d0d0d0;
     display: block;
@@ -193,8 +197,47 @@ input[type=text], input[type=tel], input[type=email], input[type=date], textarea
     font-size: 1.8rem;
     font-weight: 500;
     color: black;
+    background-color: white;
+    box-shadow: 0.3px 0.3px 1.3px rgba(0, 0, 0, 0.028), 0.9px 1.1px 4.5px rgba(0, 0, 0, 0.042), 4px 5px 20px rgba(0, 0, 0, 0.07);
 }
 
+input[type=date]::placeholder {
+    opacity: 0.6;
+    width: 100%;
+    border: 1px solid #d0d0d0;
+    display: block;
+    padding: 8px;
+    margin: 5px 0;
+    margin-bottom: 0.5%;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: black;
+    background-color: white;
+    box-shadow: 0.3px 0.3px 1.3px rgba(0, 0, 0, 0.028), 0.9px 1.1px 4.5px rgba(0, 0, 0, 0.042), 4px 5px 20px rgba(0, 0, 0, 0.07);
+}
+
+*::placeholder {
+    font-weight: normal;
+}
+
+input[type=date].profileInfo-personal-data-afterimg {
+    width: 100%;
+    border: 1px solid #d0d0d0;
+    display: block;
+    padding: 8px;
+    margin: 5px 0;
+    margin-bottom: 0.5%;
+    font-size: 1.8rem;
+    font-weight: normal;
+    color: black;
+    background-color: white;
+    box-shadow: 0.3px 0.3px 1.3px rgba(0, 0, 0, 0.028), 0.9px 1.1px 4.5px rgba(0, 0, 0, 0.042), 4px 5px 20px rgba(0, 0, 0, 0.07);
+    height: 3%;
+}
+
+input[type=date]::placeholder {
+    opacity: 0.5;
+}
 /**PROFILE PICTURE**/
 .profile-pic {
     width: 200px;
@@ -512,13 +555,15 @@ input[type=text], input[type=tel], input[type=email], input[type=date], textarea
     .login-box {
         height: 120%;
     }
-    .modal-box{
-        height:55%;
+
+    .modal-box {
+        height: 55%;
     }
-    .modal-box .save-button {
-        bottom: 10%;
-        right: 4%;
-    }
+
+        .modal-box .save-button {
+            bottom: 10%;
+            right: 4%;
+        }
 }
 
 
