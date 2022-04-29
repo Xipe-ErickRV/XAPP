@@ -143,20 +143,70 @@ namespace Xapp.API.XipeCoinsController
 
             List<Transfer> ab = lista.WalletlUser.Transfers;
 
+            //for (int i = 0; i < ab.Count; i++)
+            //{
+            //    Console.WriteLine(ab[i].Receiver);
+            //    Console.WriteLine(ab[i].Sender);
+            //    Console.WriteLine(ab[i].Concept);
+            //    Console.WriteLine(ab[i].Amount);
+            //    Console.WriteLine(ab[i].WalletId);
+            //}
+
             return Ok(ab);
         }
 
         [HttpGet("GetEarnings")]
         public async Task<IActionResult> GetEarnings(int id)
         {
-            var earnings = await _db.Transfers
-                .Include(x => x.Amount)
-                .FirstOrDefaultAsync(x => x.Receiver == id);
+            var earnings = await _db.Wallets
+                .Include(x => x.Transfers)
+                .FirstOrDefaultAsync(x => x.UserId == id);
 
             // Falta hacer que sumen las ganancias, que no sea una lista
 
-            return Ok(earnings);
-        }
+            if (earnings == null)
+            {
+                var output = new ApiResponse
+                {
+                    StatusCode = 400,
+                    Message = "El Usuario no tiene Wallet registrada",
+                };
+                return BadRequest(output);
+            }
 
+            var transfers = earnings.Transfers;
+
+            if (transfers == null)
+            {
+                var output = new ApiResponse
+                {
+                    StatusCode = 400,
+                    Message = "El Usuario no tiene movimientos registrados",
+                };
+                return BadRequest(output);
+            }
+
+            List<Transfer> XPearn = new List<Transfer>();
+
+            for (int i = 0; i < transfers.Count; i++)
+            {
+                if (transfers[i].Receiver == earnings.UserId)
+                {
+                    XPearn.Add(earnings.Transfers[i]);
+                }
+            }
+
+            if (XPearn == null)
+            {
+                var output = new ApiResponse
+                {
+                    StatusCode = 400,
+                    Message = "El Usuario no tiene movimientos registrados donde reciba XipeCoins",
+                };
+                return BadRequest(output);
+            }
+
+            return Ok(XPearn);
+        }
     }
 }
