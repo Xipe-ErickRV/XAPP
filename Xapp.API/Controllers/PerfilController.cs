@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Xapp.Domain.DTOs;
 using Xapp.Domain.Entities;
+using Xapp.Domain.DTOs.Perfil;
+using Xapp.API.Hash;
 
 namespace Xapp.API.Controllers
 {
@@ -22,63 +24,114 @@ namespace Xapp.API.Controllers
         {
             _db = db;
         }
+        
+        [HttpGet("getUser")]
+        public async Task<IActionResult> GetUser(string email)
+        {
+            var user = await _db.Users
+                .FirstOrDefaultAsync(x => x.Email == email);
+            if (user == null) return BadRequest();
 
+            return Ok(user);
+        }
         [HttpGet("getPerfil")]
         public async Task<IActionResult> GetPerfil(string email)
         {
-            var user = await _db.Users.FirstOrDefaultAsync(m => m.Email == email);
+            var user = await _db.Users
+                .Include(x => x.PerfilUser)
+                .FirstOrDefaultAsync(x => x.Email == email);
+
             var perfil = user.PerfilUser;
-            if (perfil != null)
+
+            if (user != null)
             {
-                return Ok(perfil);
+                var output = new ApiResponse<Perfil>
+                {
+                    StatusCode = 200,
+                    Message = "Perfil de usuario",
+                    Result = perfil
+                };
+                return Ok(output);
             }
             else
             {
-
-                return Ok();
-            }
+                var output = new ApiResponse<Perfil>
+                {
+                    StatusCode = 400,
+                    Message = "Usuario no encontrado.",
+                    Result = null
+                };
+                return BadRequest(output);
+            };
         }
-
-        //TEST PENDING
         [HttpGet("getSkills")]
         public async Task<IActionResult> GetSkills(string email)
         {
-            var user = await _db.Users.FirstOrDefaultAsync(m => m.Email == email);
-            var skills = user.PerfilUser.Skills; 
+            var user = await _db.Users
+                .Include(x => x.PerfilUser)
+                .ThenInclude(x => x.Skills)
+                .FirstOrDefaultAsync(m => m.Email == email);
+
             if (user != null)
             {
-                return Ok(skills);
-            }
+                var output = new ApiResponse<List<Skill>>
+                {
+                    StatusCode = 200,
+                    Message = "Lista de skills",
+                    Result = user.PerfilUser.Skills.ToList()
+                };
+                return Ok(output);
+            } 
             else
             {
-
-                return Ok();
-            }
+                var output = new ApiResponse<List<Skill>>
+                {
+                    StatusCode = 400,
+                    Message = "Usuario no encontrado.",
+                    Result = null
+                };
+                return BadRequest(output);
+            };
         }
 
         [HttpPost("login")]
-
-        public async Task<IActionResult> Login(string email, string password)
+        public async Task<IActionResult> Login(LoginInput dto)
         {
-            var user = await _db.Users.Include(m => m.PerfilUser).FirstOrDefaultAsync(m => m.Email == email && m.Password == password);
+            Encrypt hash = new Encrypt();
+            var user = await _db.Users
+                .Include(m => m.PerfilUser)
+                .FirstOrDefaultAsync(m => m.Email == dto.Email && m.Password == hash.EncryptPwd(dto.Password));
             if (user != null)
             {
-                return Ok(user);
+                var output = new ApiResponse<User>
+                {
+                    StatusCode = 200,
+                    Message = "Bienvenido...",
+                    Result = user
+                };
+                return Ok(output);
             }
             else
             {
-                return BadRequest();
+                var output = new ApiResponse<User>
+                {
+                     StatusCode = 400,
+                     Message ="Verifica tus campos."
+                };
+                return BadRequest(output);
             } 
         }
 
         [HttpPost("addUser")]
-        public async Task<IActionResult> addUser(UserInput dto)
+        public async Task<IActionResult> AddUser(UserInput dto)
         {
+            Encrypt hash = new Encrypt();
+
             var user = new User()
             {
                 Username = dto.Username,
                 Email = dto.Email,
-                Password = dto.Password,
+                Password = hash.EncryptPwd(dto.Password),
                 PerfilUser = new Perfil
                 {
                     Nombre = dto.Nombre,
@@ -104,8 +157,6 @@ namespace Xapp.API.Controllers
 
             return Ok();
         }
-
-        //FALTA VINCULAR PERFIL-SKILL
         [HttpPost("newSkill")]
         public async Task<IActionResult> NewSkill(string email, SkillInput dto)
         {
@@ -118,10 +169,13 @@ namespace Xapp.API.Controllers
 
             var skill = new Skill()
             {
+                User = user.UserId,
                 Nombre = dto.Nombre,
                 Nivel = dto.Nivel,
                 Descripcion = dto.Descripcion
             };
+            skill.CreateEntity();
+            user.PerfilUser.Skills.Add(skill);
 
             await _db.Skills.AddAsync(skill);
             await _db.SaveChangesAsync();
@@ -129,7 +183,37 @@ namespace Xapp.API.Controllers
             return Ok();
         }
 
-        //SERVICES??
+        [HttpPatch("passwordChange")]
+        public async Task<IActionResult> PasswordChange(string email, string old, string newP, string confirmP)
+        {
+            var user = await _db.Users
+                .FirstOrDefaultAsync(x => x.Email == email);
+
+            if (user == null) return NotFound();
+
+            if (user.Password != old) return BadRequest();
+
+            if (confirmP != newP) return BadRequest();
+
+            user.Password = newP;
+            await _db.SaveChangesAsync();
+            return Ok();
+        }
+        [HttpPatch("patchUsuario")]
+        public async Task<IActionResult> PatchUsuario(string email, PatchUser dto)
+        {
+            var user = await _db.Users
+                .FirstOrDefaultAsync(x => x.Email == email);
+
+            if (user == null) return BadRequest();
+
+            user.Username = dto.Username;
+            //user.Password = dto.Password;
+            user.Email = dto.Email;
+
+            await _db.SaveChangesAsync();
+            return Ok();
+        }
         [HttpPatch("patchPerfil")]
         public async Task<IActionResult> PatchPerfil(string email, ProfileUpdate dto)
         {
@@ -147,8 +231,26 @@ namespace Xapp.API.Controllers
                 return BadRequest();
             }
         }
+        
+        //INCOMPLETE?
+        [HttpDelete("userDelete")]
+        public async Task<IActionResult> UserDelete(string email)
+        {
+            var user = await _db.Users
+                .Include(x => x.PerfilUser)
+                .Include(x=>x.WalletlUser)
+                .FirstOrDefaultAsync(x => x.Email == email);
 
-        //TEST PENDING
+            if (user == null) return BadRequest();
+
+            user.Delete();
+            user.PerfilUser.Delete();
+            user.WalletlUser.Delete();
+            //Execute every Delete() in child entities like PTO?
+
+            await _db.SaveChangesAsync();
+            return Ok(user);
+        }
         [HttpDelete("skillDelete")]
         public async Task<IActionResult> SkillDelete(int ID, string email)
         {
@@ -160,8 +262,10 @@ namespace Xapp.API.Controllers
             //validación bla bla
             // validación ...
 
+            var skill = user.PerfilUser.Skills
+                .Find(x => x.User == user.UserId && x.Id == ID);
+            if (skill == null) return BadRequest();
 
-            var skill = user.PerfilUser.Skills.Find(m => m.Id == ID);
             skill.Delete();
             await _db.SaveChangesAsync();
             return Ok(skill);

@@ -1,8 +1,85 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
-}
+    ViewData["Title"] = "Login";
+    Layout = null;
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+}
+@model Xapp.Domain.DTOs.Perfil.LoginInput
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="~/css/login.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <main>
+
+        <section class="loginandimg">
+            <div class="login">
+                <div class="loginabsolute">
+                    <h2 class="login-title">Log In</h2>
+                    <h3 class="login-welcome">¡Welcome Xapien! </h3>
+
+                    <div class="formulario">
+
+
+                        <div class="login-form">
+                            <form action="Home/Index" method="post">
+                                <label for="">Correo electrónico</label>
+                                <input name="email" type="email" placeholder="">
+                                <label for="">Contraseña</label>
+                                <input name="password" type="password" placeholder="">
+                                <div class="stayconnected">
+
+                                    <div class="remember-form">
+                                        <input type="checkbox" checked="checked">
+
+                                        <h2>Mantenerme Conectado</h2>
+                                    </div>
+
+                                </div>
+
+                                <button type="submit">Log In</button>
+                                <div class="forget-pass">
+                                    <button class="btn btn-primary contra-button" type="button">¿Olvidaste tu contraseña?</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="imglogin">
+                <img src="https://drive.google.com/uc?export=view&id=1OpGwdjlr2iC1KNanzcmz6178flh9qQZ2" alt="XIPE Employees" />
+
+            </div>
+        </section>
+
+        <!-- PopUp -->
+        <div class="modal-cont">
+            <!--Background-->
+            <div class="modal-box">
+
+                <div class="login-box">
+                    <span class="close">&times;</span>
+                    <h2 class="changepwd"> Cambiar Contraseña </h2>
+                    <label for="">Correo electrónico:</label>
+                    <input type="email" class="emailnewpwd" id="field1" required>
+                    <label for="">Contraseña nueva:</label>
+                    <input type="password" class="contra_nueva" value="" required>
+                    <label for="">Confirmar contraseña nueva:</label>
+                    <input type="password" class="contra_nueva confirmation" value="" required><br>
+                    <button class="save-button">Save</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</body>
+<!-- Archivo de Javascript -->
+<script src="~/js/login_code.js"></script>
+</html>

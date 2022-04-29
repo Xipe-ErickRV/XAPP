@@ -24,20 +24,117 @@ namespace Xapp.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetAsync()
         {
-            return new string[] { "value1", "value2" };
+            var events = await _db.Eventos
+                .Where(x => x.IsPublic).ToListAsync();
+
+            if (events == null)
+            {
+                var outputError = new ApiResponse<string>
+                {
+                    StatusCode = 400,
+                    Message = "Error",
+                    Result = "No existe el usuario"
+                };
+                return BadRequest(outputError);
+            }
+            //misma logica pero para PTOs
+
+
+            var listOfEvent = events.Select(X => X.Output()).ToList();
+            var output = new ApiResponse<List<EventInput>>
+            {
+                StatusCode = 200,
+                Message = "",
+                Result = listOfEvent
+            };
+            return Ok(output);
         }
 
         // GET api/<CalendarController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("GetEventsByUser")]
+        public async Task<IActionResult> Get(int userId)
         {
-            return "value";
+            var events = await _db.Eventos
+                .Where(x => x.UserId == userId).ToListAsync();
+
+            if (events == null)
+            {
+                var outputError = new ApiResponse<string>
+                {
+                    StatusCode = 400,
+                    Message = "Error",
+                    Result = "No existe el usuario"
+                };
+                return BadRequest(outputError);
+            }
+            //misma logica pero para PTOs
+
+
+            var listOfEvent = events.Select(X => X.Output()).ToList();
+            var output = new ApiResponse<List<EventInput>>
+            {
+                StatusCode = 200,
+                Message = "",
+                Result = listOfEvent
+            };
+            return Ok(output);
         }
 
         [HttpPost("addEvent")]
-        
+        public async Task<IActionResult> AddEvent(EventInput dto)
+        {
+            var user = await _db.Users
+                .Include(x => x.PerfilUser)
+                .ThenInclude(x => x.Eventos)
+                .FirstOrDefaultAsync(x => x.UserId == dto.UserId);
+
+            if (user == null)
+            {
+                var outputError = new ApiResponse<string>
+                {
+                    StatusCode = 400,
+                    Message = "Error",
+                    Result = "No existe el usuario"
+                };
+                return BadRequest(outputError);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                var outputError = new ApiResponse<string>
+                {
+                    StatusCode = 400,
+                    Message = "Error",
+                    Result = "Llena los campos correctamente"
+                };
+                return BadRequest(outputError);
+            }
+
+            var evento = new Event()
+            {
+                Title = dto.Title,
+                Description = dto.Description,
+                DateTime = dto.Date,
+                IsPublic = dto.IsPublic,
+                IsPublish = true,
+                UserId = dto.UserId,
+                User = user
+            };
+            evento.CreateEntity();
+            user.PerfilUser.Eventos.Add(evento);
+            await _db.Eventos.AddAsync(evento);
+            await _db.SaveChangesAsync();
+
+            var output = new ApiResponse<string>
+            {
+                StatusCode = 200,
+                Message = "Éxito",
+                Result = "Evento creado"
+            };
+            return Ok(output);
+        }
 
         // PUT api/<CalendarController>/5
         [HttpPut("{id}")]

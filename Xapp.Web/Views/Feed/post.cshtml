@@ -1,0 +1,140 @@
+@{
+    ViewData["Title"] = "Feed";
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- w3css library -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <!--Poppins font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <!-- Icons link -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!--link to stylesheet-->
+    <link href="~/css/feed_styles.css" rel="stylesheet">
+
+    <title>Post</title>
+</head>
+
+<body style="background-color:rgb(255, 255, 255)">
+    <!--side bar-->
+    <div class="sidebar">
+        <img src="https://drive.google.com/uc?export=view&id=17qRly_RNtO7moC4aSQkWyQjI5xKTv4Ft" id="logo">
+        <a href="#Profile"> Profile</a>
+        <a href="#Feed"> Feed</a>
+        <a href="#XipeCoins"> XipeCoins</a>
+        <a href="#Calendar"> Calendar</a>
+    </div>
+
+    <div class="main">
+
+        <!-- full post -->
+        <div id="post_container">
+            <div class="post_elements">
+
+                <div class="btn_icons">
+                    <div class="interactions_container">
+                        <button class="like_btn" onclick=change_like_color(like01)><i class="material-icons thumbs_up"
+                                id="like01">thumb_up</i></button>
+                        <span>7</span>
+                    </div>
+                    <div class="interactions_container">
+                        <i class="material-icons">chat</i>
+                        <span>2</span>
+                    </div>
+                </div>
+
+                <div class="post_title_tag">
+                    <h2 class="post_title">Title #1</h2>
+                    <span class="post_tag">Tag Name</span>
+                </div>
+
+                <div class="profile_elements">
+                    <img src="pic_example.jpg" class="user_pic">
+                    <h3 class="author">Author Name</h3>
+                </div>
+
+                <p class="post_content">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+                    praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
+                    occaecati
+                    cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est
+                    laborum et
+                    dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum
+                    soluta
+                    nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus,
+                    omnis
+                    voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis
+                    aut
+                    rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
+                    Itaque
+                    earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias
+                    consequatur
+                    aut perferendis doloribus asperiores repellat.
+                </p>
+
+                <span style="color:rgb(226, 36, 50)">2 COMMENTS</span>
+            </div>
+        </div>
+
+        <!-- post comments -->
+        <div id="comment_container">
+            <div class="comment_block">
+                <div class="comment_elements">
+
+                    <div class="profile_elements">
+                        <img src="pic_example.jpg" class="user_pic">
+                        <h3 class="comment_author">Author Name</h3>
+                    </div>
+
+                    <p class="comment_content">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+                        veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                    </p>
+                </div>
+            </div>
+
+            <div class="comment_block">
+                <div class="comment_elements">
+
+                    <div class="profile_elements">
+                        <img src="pic_example.jpg" class="user_pic">
+                        <h3 class="comment_author">Author Name</h3>
+                    </div>
+
+                    <p class="comment_content">But I must explain to you how all this mistaken idea of denouncing
+                        pleasure and praising pain was born and I will give you a complete account of the system, and
+                        expound the actual teachings of the great explorer of the truth, the master-builder of human
+                        happiness.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- add comment -->
+        <div id="add_comment" class="w3-display-container form-group">
+            <textarea id="comment_input" placeholder="Add a comment"></textarea>
+            <button type="submit" class="w3-button w3-round-large w3-display-bottomright">Send</button>
+        </div>
+
+    </div>
+
+    <!-- link to js file -->
+    <script src="~/js/feed_script.js"></script>
+
+</body>
+
+</html>
