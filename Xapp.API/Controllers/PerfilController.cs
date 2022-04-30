@@ -39,6 +39,7 @@ namespace Xapp.API.Controllers
         {
             var user = await _db.Users
                 .Include(x => x.PerfilUser)
+                .ThenInclude(x => x.Skills)
                 .FirstOrDefaultAsync(x => x.Email == email);
 
             var perfil = user.PerfilUser;
@@ -106,7 +107,7 @@ namespace Xapp.API.Controllers
                 var output = new ApiResponse<User>
                 {
                     StatusCode = 200,
-                    Message = "Bienvenido...",
+                    Message = "Bienvenido a XAPP",
                     Result = user
                 };
                 return Ok(output);
@@ -180,7 +181,28 @@ namespace Xapp.API.Controllers
             await _db.Skills.AddAsync(skill);
             await _db.SaveChangesAsync();
 
-            return Ok();
+            if (user.PerfilUser.Skills != null)
+            {
+                var output = new ApiResponse<List<Skill>>
+                {
+                    StatusCode = 200,
+                    Message = "Añadiste una nueva skill.",
+                    Result = user.PerfilUser.Skills
+                };
+                return Ok(output);
+            }
+            else
+            {
+                var output = new ApiResponse<List<Skill>>
+                {
+                    StatusCode = 400,
+                    Message = "Verifica tus campos."
+                };
+                return BadRequest(output);
+            }
+
+           
+
         }
 
         [HttpPatch("passwordChange")]

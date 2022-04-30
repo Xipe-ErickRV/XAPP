@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Xapp.Domain.DTOs;
 using Xapp.Domain.DTOs.Perfil;
 using Xapp.Domain.Entities;
 using Xapp.Web.Models;
@@ -37,7 +38,7 @@ namespace Xapp.Web.Controllers
             if (output.StatusCode == 200) //si se pudo
             {
                 var user = (User)output.Result; //esto mandarlo al feed , creo
-                string page = $"/Home/Profile_html?email={user.Email}";
+                string page = $"/Home/ProfileModoVista?email={user.Email}";
                 return Redirect(page);
             }
             else //no se pudo
@@ -53,7 +54,7 @@ namespace Xapp.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Profile_html(string email)
+        public async Task<IActionResult> Profile(string email)
         {
             var obj = new PerfilService();
             var output = await obj.GetPerfil(email);
@@ -70,9 +71,23 @@ namespace Xapp.Web.Controllers
             }
         }
 
-        public IActionResult Profile()
+
+        [HttpPost]
+        public async Task<IActionResult> Profile(string email, SkillInput dto)
         {
-            return View();
+            var obj = new PerfilService();
+            var output = await obj.AddSkill(email, dto);
+
+            if (output.StatusCode == 200)
+            {
+                var listskills = output.Result;
+                return View(listskills);
+            }
+            else
+            {
+                var message = output.Message; 
+                return View();
+            }
         }
 
         public async Task<IActionResult> ProfileModoVista(string email)
@@ -92,6 +107,7 @@ namespace Xapp.Web.Controllers
                 return View();
             }
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

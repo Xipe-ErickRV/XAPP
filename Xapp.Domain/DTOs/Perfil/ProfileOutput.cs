@@ -13,6 +13,7 @@ namespace Xapp.Domain.DTOs.Perfil
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Area { get; set; }
+        public string Email { get; set; }
         public string Bio { get; set; }
         public DateTime FechaCumple { get; set; }
         public List<Skill> Skills { get; set; }

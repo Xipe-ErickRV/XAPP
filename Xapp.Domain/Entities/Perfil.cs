@@ -76,6 +76,7 @@ namespace Xapp.Domain.Entities
                 Apellido = Apellido,
                 Area = Area,
                 Bio = Bio,
+                Email = User.Email,
                 FechaCumple = FechaCumple,
                 Skills = Skills
             };

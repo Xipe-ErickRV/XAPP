@@ -55,5 +55,26 @@ namespace Xapp.Web.Services
                 return output;
             }
         }
+
+        public async Task<ApiResponse<List<Skill>>> AddSkill(string email, SkillInput dto) //poner email en SkillInput
+        {
+            var url = $"{_baseUrl}/addSkill?email={email}";
+            var client = new RestClient(url);
+            var request = new RestRequest() { Method = Method.Post };
+            request.RequestFormat = RestSharp.DataFormat.Json;
+            request.AddHeader("Content-Type", "application/json");
+            request.AddJsonBody(dto);
+            var response = await client.ExecuteAsync(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var output = JsonConvert.DeserializeObject<ApiResponse<List<Skill>>>(response.Content);
+                return output;
+            }
+            else
+            {
+                var output = JsonConvert.DeserializeObject<ApiResponse<List<Skill>>>(response.Content);
+                return output;
+            }
+        }
     }
 }

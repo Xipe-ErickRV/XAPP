@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Xapp.Domain.DTOs.Perfil.ProfileOutput
+@{
     ViewData["Title"] = "My Profile";
     Layout = null;
 
@@ -105,7 +106,7 @@
     <div class="modal-cont">
         <div class="modal-box">
             <span class="close">&times;</span>
-            <form action="" class="login-box">
+            <form action="Home/Profile" method="post" class="login-box">
                 <h1 class="skilltitle"> Add Skill </h1>
                 <label class="skilllabel">Name:</label>
                 <input type="text" class="skillname" id="field1" required>
@@ -116,7 +117,7 @@
                 <button class="expert" type="button" id="skill_pill">Expert</button>
 
 
-                <button class="save-button">Save</button>
+                <button type="submit" class="save-button">Save</button>
             </form>
         </div>
     </div>

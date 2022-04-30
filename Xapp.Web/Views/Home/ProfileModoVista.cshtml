@@ -59,7 +59,7 @@
                                     <p> @Model.Telefono </p>
                                 </div><br>
                                 <div class="col-md-12 afterimg"><label class="labels">Email</label>
-                                    <p> email </p>
+                                    <p> @Model.Email  </p>
                                 </div><br>
                                 <div class="col-md-12 afterimg"><label class="labels">Birthday</label>
                                     <p> @Model.FechaCumple.ToShortDateString() </p>
@@ -77,8 +77,13 @@
                             <h2>
                                 <span class="skills_title">Skills</span>
                             </h2><br>
-
-                        </div>
+                        <ul>
+                        @foreach (var skill in Model.Skills)
+                        {
+                            <li>@skill.Nombre</li>
+                        }
+                        </ul>
+                    </div>
                     </div>
                     <!-- Resume -->
                     <div class="profileInfo-resume">
