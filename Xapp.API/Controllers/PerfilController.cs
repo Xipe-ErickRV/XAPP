@@ -241,7 +241,9 @@ namespace Xapp.API.Controllers
         {
             var user = await _db.Users
                 .Include(x=> x.PerfilUser)
+                .ThenInclude(x => x.Skills)
                 .FirstOrDefaultAsync(m => m.Email == email);
+
             if (user != null)
             {
                 user.PerfilUser.MetodoEdit(dto);
@@ -260,13 +262,36 @@ namespace Xapp.API.Controllers
                         user.PerfilUser.Skills.Add(skill);
                         await _db.Skills.AddAsync(skill);
                     }
+                    else
+                    {
+                        var alreadyExists = new ApiResponse<Perfil>
+                        {
+                            StatusCode = 400,
+                            Message = "La skill ya existe.",
+                            Result = user.PerfilUser
+                        };
+                        return BadRequest(alreadyExists);
+                    }
                 }
                 await _db.SaveChangesAsync();
-                return Ok();
+
+                var output = new ApiResponse<Perfil>
+                {
+                    StatusCode = 200,
+                    Message = "Añadiste una nueva skill.",
+                    Result = user.PerfilUser
+                };
+                return Ok(output);
             }
             else
             {
-                return BadRequest();
+                var output = new ApiResponse<Perfil>
+                {
+                    StatusCode = 400,
+                    Message = "Usuario no encontrado.",
+                    Result = user.PerfilUser
+                };
+                return BadRequest(output);
             }
         }
         
