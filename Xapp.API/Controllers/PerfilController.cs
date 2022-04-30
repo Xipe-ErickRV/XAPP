@@ -172,8 +172,7 @@ namespace Xapp.API.Controllers
             {
                 User = user.UserId,
                 Nombre = dto.Nombre,
-                Nivel = dto.Nivel,
-                Descripcion = dto.Descripcion
+                Nivel = dto.Nivel
             };
             skill.CreateEntity();
             user.PerfilUser.Skills.Add(skill);
@@ -232,12 +231,13 @@ namespace Xapp.API.Controllers
             user.Username = dto.Username;
             //user.Password = dto.Password;
             user.Email = dto.Email;
+           
 
             await _db.SaveChangesAsync();
             return Ok();
         }
         [HttpPatch("patchPerfil")]
-        public async Task<IActionResult> PatchPerfil(string email, ProfileUpdate dto)
+        public async Task<IActionResult> PatchPerfil(string email, ProfileOutput dto)
         {
             var user = await _db.Users
                 .Include(x=> x.PerfilUser)
@@ -245,6 +245,22 @@ namespace Xapp.API.Controllers
             if (user != null)
             {
                 user.PerfilUser.MetodoEdit(dto);
+
+                foreach (var item in dto.Skills)
+                {
+                    if(!user.PerfilUser.Skills.Any(x=> x.Nombre == item.Nombre))
+                    {
+                        var skill = new Skill()
+                        {
+                            User = user.UserId,
+                            Nombre = item.Nombre,
+                            Nivel =item.Nivel
+                        };
+                        skill.CreateEntity();
+                        user.PerfilUser.Skills.Add(skill);
+                        await _db.Skills.AddAsync(skill);
+                    }
+                }
                 await _db.SaveChangesAsync();
                 return Ok();
             }

@@ -41,7 +41,7 @@
                 <div class="profileInfo-personal">
                     <div class="profileInfo-personal-data">
                         <div class="profile-pic">
-                            <img src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
+                            <img src="@Model.UrlImage"
                                  id="photo" />
                             <input type="file" id="file">
                             <label for="file" id="uploadBtn"> Change Photo </label>
@@ -50,11 +50,11 @@
                         <form action="" class="profileInfo-personal-data-afterimg">
                             <div class="col-md-12 afterimg">
                                 <label class="labels">First Name</label>
-                                <input type="text" class="form-control" placeholder="Name" value="">
+                                <input type="text" class="form-control" placeholder="Name" value="@Model.Nombre">
                             </div><br>
                             <div class="col-md-12 afterimg">
                                 <label class="labels">Last Name</label>
-                                <input type="text" class="form-control" placeholder="Last Name" value="">
+                                <input type="text" class="form-control" placeholder="Last Name" value="@Model.Apellido">
                             </div><br>
                             <div class="col-md-12 afterimg">
                                 <label class="labels">Area</label>

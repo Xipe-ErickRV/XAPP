@@ -32,7 +32,7 @@ namespace Xapp.Domain.Entities
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
 
-        public void MetodoEdit(ProfileUpdate dto)
+        public void MetodoEdit(ProfileOutput dto)
         {
             Nombre = dto.Nombre;
             Apellido = dto.Apellido;
@@ -78,7 +78,7 @@ namespace Xapp.Domain.Entities
                 Bio = Bio,
                 Email = User.Email,
                 FechaCumple = FechaCumple,
-                Skills = Skills
+                Skills = Skills.Select(x=>x.ToOutput()).ToList()
             };
 
         }

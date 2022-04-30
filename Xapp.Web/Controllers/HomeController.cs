@@ -62,7 +62,8 @@ namespace Xapp.Web.Controllers
             if (output.StatusCode == 200) //si se pudo
             {
                 var perfil = (Perfil)output.Result; //esto mandarlo al feed , creo
-                return View(perfil);
+                var outout = perfil.Output();
+                return View(outout);
             }
             else //no se pudo
             {
@@ -72,22 +73,23 @@ namespace Xapp.Web.Controllers
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> Profile(string email, SkillInput dto)
+        [HttpPut]
+        public async Task<IActionResult> Profile(string email, ProfileOutput dto)
         {
-            var obj = new PerfilService();
-            var output = await obj.AddSkill(email, dto);
+            //var obj = new PerfilService();
+            //var output = await obj.AddSkill(email, dto);
 
-            if (output.StatusCode == 200)
-            {
-                var listskills = output.Result;
-                return View(listskills);
-            }
-            else
-            {
-                var message = output.Message; 
-                return View();
-            }
+            //if (output.StatusCode == 200)
+            //{
+            //    var listskills = output.Result;
+            //    return View(listskills);
+            //}
+            //else
+            //{
+            //    var message = output.Message; 
+            //    return View();
+            //}
+            return View();
         }
 
         public async Task<IActionResult> ProfileModoVista(string email)

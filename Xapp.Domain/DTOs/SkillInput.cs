@@ -11,6 +11,5 @@ namespace Xapp.Domain.DTOs
     {
         public string Nombre { get; set; }
         public Nivel Nivel { get; set; }
-        public string Descripcion { get; set; }
     }
 }
