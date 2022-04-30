@@ -47,7 +47,7 @@
                             <label for="file" id="uploadBtn"> Change Photo </label>
 
                         </div>
-                        <form action="" class="profileInfo-personal-data-afterimg">
+                        <form action="Home/Profile" method="patch" class="profileInfo-personal-data-afterimg">
                             <div class="col-md-12 afterimg">
                                 <label class="labels">First Name</label>
                                 <input type="text" class="form-control" placeholder="Name" value="@Model.Nombre">
@@ -58,23 +58,23 @@
                             </div><br>
                             <div class="col-md-12 afterimg">
                                 <label class="labels">Area</label>
-                                <input type="text" class="form-control" placeholder="Area" value="">
+                                <input type="text" class="form-control" placeholder="Area" value="@Model.Area">
                             </div><br>
                             <div class="col-md-12 afterimg">
                                 <label class="labels">Phone Number</label>
-                                <input type="tel" class="form-control" placeholder="XXX-XXXX-XXX" value="">
+                                <input type="tel" class="form-control" placeholder="XXX-XXXX-XXX" value="@Model.Telefono">
                             </div><br>
                             <div class="col-md-12 afterimg">
                                 <label class="labels">Email</label>
-                                <input type="email" class="form-control" placeholder="example@example.com" value="">
+                                <input type="email" class="form-control" placeholder="example@example.com" value="@Model.Email">
                             </div><br>
                             <div class="col-md-12 afterimg">
                                 <label class="labels">Birthday</label>
-                                <input type="date" class="form-control" placeholder="dd/mm/aaaa"value="">
+                                <input type="date" class="form-control" placeholder="dd/mm/aaaa"value="@Model.FechaCumple.ToShortDateString()">
                             </div><br>
                             <div class="col-md-12 afterimg">
                                 <label class="labels">Bio</label>
-                                <textarea type="input-field" class="form-control" placeholder="Description" value="" style="height:200px"> </textarea>
+                                <textarea type="input-field" class="form-control" placeholder="Description" value="@Model.Bio" style="height:200px"> </textarea>
                             </div><br>
                         </form>
                     </div>
@@ -106,7 +106,7 @@
     <div class="modal-cont">
         <div class="modal-box">
             <span class="close">&times;</span>
-            <form action="Home/Profile" method="post" class="login-box">
+            <form action="Home/Profile" method="patch" class="login-box">
                 <h1 class="skilltitle"> Add Skill </h1>
                 <label class="skilllabel">Name:</label>
                 <input type="text" class="skillname" id="field1" required>

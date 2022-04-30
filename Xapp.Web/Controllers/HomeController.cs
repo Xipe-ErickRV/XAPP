@@ -73,23 +73,24 @@ namespace Xapp.Web.Controllers
         }
 
 
-        [HttpPut]
+        [HttpPatch]
         public async Task<IActionResult> Profile(string email, ProfileOutput dto)
         {
-            //var obj = new PerfilService();
-            //var output = await obj.AddSkill(email, dto);
+            var obj = new PerfilService();
+            var output = await obj.PatchPerfil(email, dto);
 
-            //if (output.StatusCode == 200)
-            //{
-            //    var listskills = output.Result;
-            //    return View(listskills);
-            //}
-            //else
-            //{
-            //    var message = output.Message; 
-            //    return View();
-            //}
-            return View();
+            if (output.StatusCode == 200)
+            {
+                var perfil = output.Result;
+                string page = $"/Profile?email={email}";
+                return Redirect(page);
+            }
+            else
+            {
+                var message = output.Message; 
+                return View();
+            }
+           
         }
 
         public async Task<IActionResult> ProfileModoVista(string email)
