@@ -248,31 +248,25 @@ namespace Xapp.API.Controllers
             {
                 user.PerfilUser.MetodoEdit(dto);
 
-                foreach (var item in dto.Skills)
+                if (dto.Skills != null)
                 {
-                    if(!user.PerfilUser.Skills.Any(x=> x.Nombre == item.Nombre))
+                    foreach (var item in dto.Skills)
                     {
-                        var skill = new Skill()
+                        if (!user.PerfilUser.Skills.Any(x => x.Nombre == item.Nombre))
                         {
-                            User = user.UserId,
-                            Nombre = item.Nombre,
-                            Nivel =item.Nivel
-                        };
-                        skill.CreateEntity();
-                        user.PerfilUser.Skills.Add(skill);
-                        await _db.Skills.AddAsync(skill);
-                    }
-                    else
-                    {
-                        var alreadyExists = new ApiResponse<Perfil>
-                        {
-                            StatusCode = 400,
-                            Message = "La skill ya existe.",
-                            Result = user.PerfilUser
-                        };
-                        return BadRequest(alreadyExists);
+                            var skill = new Skill()
+                            {
+                                User = user.UserId,
+                                Nombre = item.Nombre,
+                                Nivel = item.Nivel
+                            };
+                            skill.CreateEntity();
+                            user.PerfilUser.Skills.Add(skill);
+                            await _db.Skills.AddAsync(skill);
+                        }
                     }
                 }
+
                 await _db.SaveChangesAsync();
 
                 var output = new ApiResponse<Perfil>

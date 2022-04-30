@@ -38,7 +38,7 @@ namespace Xapp.Web.Controllers
             if (output.StatusCode == 200) //si se pudo
             {
                 var user = (User)output.Result; //esto mandarlo al feed , creo
-                string page = $"/Home/ProfileModoVista?email={user.Email}";
+                string page = $"/Home/ProfileModoVista?email={user.Email}"; 
                 return Redirect(page);
             }
             else //no se pudo
@@ -73,16 +73,17 @@ namespace Xapp.Web.Controllers
         }
 
 
-        [HttpPatch]
-        public async Task<IActionResult> Profile(string email, ProfileOutput dto)
+        [HttpPost]
+        public async Task<IActionResult> Profile(ProfileOutput dto)
         {
+            var email = dto.Email; // Esto esta MUUUUY mal hecho
             var obj = new PerfilService();
             var output = await obj.PatchPerfil(email, dto);
 
             if (output.StatusCode == 200)
             {
                 var perfil = output.Result;
-                string page = $"/Profile?email={email}";
+                string page = $"/Home/ProfileModoVista?email={email}";
                 return Redirect(page);
             }
             else
@@ -93,6 +94,7 @@ namespace Xapp.Web.Controllers
            
         }
 
+        [HttpGet]
         public async Task<IActionResult> ProfileModoVista(string email)
         {
             var obj = new PerfilService();
