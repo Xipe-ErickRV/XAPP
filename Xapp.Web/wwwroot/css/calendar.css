@@ -1,0 +1,166 @@
+* {
+    box-sizing: border-box;
+}
+
+ul {
+    list-style-type: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f2f0f0;
+}
+
+.month {
+    color: #e22432;
+    text-align: center;
+    width: 320px;
+    height: 15px;
+    border-style: dotted;
+    position: absolute;
+    top: 100px;
+}
+
+    .month ul {
+        margin: 0;
+        padding: 0;
+    }
+
+        .month ul li {
+            color: white;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+    .month .prev {
+        height: 15px;
+        width: 15px;
+        float: left;
+        border-radius: 50%;
+        background: #e74955;
+    }
+
+    .month .next {
+        height: 15px;
+        width: 15px;
+        float: right;
+        border-radius: 50%;
+        background: #e74955;
+    }
+
+.weekdays {
+    top: 160px;
+    left: 330px;
+    padding: 10px 0;
+    position: relative;
+    width: 800px;
+    color: #000000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 33px;
+}
+
+    .weekdays li {
+        top: 200px;
+        left: 330px;
+        display: inline-grid;
+        width: 13%;
+        height: 13%;
+        text-align: center;
+    }
+
+.days {
+    top: 185px;
+    left: 330px;
+    padding: 10px 0;
+    margin: 0;
+    position: relative;
+    width: 800px;
+    color: #000000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 33px;
+}
+
+    .days li {
+        top: 185px;
+        left: 330px;
+        list-style-type: none;
+        display: inline-grid;
+        width: 13%;
+        height: 13%;
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 33px;
+        color: #000000;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+        .days li .active {
+            padding: 5px;
+            background: #1abc9c;
+            color: white !important
+        }
+
+.resume {
+    color: #1c1b1b;
+    text-align: center;
+    width: 320px;
+    height: 500px;
+    border-style: hidden;
+    border-radius: 30px;
+    position: absolute;
+    top: 150px;
+    right: 80px;
+    background-color: #ffffff;
+}
+
+.res_data {
+    color: #989ba5;
+    font-size: 15px;
+}
+
+.register {
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    width: 180px;
+    height: 50px;
+    border-style: hidden;
+    border-radius: 15px;
+    position: absolute;
+    top: 75px;
+    right: 150px;
+    background-color: #e22432;
+    cursor: pointer;
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Add media queries for smaller screens */
+@media screen and (max-width:720px) {
+    .weekdays li, .days li {
+        width: 13.1%;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .weekdays li, .days li {
+        width: 12.5%;
+    }
+
+        .days li .active {
+            padding: 2px;
+        }
+}
+
+@media screen and (max-width: 290px) {
+    .weekdays li, .days li {
+        width: 12.2%;
+    }
+}

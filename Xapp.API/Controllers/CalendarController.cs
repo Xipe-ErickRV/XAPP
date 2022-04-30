@@ -137,21 +137,24 @@ namespace Xapp.API.Controllers
         }
 
         // PUT api/<CalendarController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        
 
         // DELETE api/<CalendarController>/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> EventDelete(int id)
+        [HttpDelete("DeleteEvent")]
+        public async Task<IActionResult> DeleteEvent(int id)
         {
+            var user = await _db.Users
+                .Include(x=> x.PerfilUser)
+                .ThenInclude(x=> x.Eventos)
+                .FirstOrDefaultAsync(x=> x.UserId == id);
+
             var events = await _db.Eventos.FindAsync(id);
             if (events == null)
                 return BadRequest();
 
-            _db.Eventos.Remove(events);
-            return Ok();
+            events.Delete();
+            await _db.SaveChangesAsync();
+            return Ok(events);
         }
 
     }
