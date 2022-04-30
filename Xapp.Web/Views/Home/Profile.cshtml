@@ -70,11 +70,11 @@
                             </div><br>
                             <div class="col-md-12 afterimg">
                                 <label class="labels">Birthday</label>
-                                <input type="date" class="form-control" placeholder="dd/mm/aaaa"value="@Model.FechaCumple.ToShortDateString()">
+                                @Html.TextBoxFor(m => m.FechaCumple, "{0:yyyy-MM-dd}", new {@type = "date", @class = "form-control", @placeholder="mm/dd/aaaa"})
                             </div><br>
                             <div class="col-md-12 afterimg">
                                 <label class="labels">Bio</label>
-                                <textarea type="input-field" class="form-control" placeholder="Description" value="@Model.Bio" style="height:200px"> </textarea>
+                                <input type="text" class="form-control" placeholder="Description" value="@Model.Bio" style="height:fit-content">
                             </div><br>
                         </form>
                     </div>
