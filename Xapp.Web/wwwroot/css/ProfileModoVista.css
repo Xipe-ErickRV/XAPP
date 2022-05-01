@@ -203,7 +203,7 @@ input[type=text], input[type=tel], input[type=email], textarea[type=input-field]
     border: 1px solid grey;
     border-radius: 50%;
     position: absolute;
-    top: 25%;
+    top: 23%;
     left: 27%;
 }
 
@@ -359,6 +359,7 @@ input[type=text], input[type=tel], input[type=email], textarea[type=input-field]
     position: absolute;
     top: 10%;
     right: 30%;
+    text-decoration:none;
 }
 
 
@@ -367,6 +368,7 @@ input[type=text], input[type=tel], input[type=email], textarea[type=input-field]
         color: black;
         box-shadow: none;
         border: none;
+        text-decoration: none;
     }
 
     .edit-button:focus {
@@ -374,12 +376,14 @@ input[type=text], input[type=tel], input[type=email], textarea[type=input-field]
         box-shadow: none;
         border: none;
         outline: none;
+        text-decoration: none;
     }
 
     .edit-button:active {
         background: transparent;
         box-shadow: none;
         border: none;
+        text-decoration: none;
     }
 
 /* Titulo para los input text */
@@ -398,29 +402,21 @@ input[type=text], input[type=tel], input[type=email], textarea[type=input-field]
 }
 
 /* Archivo PDF */
+#PDF_Btn #file-input {
+    display: none;
+}
+
+#PDF_Btn img {
+    height: 60px;
+    width: 60px;
+}
+
 
 #PDF_Btn {
-    background-color: transparent;
-    width: 10%;
-    height: 60px;
-    margin-top: 0%;
     margin-left: 88%;
-    border: none;
-    box-shadow: none;
-    display: inline-block;
+    margin-bottom: 9%;
 }
 
-#icono_carpeta {
-    color: black;
-    font-size: 350%;
-}
-
-#pdf {
-    margin-top: 6%;
-    width: 0%;
-    color: black;
-    background-color: purple;
-}
 
 #boton_icono_pdf {
     background-image: url( 'https://cdn-icons-png.flaticon.com/512/136/136522.png' );
@@ -621,7 +617,7 @@ label.login-box {
 .skillsmenu-outer{
 
     width:100%;
-    max-height:120px;
+    max-height:110px;
     overflow-y:auto;
 
 

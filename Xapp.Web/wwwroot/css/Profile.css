@@ -402,30 +402,6 @@ input[type=date]::placeholder {
 
 
 /* Agregar Archivo PDF */
-
-#PDF_Btn {
-    background-color: transparent;
-    width: 10%;
-    height: 60px;
-    margin-top: 0%;
-    margin-left: 88%;
-    border: none;
-    box-shadow: none;
-    display: inline-block;
-}
-
-#icono_carpeta {
-    color: black;
-    font-size: 350%;
-}
-
-#pdf {
-    margin-top: 6%;
-    width: 0%;
-    color: black;
-    background-color: purple;
-}
-
 #PDF_Btn #file-input {
     display: none;
 }
