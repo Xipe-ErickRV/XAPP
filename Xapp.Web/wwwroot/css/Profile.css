@@ -311,6 +311,7 @@ input[type=date]::placeholder {
     .skill-button:active {
         border: none;
         outline: none;
+        color:var(--grey);
     }
 
 
@@ -473,8 +474,6 @@ input[type=date]::placeholder {
         font-size: 320%;
         font-weight: lighter;
         cursor: pointer;
-        height:5%;
-        width:5%;
     }
 
         .modal-box .close:hover,
@@ -605,7 +604,7 @@ label.login-box {
     }
 }
 
-.skilloption:active, .skilloption:focus, .Nivel:active, .Nivel:focus {
+.skilloption:active, .skilloption:focus{
     background-color: grey;
     border: black;
 }
@@ -669,9 +668,9 @@ label.login-box {
     margin-bottom: 3%;
 }
 
-    #skill_pill.basic {
-        background-color: var(--green1);
-    }
+.basic {
+    background-color: var(--green1);
+}
 
 .medium {
     background-color: var(--orange1);

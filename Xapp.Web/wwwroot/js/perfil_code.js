@@ -39,10 +39,16 @@ var closeBut = document.getElementsByClassName('close')[0],
     loginBut = document.getElementsByClassName('skill-button')[0];
 
 //close
-function x() {
-    modal.style.display = "none";
+
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
 }
-closeBut.onclick = x;
 
 loginBut.onclick = function () {
     modal.style.display = "block";
