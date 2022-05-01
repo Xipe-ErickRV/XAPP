@@ -76,26 +76,29 @@
                             <h2>
                                 <span class="skills_title">Skills</span>
                             </h2><br>
+                        <div class="skillsmenu-outer">
+                            
+                                <ul class="horizontallist">
+                                @foreach (var skill in Model.Skills)
+                                {
+                                        @if(@skill.Nivel == Xapp.Domain.Enums.Nivel.Basico)
+                                        {
+                                            <li id="skill_pill" class="basic">@skill.Nombre</li>
+                                        } else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Intermedio)
+                                        {
+                                            <li id="skill_pill" class="medium">@skill.Nombre</li>
+                                        } else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Avanzado)
+                                        {
+                                            <li id="skill_pill" class="advanced">@skill.Nombre</li>
+                                        }  else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Experto)
+                                        {
+                                            <li id="skill_pill" class="expert">@skill.Nombre</li>
+                                        }
 
-                        <ul>
-                        @foreach (var skill in Model.Skills)
-                        {
-                                @if(@skill.Nivel == Xapp.Domain.Enums.Nivel.Basico)
-                                {
-                                    <li id="skill_pill" class="basic">@skill.Nombre</li>
-                                } else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Intermedio)
-                                {
-                                    <li id="skill_pill" class="medium">@skill.Nombre</li>
-                                } else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Avanzado)
-                                {
-                                    <li id="skill_pill" class="advanced">@skill.Nombre</li>
-                                }  else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Experto)
-                                {
-                                    <li id="skill_pill" class="expert">@skill.Nombre</li>
-                                }
-
-                            }
-                        </ul>
+                                    }
+                                </ul>
+                          
+                        </div>
                     </div>
                     </div>
                     <!-- Resume -->
