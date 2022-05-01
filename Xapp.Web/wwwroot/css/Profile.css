@@ -427,13 +427,14 @@ input[type=date]::placeholder {
 }
 
 #boton_icono_pdf {
-    color: red;
+    background-image: url( 'https://cdn-icons-png.flaticon.com/512/136/136522.png' );
+    background-size: cover;
     background-color: transparent;
-    width: 16%;
-    height: 140px;
-    font-size: 100px;
-    margin-top: 1%;
+    height: 100px;
+    width: 100px;
     border: none;
+    margin-left: 6.5%;
+    margin-top:3%;
 }
 
 
