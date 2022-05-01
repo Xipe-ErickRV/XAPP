@@ -306,6 +306,8 @@ input[type=date]::placeholder {
     border: none;
     font-size: 135%;
     outline: none;
+    position:absolute;
+    top:30%;
 }
 
     .skill-button:active {
@@ -472,7 +474,9 @@ input[type=date]::placeholder {
         top: 5%;
         font-size: 320%;
         font-weight: lighter;
-        cursor: pointer
+        cursor: pointer;
+        height:5%;
+        width:5%;
     }
 
         .modal-box .close:hover,
@@ -588,7 +592,10 @@ label.login-box {
     font-size: 1.8rem;
     background-color: var(--lightgrey);
     box-shadow: 3px 1px 10px lightgrey;
+    padding-left: 3%;
+    height:45px;
 }
+
 
 @keyframes zoom {
     from {
@@ -600,13 +607,17 @@ label.login-box {
     }
 }
 
-
-
+.skilloption:active, .skilloption:focus, .Nivel:active, .Nivel:focus {
+    background-color: grey;
+    border: black;
+}
 /*SKILLS*/
 .skillsmenu-outer {
     width: 100%;
     max-height: 110px;
     overflow-y: auto;
+    position: absolute;
+    top:30%;
 }
 
 .horizontallist {
@@ -615,6 +626,8 @@ label.login-box {
     display: flex;
     flex-wrap: wrap;
     margin-right: 20%;
+    
+
 }
 
     .horizontallist li {

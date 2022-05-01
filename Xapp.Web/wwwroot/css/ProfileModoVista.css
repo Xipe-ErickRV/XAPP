@@ -614,28 +614,25 @@ label.login-box {
 
 
 /*SKILLS*/
-.skillsmenu-outer{
-
-    width:100%;
-    max-height:110px;
-    overflow-y:auto;
-
-
+.skillsmenu-outer {
+    width: 100%;
+    max-height: 110px;
+    overflow-y: auto;
+    position: absolute;
+    top: 30%;
 }
 
 .horizontallist {
     list-style: none;
     padding-top: 20px;
- 
     display: flex;
     flex-wrap: wrap;
     margin-right:20%;
 }
 
-    .horizontallist li {
-        display: inline;
-    }
-
+.horizontallist li {
+    display: inline;
+}
 
 #skill_pill {
     color: black;
