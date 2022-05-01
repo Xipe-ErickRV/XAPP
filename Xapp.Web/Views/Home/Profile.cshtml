@@ -18,7 +18,7 @@
     <!-- Libreria de Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel=preload href="~/css/Profile.css" as="style">
-    <link href="~/css/Profile.css" rel="stylesheet" type="text/css">
+    <link href="~/css/Profile.css" rel="stylesheet" type="text/css" asp-append-version="true">
 </head>
 
 <body>
@@ -87,12 +87,45 @@
                         <h2>
                             <span class="skills_title">Skills</span>
                         </h2><br>
-                        <ul>
-                            @foreach (var skill in Model.Skills)
-                            {
-                                <li>@skill.Nombre : @skill.Nivel</li>
-                            }
-                        </ul>
+                        <div class="skillsmenu-outer">
+
+                            <ul class="horizontallist">
+                                @foreach (var skill in Model.Skills)
+                                {
+                                    @if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Basico)
+                                    {
+                                        <li id="skill_pill" class="basic">
+                                            @skill.Nombre
+                                            <span class="close closeskill">&times;</span>
+                                        </li>
+
+                                    }
+                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Intermedio)
+                                    {
+                                        <li id="skill_pill" class="medium">
+                                            @skill.Nombre
+                                            <span class="close closeskill">&times;</span>
+                                        </li>
+                                    }
+                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Avanzado)
+                                    {
+                                        <li id="skill_pill" class="advanced">
+                                            @skill.Nombre
+                                            <span class="close closeskill">&times;</span>
+                                        </li>
+                                    }
+                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Experto)
+                                    {
+                                        <li id="skill_pill" class="expert">
+                                            @skill.Nombre
+                                            <span class="close closeskill">&times;</span>
+                                        </li>
+                                    }
+
+                                }
+                            </ul>
+
+                        </div>
                         <button class="skill-button" type="button">+ Add Skill</button>
                     </div>
                 </div>
@@ -100,7 +133,9 @@
                 <div class="profileInfo-resume">
                     <div class="d-flex flex-column p-3 py-5">
                         <h2 class="resume_title">Resume</h2>
-                        <div id="boton_icono_pdf"></div>
+                        <div id="boton_icono_pdf">
+                            <span class="close closeresume">&times;</span>
+                        </div>
                         <div id="PDF_Btn">
                             <label for="file-input">
                                 <img src="https://cdn-icons.flaticon.com/png/512/3720/premium/3720346.png?token=exp=1651430351~hmac=afcc66046de6dc129839e40be7e7df76" />
