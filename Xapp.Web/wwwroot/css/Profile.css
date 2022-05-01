@@ -426,6 +426,22 @@ input[type=date]::placeholder {
     background-color: purple;
 }
 
+#PDF_Btn #file-input {
+    display: none;
+}
+
+#PDF_Btn img {
+    height: 60px;
+    width: 60px;
+}
+
+
+#PDF_Btn {
+    margin-left: 88%;
+    margin-bottom: 9%;
+}
+
+
 #boton_icono_pdf {
     background-image: url( 'https://cdn-icons-png.flaticon.com/512/136/136522.png' );
     background-size: cover;

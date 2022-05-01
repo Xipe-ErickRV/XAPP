@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <!-- Libreria de Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel=preload href="~/css/Profile.css" as="style">
     <link href="~/css/Profile.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -34,7 +35,7 @@
         <!-- Grid Profile-->
         <section class="profilesection">
             <h2 class="myprofiletext bgColor">My Profile</h2>
-            <input class="profile-button" type="submit" form="perfil" value="Guardar Cambios"/>
+            <input class="profile-button" type="submit" form="perfil" value="Guardar Cambios" />
 
             <div class="profileWrapper">
 
@@ -54,7 +55,7 @@
                             </div><br>
                             <div class="col-md-12 afterimg">
                                 <label class="labels">Last Name</label>
-                                <input name="Apellido"  type="text" class="form-control" placeholder="Last Name" value="@Model.Apellido">
+                                <input name="Apellido" type="text" class="form-control" placeholder="Last Name" value="@Model.Apellido">
                             </div><br>
                             <div class="col-md-12 afterimg">
                                 <label class="labels">Area</label>
@@ -87,10 +88,10 @@
                             <span class="skills_title">Skills</span>
                         </h2><br>
                         <ul>
-                        @foreach (var skill in Model.Skills)
-                        {
-                            <li>@skill.Nombre : @skill.Nivel</li>
-                        }
+                            @foreach (var skill in Model.Skills)
+                            {
+                                <li>@skill.Nombre : @skill.Nivel</li>
+                            }
                         </ul>
                         <button class="skill-button" type="button">+ Add Skill</button>
                     </div>
@@ -100,8 +101,17 @@
                     <div class="d-flex flex-column p-3 py-5">
                         <h2 class="resume_title">Resume</h2>
                         <div id="boton_icono_pdf"></div>
-                        <button id="PDF_Btn" onclick="document.getElementById('pdf').click()"> <i class="fa fa-folder" id="icono_carpeta"></i> </button>
-                        <input type="file" name="subir-pdf" accept="application/pdf,application/vnd.ms-excel" id="pdf">
+                        <div id="PDF_Btn">
+                            <label for="file-input">
+                                <img src="https://cdn-icons.flaticon.com/png/512/3720/premium/3720346.png?token=exp=1651430351~hmac=afcc66046de6dc129839e40be7e7df76" />
+                            </label>
+
+                            <form enctype="multipart/form-data" method="post">
+                                <input type="file" id="file-input" accept=".pdf" />
+                            </form>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
