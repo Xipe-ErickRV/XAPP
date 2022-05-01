@@ -186,8 +186,7 @@ body {
 input[type=text].profileInfo-personal-data-afterimg,
 input[type=tel].profileInfo-personal-data-afterimg,
 input[type=email].profileInfo-personal-data-afterimg,
-input[type=date].profileInfo-personal-data-afterimg,
-textarea[type=input-field].profileInfo-personal-data-afterimg {
+input[type=date].profileInfo-personal-data-afterimg {
     width: 100%;
     border: 1px solid #d0d0d0;
     display: block;
@@ -197,7 +196,6 @@ textarea[type=input-field].profileInfo-personal-data-afterimg {
     font-size: 1.8rem;
     font-weight: 500;
     color: black;
-    background-color: white;
     box-shadow: 0.3px 0.3px 1.3px rgba(0, 0, 0, 0.028), 0.9px 1.1px 4.5px rgba(0, 0, 0, 0.042), 4px 5px 20px rgba(0, 0, 0, 0.07);
 }
 
@@ -619,6 +617,29 @@ label.login-box {
     position: absolute;
     top:30%;
 }
+
+/* width */
+    .skillsmenu-outer::-webkit-scrollbar {
+        width: 10px;
+        background-color:var(--lightgrey);
+    }
+
+/* Track */
+    .skillsmenu-outer::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+    }
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--red);
+    border-radius: 30%;
+    width: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
 
 .horizontallist {
     list-style: none;

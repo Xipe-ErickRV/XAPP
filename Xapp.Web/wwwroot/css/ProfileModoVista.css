@@ -270,6 +270,34 @@ input[type=text], input[type=tel], input[type=email], textarea[type=input-field]
         outline: none;
     }
 
+.skillsmenu-outer {
+    width: 100%;
+    max-height: 110px;
+    overflow-y: auto;
+    position: absolute;
+    top: 30%;
+}
+
+    /* width */
+    .skillsmenu-outer::-webkit-scrollbar {
+        width: 10px;
+        background-color: var(--lightgrey);
+    }
+
+    /* Track */
+    .skillsmenu-outer::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 10px;
+    }
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--red);
+    border-radius: 30%;
+    width: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
 
 
 .profileInfo-resume {
