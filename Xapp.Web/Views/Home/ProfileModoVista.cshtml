@@ -15,7 +15,7 @@
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
             <!-- Libreria de Iconos -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <link href="~/css/ProfileModoVista.css" rel="stylesheet" type="text/css">
+            <link href="~/css/ProfileModoVista.css" rel="stylesheet" type="text/css"  asp-append-version="true">
         </head>
 
     <body>
@@ -76,11 +76,25 @@
                             <h2>
                                 <span class="skills_title">Skills</span>
                             </h2><br>
+
                         <ul>
                         @foreach (var skill in Model.Skills)
                         {
-                            <li>@skill.Nombre : @skill.Nivel</li>
-                        }
+                                @if(@skill.Nivel == Xapp.Domain.Enums.Nivel.Basico)
+                                {
+                                    <li id="skill_pill" class="basic">@skill.Nombre</li>
+                                } else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Intermedio)
+                                {
+                                    <li id="skill_pill" class="medium">@skill.Nombre</li>
+                                } else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Avanzado)
+                                {
+                                    <li id="skill_pill" class="advanced">@skill.Nombre</li>
+                                }  else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Experto)
+                                {
+                                    <li id="skill_pill" class="expert">@skill.Nombre</li>
+                                }
+
+                            }
                         </ul>
                     </div>
                     </div>

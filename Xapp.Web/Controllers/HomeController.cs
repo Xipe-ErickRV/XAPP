@@ -31,19 +31,18 @@ namespace Xapp.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(LoginInput dto)
         {
-            //consumir API
             var obj = new PerfilService();
             var output = await obj.LogInAsync(dto);
 
-            if (output.StatusCode == 200) //si se pudo
+            if (output.StatusCode == 200)
             {
-                var user = (User)output.Result; //esto mandarlo al feed , creo
+                var user = (User)output.Result; 
                 string page = $"/Home/ProfileModoVista?email={user.Email}"; 
                 return Redirect(page);
             }
-            else //no se pudo
+            else
             {
-                var message = output.Message; //mostrar esta alerta con sweet alert
+                var message = output.Message; 
                 return Redirect("/");
             }
         }
@@ -59,15 +58,15 @@ namespace Xapp.Web.Controllers
             var obj = new PerfilService();
             var output = await obj.GetPerfil(email);
 
-            if (output.StatusCode == 200) //si se pudo
+            if (output.StatusCode == 200) 
             {
-                var perfil = (Perfil)output.Result; //esto mandarlo al feed , creo
+                var perfil = (Perfil)output.Result;
                 var outout = perfil.Output();
                 return View(outout);
             }
-            else //no se pudo
+            else 
             {
-                var message = output.Message; //mostrar esta alerta con sweet alert
+                var message = output.Message; 
                 return View();
             }
         }
@@ -76,7 +75,7 @@ namespace Xapp.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Profile(ProfileOutput dto)
         {
-            var email = dto.Email; // Esto esta MUUUUY mal hecho
+            var email = dto.Email;
             var obj = new PerfilService();
             var output = await obj.PatchPerfil(email, dto);
 
