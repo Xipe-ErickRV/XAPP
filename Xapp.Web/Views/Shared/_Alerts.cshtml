@@ -1,0 +1,27 @@
+﻿@{
+    var type = (string)TempData["_alert.type"];
+    var title = (string)TempData["_alert.title"];
+    var body = (string)TempData["_alert.body"];
+    var buttonText = (string)TempData["_alert.buttonText"];
+
+    var redirectpPage = (string)TempData["_alert.page"];
+}
+
+<meta charset="UTF-8">
+<style>
+    #swal2-title {
+        font-family: Arial;
+        font-size: 20px;
+    }
+
+    #swal2-content {
+        font-family: Arial;
+        font-size: 20px;
+    }
+</style>
+@if (!string.IsNullOrEmpty(type))
+{
+    <script>
+    swal('@title', '@body', '@type');
+    </script>
+}

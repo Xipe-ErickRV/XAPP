@@ -6,6 +6,9 @@
     <title>@ViewData["Title"] - Xapp.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
+    <link rel="stylesheet" type="text/css" href="~/limonte-sweetalert2/sweetalert2.min.css" />
+    <script src="~/limonte-sweetalert2/sweetalert2.min.js"></script>
 </head>
 <body>
     <header>
@@ -34,6 +37,7 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            <partial name="_Alerts" />
             @RenderBody()
         </main>
     </div>
