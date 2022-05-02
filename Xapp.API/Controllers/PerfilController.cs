@@ -272,7 +272,7 @@ namespace Xapp.API.Controllers
                 var output = new ApiResponse<Perfil>
                 {
                     StatusCode = 200,
-                    Message = "Añadiste una nueva skill.",
+                    Message = "Editaste el perfil.",
                     Result = user.PerfilUser
                 };
                 return Ok(output);
