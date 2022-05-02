@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -16,10 +19,13 @@ namespace Xapp.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly JWTMiddlewareService _session;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public HomeController(ILogger<HomeController> logger, JWTMiddlewareService session, IHttpContextAccessor httpContextAccessor)
         {
             _logger = logger;
+            _session = session;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet]
@@ -49,6 +55,10 @@ namespace Xapp.Web.Controllers
 
         public IActionResult Privacy()
         {
+            var test = User.Identity;
+            var test1 = User.Claims;
+            var test2 = User.Identity.IsAuthenticated;
+
             return View();
         }
 
@@ -110,6 +120,11 @@ namespace Xapp.Web.Controllers
                 var message = output.Message; 
                 return View();
             }
+        }
+
+        public async Task<IActionResult> LogOut()
+        {
+            return RedirectToAction("Index", "Home");
         }
 
 
