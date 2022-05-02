@@ -98,6 +98,21 @@ namespace Xapp.API.Controllers
             return Ok(outpost);
 
         }
+
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            var posts = await _db.Posts
+                .Include(x => x.Comments)
+                .Include(x => x.User)
+                .ThenInclude(x => x.PerfilUser)
+                .ToListAsync();
+
+            var listPosts = posts.Select(x => x.Output()).ToList();
+
+            return Ok(listPosts);
+        }
+
         [HttpPatch("Update")]
         public async Task<IActionResult> Update(int id, PostInput npost)
         {

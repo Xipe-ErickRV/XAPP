@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xapp.Domain.DTOs;
 using Xapp.Domain.Enums;
 
 namespace Xapp.Domain.Entities
@@ -18,5 +19,22 @@ namespace Xapp.Domain.Entities
         public int UserId { get; set; }
         public virtual User User { get; set; }
         public List<Comment> Comments { get; set; }
+
+
+        public PostOutput Output()
+        {
+            return new PostOutput
+            {
+                Title = Title,
+                Content = Content,
+                Multimedia = Multimedia,
+                Tag = Tag,
+                UserId = UserId,
+                UserName = User.Username,
+                URLProfile = User.PerfilUser.UrlFoto,
+                Likes = Likes,
+                Comments = Comments
+            };
+        }
     }
 }
