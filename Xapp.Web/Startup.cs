@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,7 +26,18 @@ namespace Xapp.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddScoped<JWTMiddlewareService>();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+                options =>
+                {
+                    options.Cookie.Name = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.LoginPath = new PathString("/Auth/Login");
+                    options.AccessDeniedPath = new PathString("/Auth/Denied");
+                });
+
+            services.AddScoped<JWTMiddlewareService>();
+            services.AddHttpContextAccessor();
+
             services.AddControllersWithViews();
         }
 
