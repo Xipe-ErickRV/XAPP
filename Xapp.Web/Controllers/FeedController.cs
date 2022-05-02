@@ -37,6 +37,7 @@ namespace Xapp.Web.Controllers
             }
         }
 
+        [HttpGet]
         public async Task<IActionResult> GetPost(int id)
         {
             var obj = new FeedService();
