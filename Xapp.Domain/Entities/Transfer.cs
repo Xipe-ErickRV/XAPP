@@ -17,4 +17,7 @@ namespace Xapp.Domain.Entities
         public virtual Wallet Wallet { get; set; } //a space that will be use to store de entire object if we needed
 
     }
+
 }
+
+
