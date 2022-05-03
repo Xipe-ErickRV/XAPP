@@ -32,27 +32,7 @@ namespace Xapp.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var output = new LoginInput();
-            return View(output);
-        }
-        [HttpPost]
-        public async Task<IActionResult> Index(LoginInput dto)
-        {
-            var obj = new PerfilService();
-            var output = await obj.LogInAsync(dto);
-
-            if (output.StatusCode == 200)
-            {
-                var user = (User)output.Result; 
-                _session.AttachAccountToContext(user.Token);
-                string page = $"/Home/ProfileModoVista?email={user.Email}"; 
-                return Redirect(page);
-            }
-            else
-            {
-                var message = output.Message; 
-                return Redirect("/");
-            }
+            return View();
         }
 
         [Authorize]
@@ -123,13 +103,6 @@ namespace Xapp.Web.Controllers
                 return View();
             }
         }
-
-        public async Task<IActionResult> LogOut()
-        {
-            await _httpContextAccessor.HttpContext.SignOutAsync();
-            return RedirectToAction("Index", "Home");
-        }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
