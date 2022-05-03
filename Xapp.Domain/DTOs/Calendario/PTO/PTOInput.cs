@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xapp.Domain.DTOs.Calendario.PTO
+namespace Xapp.Domain.DTOs
 {
     public class PTOInput
     {

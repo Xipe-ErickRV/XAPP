@@ -27,7 +27,7 @@ namespace Xapp.API.Controllers
         public async Task<IActionResult> GetAsync()
         {
             var events = await _db.Eventos
-                .Where(x => x.IsPublic).ToListAsync();
+                .Where(x => x.IsPublic && x.IsActive).ToListAsync();
 
             if (events == null)
             {
@@ -39,8 +39,6 @@ namespace Xapp.API.Controllers
                 };
                 return BadRequest(outputError);
             }
-            //misma logica pero para PTOs
-
 
             var listOfEvent = events.Select(X => X.Output()).ToList();
             var output = new ApiResponse<List<EventInput>>
@@ -52,7 +50,6 @@ namespace Xapp.API.Controllers
             return Ok(output);
         }
 
-        // GET api/<CalendarController>/5
         [HttpGet("GetEventsByUser")]
         public async Task<IActionResult> Get(int userId)
         {
@@ -69,8 +66,6 @@ namespace Xapp.API.Controllers
                 };
                 return BadRequest(outputError);
             }
-            //misma logica pero para PTOs
-
 
             var listOfEvent = events.Select(X => X.Output()).ToList();
             var output = new ApiResponse<List<EventInput>>
@@ -136,16 +131,47 @@ namespace Xapp.API.Controllers
             return Ok(output);
         }
 
-        // PUT api/<CalendarController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        //BadRequest, no funciona
+        [HttpPatch("EditEvent")]
+        public async Task<IActionResult> EditEvent(EditEvent dto, int id, int Eid)
         {
+            var user = await _db.Users
+                .FirstOrDefaultAsync(x => x.UserId == id);
+
+            if (user == null)
+                return BadRequest();
+
+            var evento = await _db.Eventos
+               .FirstOrDefaultAsync(x => x.Id == Eid);
+            if (evento == null)
+                return BadRequest();
+
+            evento.Title = dto.Title;
+            evento.Description = dto.Description;
+            evento.DateTime = dto.DateTime;
+
+            await _db.SaveChangesAsync();
+            return Ok();
         }
 
-        // DELETE api/<CalendarController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        //No borra
+        [HttpDelete("DeleteEvent")]
+        public async Task<IActionResult> DeleteEvent(int Uid, string titulo)
         {
+            var user = await _db.Users
+                .Include(x => x.PerfilUser)
+                .ThenInclude(x => x.Eventos)
+                .FirstOrDefaultAsync(x => x.UserId == Uid);
+
+            var events = user.PerfilUser.Eventos
+                .Find(x => x.UserId == user.UserId && x.Title == titulo);
+            if (events == null)
+                return BadRequest();
+
+            events.Delete();
+            await _db.SaveChangesAsync();
+            return Ok(events);
         }
+
     }
 }
