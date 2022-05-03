@@ -27,7 +27,7 @@ namespace Xapp.API.Controllers
         public async Task<IActionResult> GetAsync()
         {
             var events = await _db.Eventos
-                .Where(x => x.IsPublic).ToListAsync();
+                .Where(x => x.IsPublic && x.IsActive).ToListAsync();
 
             if (events == null)
             {
@@ -39,8 +39,6 @@ namespace Xapp.API.Controllers
                 };
                 return BadRequest(outputError);
             }
-            //misma logica pero para PTOs
-
 
             var listOfEvent = events.Select(X => X.Output()).ToList();
             var output = new ApiResponse<List<EventInput>>
@@ -68,8 +66,6 @@ namespace Xapp.API.Controllers
                 };
                 return BadRequest(outputError);
             }
-            //misma logica pero para PTOs
-
 
             var listOfEvent = events.Select(X => X.Output()).ToList();
             var output = new ApiResponse<List<EventInput>>

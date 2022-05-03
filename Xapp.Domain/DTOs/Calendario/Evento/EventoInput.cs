@@ -8,6 +8,7 @@ namespace Xapp.Domain.DTOs
 {
     public class EventInput
     {
+        public int EventId { get; set; }
         public int UserId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
