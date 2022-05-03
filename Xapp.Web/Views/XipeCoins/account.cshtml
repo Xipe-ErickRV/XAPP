@@ -1,0 +1,342 @@
+﻿@{
+    ViewData["Title"] = "Account";
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Cuenta</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="../wwwroot/css/stylecuenta.css">
+  <link rel="stylesheet" href="../wwwroot/css/sidebar.css">
+  <link rel="stylesheet" type="text/css" href="../wwwroot/css/xipecoinstabla/animate.css">
+  <link rel="stylesheet" type="text/css" href="../wwwroot/css/xipecoinstabla/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../wwwroot/css/xipecoinstabla/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../wwwroot/css/xipecoinstabla/perfect-scrollbar.css">
+  <link rel="stylesheet" type="text/css" href="../wwwroot/css/xipecoinstabla/select2.min.css">
+  <link rel="stylesheet" type="text/css" href="../wwwroot/css/xipecoinstabla/tabla.css">
+  <link rel="stylesheet" type="text/css" href="../wwwroot/css/xipecoinstabla/util.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!-- Sidebar -->
+<div class="sidebar">
+	<img src="https://drive.google.com/uc?export=view&id=17qRly_RNtO7moC4aSQkWyQjI5xKTv4Ft" id="logo">
+	<a href="#Perfil" class="sidebar-labels"> Profile</a>
+	<a href="#Feed" class="sidebar-labels"> Feed</a>
+	<a href="../Views/XipeCoins/Index.cshtml" class="sidebar-labels"> XipeCoins</a>
+	<a href="#Calendar" class="sidebar-labels"> Calendar</a>
+</div>
+<div class="app">
+	<header class="app-header">
+		<div class="app-header-logo">
+			<div class="logo">
+				<span class="logo-icon">
+					<img src="https://pbs.twimg.com/profile_images/1463883159607681029/X7Gka3TC_400x400.jpg" />
+				</span>
+				<h1 class="logo-title">
+					<SPAN STYLE="font-size:16px">XipeCoins</span>
+					<SPAN STYLE="font-size:16px">XipeBank</span>
+				</h1>
+			</div>
+		</div>
+		<div class="app-header-navigation">
+			<div class="tabs">
+				<a href="../Views/XipeCoins/Index.cshtml" class="active">
+					General
+				</a>
+				<a href="../Views/XipeCoins/transaction.cshtml" class="active">
+					Transferencia
+				</a>
+				<a href="../Views/XipeCoins/account.cshtml">
+					Cuenta  
+				</a>
+
+			</div>
+		</div>
+		<div class="app-header-actions">
+			<a href="#Perfil" class="active"></a>
+			<button class="user-profile">
+				<span>Jorge Jiménez</span>
+				<span>
+					<img src="https://assets.codepen.io/285131/almeria-avatar.jpeg" />
+				</span>
+			</button>
+			<div class="app-header-actions-buttons">
+				<button class="icon-button large">
+					<i class="ph-magnifying-glass"></i>
+				</button>
+				<button class="icon-button large">
+					<i class="ph-bell"></i>
+				</button>
+			</div>
+		</div>
+		<div class="app-header-mobile">
+				<ul>
+					<li><a href="../Views/XipeCoins/Index.cshtml">General</a></li>
+					<li><a href="../Views/XipeCoins/transaction.cshtml">Transferencia</a></li>
+					<li><a href="../Views/XipeCoins/account.cshtml">Cuenta</a></li>
+				</ul>
+			
+		</div>
+
+	</header>
+		<div class="app-body-main-content">
+			<section class="service-section">
+				<h3>Balance</h3>
+				<div class="tiles1">
+					<article class ="tile1">
+						<div class="tile1-header">
+							<i></i>
+							<h3>
+								<SPAN style="font-size: 16px;">XipeCoins</span>
+								<span>100</span>
+							</h3>
+							
+						</div>
+						<div>
+							<a href="#">
+								<span class="icon-button">
+								<i class="ph-caret-right-bold"></i>
+							</span>
+						</a>
+						</div>
+						
+
+						
+					</article>
+					
+				</div>
+			</section>
+			<section class="transfer-section">
+				<div class="transfer-section-header">
+					<h3>Ultimos Movimientos</h3>
+				</div>
+				</section>
+					<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+					<script>
+					var xValues = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
+					var yValues = [0,15,45,30,50,50,50,80,100,60,80,120,120,120,160,200,220,240,180,150,200,250,250,,250,275,300,200,250,150,100];
+
+					new Chart("myChart", {
+					type: "line",
+					data: {
+						labels: xValues,
+						datasets: [{
+						fill: false,
+						lineTension: 0,
+						backgroundColor: "rgba(0,0,255,1.0)",
+						borderColor: "rgba(0,0,255,0.1)",
+						data: yValues
+						}]
+					},
+					options: {
+						legend: {display: false},
+						scales: {
+						yAxes: [{ticks: {min: 0, max:500}}],
+						}
+					}
+					});
+					</script>
+
+			</section>
+
+			<section class="transfer-section">
+			<div class="transfer-section-header">
+				<h3>Transferencias</h3>
+			</div>
+			</section>
+			<section class="transfer-section">
+				<div class="transfer-section-header">
+					<div class="table100 ver2 m-b-30">
+						<div class="table100-head">
+						<table>
+						<thead>
+						<tr class="row100 head">
+						<th class="cell100 column1">Sender</th>
+						<th class="cell100 column2">Receiver</th>
+						<th class="cell100 column3">Concept</th>
+						<th class="cell100 column4">Amount</th>
+						<th class="cell100 column5">Date</th>
+						
+						</tr>
+						</thead>
+						</table>
+						</div>
+						<div class="table100-body js-pscroll">
+						<table>
+						<tbody>
+						<tr class="row100 body">
+						<td class="cell100 column1">Jorge</td>
+						<td class="cell100 column2">Randy</td>
+						<td class="cell100 column3">Ayuda C#</td>
+						<td class="cell100 column4">50</td>
+						<td class="cell100 column5">31/04/22</td>
+
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Jorge</td>
+						<td class="cell100 column2">Randy</td>
+						<td class="cell100 column3">Ayuda Python</td>
+						<td class="cell100 column4">100</td>
+						<td class="cell100 column5">30/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Randy</td>
+						<td class="cell100 column2">Jorge</td>
+						<td class="cell100 column3">Ayuda C++</td>
+						<td class="cell100 column4">50</td>
+						<td class="cell100 column5">29/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Jorge</td>
+						<td class="cell100 column2">Randy</td>
+						<td class="cell100 column3">Ayuda en LOL</td>
+						<td class="cell100 column4">100</td>
+						<td class="cell100 column5">28/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Randy</td>
+						<td class="cell100 column2">Jorge</td>
+						<td class="cell100 column3">Ayuda SCSS</td>
+						<td class="cell100 column4">25</td>
+						<td class="cell100 column5">27/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Randy</td>
+						<td class="cell100 column2">Jorge</td>
+						<td class="cell100 column3">Ayuda HTML</td>
+						<td class="cell100 column4">25</td>
+						<td class="cell100 column5">26/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Cardio Blast</td>
+						<td class="cell100 column2">Gym</td>
+						<td class="cell100 column3">5:00 PM - 7:00 PM</td>
+						<td class="cell100 column4">Randy Porter</td>
+						<td class="cell100 column5">25/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Pilates Reformer</td>
+						<td class="cell100 column2">Gym</td>
+						<td class="cell100 column3">8:00 AM - 9:00 AM</td>
+						<td class="cell100 column4">Randy Porter</td>
+						<td class="cell100 column5">24/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Supple Spine and Shoulders</td>
+						<td class="cell100 column2">Yoga</td>
+						<td class="cell100 column3">6:30 AM - 8:00 AM</td>
+						<td class="cell100 column4">Randy Porter</td>
+						<td class="cell100 column5">23/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Yoga for Divas</td>
+						<td class="cell100 column2">Yoga</td>
+						<td class="cell100 column3">9:00 AM - 11:00 AM</td>
+						<td class="cell100 column4">Donna Wilson</td>
+						<td class="cell100 column5">22/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Virtual Cycle</td>
+						<td class="cell100 column2">Gym</td>
+						<td class="cell100 column3">8:00 AM - 9:00 AM</td>
+						<td class="cell100 column4">Randy Porter</td>
+						<td class="cell100 column5">21/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Like a butterfly</td>
+						<td class="cell100 column2">Boxing</td>
+						<td class="cell100 column3">9:00 AM - 11:00 AM</td>
+						<td class="cell100 column4">Aaron Chapman</td>
+						<td class="cell100 column5">20/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Mind & Body</td>
+						<td class="cell100 column2">Yoga</td>
+						<td class="cell100 column3">8:00 AM - 9:00 AM</td>
+						<td class="cell100 column4">Adam Stewart</td>
+						<td class="cell100 column5">19/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Crit Cardio</td>
+						<td class="cell100 column2">Gym</td>
+						<td class="cell100 column3">9:00 AM - 10:00 AM</td>
+						<td class="cell100 column4">Aaron Chapman</td>
+						<td class="cell100 column5">18/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Wheel Pose Full Posture</td>
+						<td class="cell100 column2">Yoga</td>
+						<td class="cell100 column3">7:00 AM - 8:30 AM</td>
+						<td class="cell100 column4">Donna Wilson</td>
+						<td class="cell100 column5">17/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Playful Dancer's Flow</td>
+						<td class="cell100 column2">Yoga</td>
+						<td class="cell100 column3">8:00 AM - 9:00 AM</td>
+						<td class="cell100 column4">Donna Wilson</td>
+						<td class="cell100 column5">16/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Zumba Dance</td>
+						<td class="cell100 column2">Dance</td>
+						<td class="cell100 column3">5:00 PM - 7:00 PM</td>
+						<td class="cell100 column4">Donna Wilson</td>
+						<td class="cell100 column5">15/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Cardio Blast</td>
+						<td class="cell100 column2">Gym</td>
+						<td class="cell100 column3">5:00 PM - 7:00 PM</td>
+						<td class="cell100 column4">Randy Porter</td>
+						<td class="cell100 column5">14/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Pilates Reformer</td>
+						<td class="cell100 column2">Gym</td>
+						<td class="cell100 column3">8:00 AM - 9:00 AM</td>
+						<td class="cell100 column4">Randy Porter</td>
+						<td class="cell100 column5">13/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Supple Spine and Shoulders</td>
+						<td class="cell100 column2">Yoga</td>
+						<td class="cell100 column3">6:30 AM - 8:00 AM</td>
+						<td class="cell100 column4">Randy Porter</td>
+						<td class="cell100 column5">12/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Yoga for Divas</td>
+						<td class="cell100 column2">Yoga</td>
+						<td class="cell100 column3">9:00 AM - 11:00 AM</td>
+						<td class="cell100 column4">Donna Wilson</td>
+						<td class="cell100 column5">11/04/22</td>
+						</tr>
+						<tr class="row100 body">
+						<td class="cell100 column1">Virtual Cycle</td>
+						<td class="cell100 column2">Gym</td>
+						<td class="cell100 column3">8:00 AM - 9:00 AM</td>
+						<td class="cell100 column4">Randy Porter</td>
+						<td class="cell100 column5">10/04/22</td>
+						</tr>
+						</tbody>
+						</table>
+						</div>
+						</div>
+			</section> 
+		</div>
+
+<!-- partial -->
+  <script src='https://unpkg.com/phosphor-icons'></script><script  src="./script.js"></script>
+
+</body>
+</html>
