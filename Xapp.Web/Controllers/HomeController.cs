@@ -16,6 +16,7 @@ using Xapp.Web.Services;
 
 namespace Xapp.Web.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -31,42 +32,24 @@ namespace Xapp.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var output = new LoginInput();
-            return View(output);
-        }
-        [HttpPost]
-        public async Task<IActionResult> Index(LoginInput dto)
-        {
-            var obj = new PerfilService();
-            var output = await obj.LogInAsync(dto);
-
-            if (output.StatusCode == 200)
-            {
-                var user = (User)output.Result; 
-                string page = $"/Home/ProfileModoVista?email={user.Email}"; 
-                return Redirect(page);
-            }
-            else
-            {
-                var message = output.Message; 
-                return Redirect("/");
-            }
+            return View();
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
             var test = User.Identity;
-            var test1 = User.Claims;
             var test2 = User.Identity.IsAuthenticated;
 
             return View();
         }
 
+        [Authorize]
         [HttpGet]
-        public async Task<IActionResult> Profile(string email)
+        public async Task<IActionResult> Profile()
         {
             var obj = new PerfilService();
-            var output = await obj.GetPerfil(email);
+            var output = await obj.GetPerfil(User.Identity.Name);
 
             if (output.StatusCode == 200) 
             {
@@ -81,18 +64,17 @@ namespace Xapp.Web.Controllers
             }
         }
 
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Profile(ProfileOutput dto)
         {
-            var email = dto.Email;
             var obj = new PerfilService();
-            var output = await obj.PatchPerfil(email, dto);
+            var output = await obj.PatchPerfil(User.Identity.Name, dto);
 
             if (output.StatusCode == 200)
             {
                 var perfil = output.Result;
-                string page = $"/Home/ProfileModoVista?email={email}";
+                string page = $"/Home/ProfileModoVista";
                 return Redirect(page);
             }
             else
@@ -103,11 +85,12 @@ namespace Xapp.Web.Controllers
            
         }
 
+        [Authorize]
         [HttpGet]
-        public async Task<IActionResult> ProfileModoVista(string email)
+        public async Task<IActionResult> ProfileModoVista()
         {
             var obj = new PerfilService();
-            var output = await obj.GetPerfil(email);
+            var output = await obj.GetPerfil(User.Identity.Name);
 
             if (output.StatusCode == 200)
             {
@@ -121,12 +104,6 @@ namespace Xapp.Web.Controllers
                 return View();
             }
         }
-
-        public async Task<IActionResult> LogOut()
-        {
-            return RedirectToAction("Index", "Home");
-        }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

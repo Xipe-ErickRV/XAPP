@@ -1,0 +1,263 @@
+﻿@{
+    ViewData["Title"] = "XipeCoins";
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>XipeCoins Management</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="../wwwroot/css/styleindex.css">
+  <link rel="stylesheet" href="../wwwroot/css/sidebar.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!-- Sidebar -->
+<div class="sidebar">
+	<img src="https://drive.google.com/uc?export=view&id=17qRly_RNtO7moC4aSQkWyQjI5xKTv4Ft" id="logo">
+	<a href="#Perfil" class="sidebar-labels"> Profile</a>
+	<a href="#Feed" class="sidebar-labels"> Feed</a>
+	<a href="#XipeCoins" class="sidebar-labels"> XipeCoins</a>
+	<a href="#Calendar" class="sidebar-labels"> Calendar</a>
+</div>
+<div class="app">
+	<header class="app-header">
+		<div class="app-header-logo">
+			<div class="logo">
+				<span class="logo-icon">
+					<img src="https://pbs.twimg.com/profile_images/1463883159607681029/X7Gka3TC_400x400.jpg" />
+				</span>
+				<h1 class="logo-title">
+					<span>XipeCoins</span>
+					<span>XipeBank</span>
+				</h1>
+			</div>
+		</div>
+		<div class="app-header-navigation">
+			<div class="tabs">
+				<a href="../Views/XipeCoins/Index.cshtml" class="active">
+					General
+				</a>
+				<a href="../Views/XipeCoins/transaction.cshtml" class="active">
+					Transferencia
+				</a>
+				<a href="../Views/XipeCoins/account.cshtml">
+					Cuenta  
+				</a>
+			</div>
+		</div>
+		<div class="app-header-actions">
+			<a href="#Perfil" class="active"></a>
+			<button class="user-profile">
+				<span>Jorge Jiménez</span>
+				<span>
+					<img src="https://assets.codepen.io/285131/almeria-avatar.jpeg" />
+				</span>
+			</button>
+			<div class="app-header-actions-buttons">
+				<button class="icon-button large">
+					<i class="ph-magnifying-glass"></i>
+				</button>
+				<button class="icon-button large">
+					<i class="ph-bell"></i>
+				</button>
+			</div>
+		</div>
+		<div class="app-header-mobile">
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="../Views/XipeCoins/Index.cshtml">General</a></li>
+					<li><a href="../Views/XipeCoins/transaction.cshtml">Transferencia</a></li>
+					<li><a href="../Views/XipeCoins/account.cshtml">Cuenta</a></li>
+				</ul>
+		</div>
+
+	</header>
+		<div class="app-body-main-content">
+			<section class="service-section">
+				<h2>Balance</h2>
+				<div class="tiles1">
+					<article class ="tile1">
+						<div class="tile1-header">
+							<i></i>
+							<h3>
+								<span>XipeCoins</span>
+								<span>100</span>
+							</h3>
+							
+						</div>
+						<div>
+							<a href="../Views/XipeCoins/account.cshtml">
+								<span class="icon-button">
+								<i class="ph-caret-right-bold"></i>
+							</span>
+						</a>
+						</div>
+						
+
+						
+					</article>
+					
+				</div>
+			</section>
+			<section class="service-section">
+				<h2>Convenios</h2>
+				<div class="service-section-header">
+					<a href="../Views/XipeCoins/convenios.cshtml">
+					<button class="flat-button">
+						Search
+					</button>
+				</a>
+				</div>
+				<div class="mobile-only">
+					<a href="../Views/XipeCoins/convenios.cshtml">
+					<button class="flat-button">
+						Toggle search
+					</button>
+				</a>
+				</div>
+				<div class="tiles">
+					<article class="tile">
+						<div class="tile-header">
+							<i class="ph-lightning-light"></i>
+							<h3>
+								<span>Caffenio</span>
+								<span>Ver sucursales</span>
+							</h3>
+						</div>
+						<a href="../Views/XipeCoins/convenios.cshtml"">
+							<span>Ir a convenio</span>
+							<span class="icon-button">
+								<i class="ph-caret-right-bold"></i>
+							</span>
+						</a>
+					</article>
+					<article class="tile">
+						<div class="tile-header">
+							<i class="ph-fire-simple-light"></i>
+							<h3>
+								<span>Buquibichi</span>
+								<span>Ver sucursales</span>
+							</h3>
+						</div>
+						<a href="../Views/XipeCoins/convenios.cshtml"">
+							<span>Ir a convenio</span>
+							<span class="icon-button">
+								<i class="ph-caret-right-bold"></i>
+							</span>
+						</a>
+					</article>
+					<article class="tile">
+						<div class="tile-header">
+							<i class="ph-file-light"></i>
+							<h3>
+								<span>Doña Tota</span>
+								<span>Ver sucursales</span>
+							</h3>
+						</div>
+						<a href="../Views/XipeCoins/convenios.cshtml"">
+							<span>Ir a convenio</span>
+							<span class="icon-button">
+								<i class="ph-caret-right-bold"></i>
+							</span>
+						</a>
+					</article>
+				</div>
+				<div class="service-section-footer">
+					<p>Los convenios pueden cambiar según disponibilidad</p>
+				</div>
+			</section>
+
+			<section class="transfer-section">
+				<div class="transfer-section-header">
+					<h2>Últimas transferencias</h2>
+					<div class="filter-options">
+						<p>Filter selected: more than 100 $</p>
+						<button class="icon-button">
+							<i class="ph-funnel"></i>
+						</button>
+						<a href = "../Views/XipeCoins/account.cshtml"">
+						<button class="icon-button">
+							<i class="ph-plus"></i>
+						</button>
+					</a>
+					</div>
+				</div>
+				<div class="transfers">
+					<div class="transfer">
+						<div class="transfer-logo">
+							<img src="https://assets.codepen.io/285131/apple.svg" />
+						</div>
+						<dl class="transfer-details">
+							<div>
+								<dt>Apple Inc.</dt>
+								<dd>Apple ID Payment</dd>
+							</div>
+							<div>
+								<dt>4012</dt>
+								<dd>Last four digits</dd>
+							</div>
+							<div>
+								<dt>28 Oct. 21</dt>
+								<dd>Date payment</dd>
+							</div>
+						</dl>
+						<div class="transfer-number">
+							- $ 550
+						</div>
+					</div>
+					<div class="transfer">
+						<div class="transfer-logo">
+							<img src="https://assets.codepen.io/285131/pinterest.svg" />
+						</div>
+						<dl class="transfer-details">
+							<div>
+								<dt>Pinterest</dt>
+								<dd>2 year subscription</dd>
+							</div>
+							<div>
+								<dt>5214</dt>
+								<dd>Last four digits</dd>
+							</div>
+							<div>
+								<dt>26 Oct. 21</dt>
+								<dd>Date payment</dd>
+							</div>
+						</dl>
+						<div class="transfer-number">
+							- $ 120
+						</div>
+					</div>
+					<div class="transfer">
+						<div class="transfer-logo">
+							<img src="https://assets.codepen.io/285131/warner-bros.svg" />
+						</div>
+						<dl class="transfer-details">
+							<div>
+								<dt>Warner Bros.</dt>
+								<dd>Cinema</dd>
+							</div>
+							<div>
+								<dt>2228</dt>
+								<dd>Last four digits</dd>
+							</div>
+							<div>
+								<dt>22 Oct. 21</dt>
+								<dd>Date payment</dd>
+							</div>
+						</dl>
+						<div class="transfer-number">
+							- $ 70
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+<!-- partial -->
+  <script src='https://unpkg.com/phosphor-icons'></script><script  src="./script.js"></script>
+
+</body>
+</html>

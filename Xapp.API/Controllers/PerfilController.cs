@@ -11,6 +11,11 @@ using Xapp.Domain.DTOs;
 using Xapp.Domain.Entities;
 using Xapp.Domain.DTOs.Perfil;
 using Xapp.API.Hash;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using Microsoft.Extensions.Configuration;
 
 namespace Xapp.API.Controllers
 {
@@ -19,12 +24,16 @@ namespace Xapp.API.Controllers
     public class PerfilController : ControllerBase
     {
         private readonly DbService _db;
+        private readonly IConfiguration _configuration;
 
-        public PerfilController(DbService db)
+
+        public PerfilController(DbService db, IConfiguration configuration)
         {
             _db = db;
+            _configuration = configuration;
+
         }
-        
+
         [HttpGet("getUser")]
         public async Task<IActionResult> GetUser(string email)
         {
@@ -104,6 +113,22 @@ namespace Xapp.API.Controllers
                 .FirstOrDefaultAsync(m => m.Email == dto.Email && m.Password == hash.EncryptPwd(dto.Password));
             if (user != null)
             {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_configuration.GetSection("AppSettings")["Secret"]);
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[]
+                    {
+                        new Claim(ClaimTypes.Name, user.Email)
+
+                    }),
+                    Expires = DateTime.UtcNow.AddDays(30),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                var jwt = tokenHandler.WriteToken(token);
+                user.Token = jwt;
+
                 var output = new ApiResponse<User>
                 {
                     StatusCode = 200,
@@ -250,21 +275,9 @@ namespace Xapp.API.Controllers
 
                 if (dto.Skills != null)
                 {
-                    foreach (var item in dto.Skills)
-                    {
-                        if (!user.PerfilUser.Skills.Any(x => x.Nombre == item.Nombre))
-                        {
-                            var skill = new Skill()
-                            {
-                                User = user.UserId,
-                                Nombre = item.Nombre,
-                                Nivel = item.Nivel
-                            };
-                            skill.CreateEntity();
-                            user.PerfilUser.Skills.Add(skill);
-                            await _db.Skills.AddAsync(skill);
-                        }
-                    }
+                    _db.Skills.RemoveRange(user.PerfilUser.Skills);
+
+                    _db.Skills.AddRange(dto.Skills);
                 }
 
                 await _db.SaveChangesAsync();

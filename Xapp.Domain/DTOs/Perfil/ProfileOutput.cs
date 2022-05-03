@@ -18,6 +18,6 @@ namespace Xapp.Domain.DTOs.Perfil
         public string Email { get; set; }
         public string Bio { get; set; }
         public DateTime FechaCumple { get; set; }
-        public List<SkillInput> Skills { get; set; }
+        public List<Skill> Skills { get; set; }
     }
 }
