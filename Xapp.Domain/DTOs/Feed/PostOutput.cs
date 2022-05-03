@@ -20,4 +20,9 @@ namespace Xapp.Domain.DTOs
         public int Likes { get; set; }
         public List<Comment> Comments { get; set; }
     }
+
+    public class PostList
+    {
+        public List<PostOutput> Posts { get; set; } 
+    }
 }
