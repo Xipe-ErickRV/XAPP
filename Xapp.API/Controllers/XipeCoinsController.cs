@@ -48,7 +48,7 @@ namespace Xapp.API.XipeCoinsController
                 .FirstOrDefaultAsync(x => x.UserId == dto.IdReceiver);
             if (receiver == null)
             {
-                var output = new ApiResponse 
+                var output = new ApiResponse<string>
                 {
                     StatusCode = 400,
                     Message = "No se encontró el receptor",
@@ -61,7 +61,7 @@ namespace Xapp.API.XipeCoinsController
                 .FirstOrDefaultAsync(x => x.UserId == dto.IdSender);
             if (sender == null)
             {
-                var output = new ApiResponse 
+                var output = new ApiResponse<string>
                 {
                     StatusCode = 400,
                     Message = "No se encontró el emisor",
@@ -71,7 +71,7 @@ namespace Xapp.API.XipeCoinsController
 
             if ((sender.Balance <= 0) || (sender.Balance < dto.Amount))
             {
-                var output = new ApiResponse
+                var output = new ApiResponse<string>
                 {
                     StatusCode = 400,
                     Message = "El emisor no tiene saldo suficinente",
@@ -113,7 +113,7 @@ namespace Xapp.API.XipeCoinsController
             await _db.SaveChangesAsync();
 
 
-            var outputOk = new ApiResponse
+            var outputOk = new ApiResponse<string>
             {
                 StatusCode = 200,
                 Message = "Se transfirió correctamente",
@@ -160,7 +160,7 @@ namespace Xapp.API.XipeCoinsController
 
             if (lista == null) 
             {
-                var output = new ApiResponse
+                var output = new ApiResponse<string>
                 {
                     StatusCode = 400,
                     Message = "El Usuario no tiene movimientos registrados",
@@ -193,7 +193,7 @@ namespace Xapp.API.XipeCoinsController
 
             if (earnings == null)
             {
-                var output = new ApiResponse
+                var output = new ApiResponse<string>
                 {
                     StatusCode = 400,
                     Message = "El Usuario no tiene Wallet registrada",
@@ -205,7 +205,7 @@ namespace Xapp.API.XipeCoinsController
 
             if (transfers == null)
             {
-                var output = new ApiResponse
+                var output = new ApiResponse<string>
                 {
                     StatusCode = 400,
                     Message = "El Usuario no tiene movimientos registrados",
@@ -225,7 +225,7 @@ namespace Xapp.API.XipeCoinsController
 
             if (XPearn == null)
             {
-                var output = new ApiResponse
+                var output = new ApiResponse<string>
                 {
                     StatusCode = 400,
                     Message = "El Usuario no tiene movimientos registrados donde reciba XipeCoins",

@@ -44,11 +44,12 @@ namespace Xapp.Web.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpGet]
-        public async Task<IActionResult> Profile(string email)
+        public async Task<IActionResult> Profile()
         {
             var obj = new PerfilService();
-            var output = await obj.GetPerfil(email);
+            var output = await obj.GetPerfil(User.Identity.Name);
 
             if (output.StatusCode == 200) 
             {
@@ -63,18 +64,17 @@ namespace Xapp.Web.Controllers
             }
         }
 
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Profile(ProfileOutput dto)
         {
-            var email = dto.Email;
             var obj = new PerfilService();
-            var output = await obj.PatchPerfil(email, dto);
+            var output = await obj.PatchPerfil(User.Identity.Name, dto);
 
             if (output.StatusCode == 200)
             {
                 var perfil = output.Result;
-                string page = $"/Home/ProfileModoVista?email={User.Identity.Name}";
+                string page = $"/Home/ProfileModoVista";
                 return Redirect(page);
             }
             else
@@ -85,11 +85,12 @@ namespace Xapp.Web.Controllers
            
         }
 
+        [Authorize]
         [HttpGet]
-        public async Task<IActionResult> ProfileModoVista(string email)
+        public async Task<IActionResult> ProfileModoVista()
         {
             var obj = new PerfilService();
-            var output = await obj.GetPerfil(email);
+            var output = await obj.GetPerfil(User.Identity.Name);
 
             if (output.StatusCode == 200)
             {
