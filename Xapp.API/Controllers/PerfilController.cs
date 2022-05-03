@@ -250,21 +250,9 @@ namespace Xapp.API.Controllers
 
                 if (dto.Skills != null)
                 {
-                    foreach (var item in dto.Skills)
-                    {
-                        if (!user.PerfilUser.Skills.Any(x => x.Nombre == item.Nombre))
-                        {
-                            var skill = new Skill()
-                            {
-                                User = user.UserId,
-                                Nombre = item.Nombre,
-                                Nivel = item.Nivel
-                            };
-                            skill.CreateEntity();
-                            user.PerfilUser.Skills.Add(skill);
-                            await _db.Skills.AddAsync(skill);
-                        }
-                    }
+                    _db.Skills.RemoveRange(user.PerfilUser.Skills);
+
+                    _db.Skills.AddRange(dto.Skills);
                 }
 
                 await _db.SaveChangesAsync();

@@ -78,7 +78,7 @@ namespace Xapp.Domain.Entities
                 Bio = Bio,
                 Email = User.Email,
                 FechaCumple = FechaCumple,
-                Skills = Skills.Select(x=>x.ToOutput()).ToList()
+                Skills = Skills
             };
 
         }
