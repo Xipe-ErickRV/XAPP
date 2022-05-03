@@ -16,6 +16,7 @@ using Xapp.Web.Services;
 
 namespace Xapp.Web.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -43,6 +44,7 @@ namespace Xapp.Web.Controllers
             if (output.StatusCode == 200)
             {
                 var user = (User)output.Result; 
+                _session.AttachAccountToContext(user.Token);
                 string page = $"/Home/ProfileModoVista?email={user.Email}"; 
                 return Redirect(page);
             }
@@ -53,10 +55,10 @@ namespace Xapp.Web.Controllers
             }
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
             var test = User.Identity;
-            var test1 = User.Claims;
             var test2 = User.Identity.IsAuthenticated;
 
             return View();
@@ -92,7 +94,7 @@ namespace Xapp.Web.Controllers
             if (output.StatusCode == 200)
             {
                 var perfil = output.Result;
-                string page = $"/Home/ProfileModoVista?email={email}";
+                string page = $"/Home/ProfileModoVista?email={User.Identity.Name}";
                 return Redirect(page);
             }
             else
@@ -124,6 +126,7 @@ namespace Xapp.Web.Controllers
 
         public async Task<IActionResult> LogOut()
         {
+            await _httpContextAccessor.HttpContext.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
 

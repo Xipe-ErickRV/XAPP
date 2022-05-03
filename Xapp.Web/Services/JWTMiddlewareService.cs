@@ -47,7 +47,6 @@ namespace Xapp.Web.Services
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Name);
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, username));
                 identity.AddClaim(new Claim(ClaimTypes.Name, username));
-                identity.AddClaim(new Claim(ClaimTypes.Name, username));
                 identity.AddClaim(new Claim(ClaimTypes.Hash, token));
 
                 var authProperties = new AuthenticationProperties

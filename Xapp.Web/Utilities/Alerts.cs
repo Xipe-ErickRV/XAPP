@@ -21,6 +21,7 @@ namespace Xapp.Web.Utilities
         {
             return Alert(result, "error", title, body, buttonText );
         }
+
     }
     public class AlertDecoratorResult : IActionResult
     {

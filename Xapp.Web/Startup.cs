@@ -31,7 +31,7 @@ namespace Xapp.Web
                 options =>
                 {
                     options.Cookie.Name = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.LoginPath = new PathString("/Auth/Login");
+                    options.LoginPath = new PathString("/Home/Index");
                     options.AccessDeniedPath = new PathString("/Auth/Denied");
                 });
 
@@ -59,6 +59,7 @@ namespace Xapp.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

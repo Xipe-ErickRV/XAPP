@@ -1,0 +1,39 @@
+.sidebar {
+    height: 100%;
+    width: 20%;
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(52,52,52,255);
+    overflow-x: hidden;
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+#logo {
+    width: 36%;
+    height: auto;
+    margin-left: 15%;
+    margin-top: 26%;
+    margin-bottom: 10%;
+}
+
+
+/* Style sidebar links */
+
+.sidebar a {
+    text-decoration: none;
+    font-size: 20px;
+    color: #ffffff;
+    display: block;
+    margin-left: 15%;
+    margin-top: 12%;
+    position: relative;
+}
+/* Style links on mouse-over */
+
+.sidebar a:hover {
+    color: rgb(226, 36, 50);
+}
