@@ -241,28 +241,45 @@ namespace Xapp.API.XipeCoinsController
 
             return Ok(XPearn);
         }
+        
         [HttpGet("GetProfile")]
         public async Task<IActionResult> GetProfile (int id)
         {
-            var balance = await _db.Wallets
-                //.Include(x => x.Balance) 
-                .Include (x => x.User)
-                .ThenInclude (x => x.PerfilUser)              
+            var balance = await _db.Users
+                .Include (x => x.PerfilUser)
+                .Include (x => x.WalletlUser)
                 .FirstOrDefaultAsync(x => x.UserId == id);
 
-            var userOutput = new WalletUser();
-            userOutput.Balance = balance.Balance;
-            userOutput.UserName = balance.User.Username;
-            userOutput.UrlProfile = balance.User.PerfilUser.UrlFoto;
-
-            var output = new ApiResponse<WalletUser>
+            if (balance == null)
             {
-                StatusCode = 200,
-                Message = "OK",
-                Result = userOutput
-            };
+                var output = new ApiResponse <string>
+                {
+                    StatusCode = 400,
+                    Message = "No se encontró al usuario",
+                    Result = ""
+                };
+                return BadRequest(output);
+            }
 
-            return Ok(output);
+            var userOutput = new WalletUser();
+            userOutput.Balance = balance.WalletlUser.Balance;
+            userOutput.Nombre = balance.PerfilUser.Nombre;
+            userOutput.Apellido = balance.PerfilUser.Apellido;
+            userOutput.UrlProfile = balance.PerfilUser.UrlFoto;
+
+            if (userOutput != null)
+            {
+                var output = new ApiResponse<WalletUser>
+                {
+                    StatusCode = 200,
+                    Message = "OK",
+                    Result = userOutput
+                };
+                return Ok(output);
+            }
+
+            
+            return BadRequest();
         }
 
     }
