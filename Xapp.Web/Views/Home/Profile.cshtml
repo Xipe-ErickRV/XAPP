@@ -92,7 +92,7 @@
                             <ul class="horizontallist">
                                 @foreach (var skill in Model.Skills)
                                 {
-                                    @if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Basico)
+                                    @if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Basico && @skill.IsActive)
                                     {
                                         <li id="skill_pill" class="basic">
                                             @skill.Nombre
@@ -100,21 +100,21 @@
                                         </li>
 
                                     }
-                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Intermedio)
+                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Intermedio && @skill.IsActive)
                                     {
                                         <li id="skill_pill" class="medium">
                                             @skill.Nombre
                                             <span class="close closeskill">&times;</span>
                                         </li>
                                     }
-                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Avanzado)
+                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Avanzado && @skill.IsActive)
                                     {
                                         <li id="skill_pill" class="advanced">
                                             @skill.Nombre
                                             <span class="close closeskill">&times;</span>
                                         </li>
                                     }
-                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Experto)
+                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Experto && @skill.IsActive)
                                     {
                                         <li id="skill_pill" class="expert">
                                             @skill.Nombre
@@ -136,17 +136,27 @@
                         <div id="boton_icono_pdf">
                             <span class="close closeresume">&times;</span>
                         </div>
+                        <!--
                         <div id="PDF_Btn">
                             <label for="file-input">
                                 <img src="https://cdn-icons.flaticon.com/png/512/3720/premium/3720346.png?token=exp=1651430351~hmac=afcc66046de6dc129839e40be7e7df76" />
                             </label>
 
-                            <form enctype="multipart/form-data" method="post">
+                            <form id="perfil" action="Profile" enctype="multipart/form-data" method="post">
                                 <input type="file" id="file-input" accept=".pdf" />
                             </form>
 
                         </div>
-
+                        -->
+                        <form id="perfil"  asp-controller="Home" asp-action="Profile" method="post" enctype="multipart/form-data">
+                            <div class="row mt-2">
+                                <div class="col-12">
+                                    <label class="col-form-label">Select File</label>
+                                    <input asp-for="File" class="form-control" />
+                                    <span asp-validation-for="File" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -154,20 +164,20 @@
     </main>
 
     <!-- PopUp -->
-    <div class="modal-cont" id="id01" >
+    <div class="modal-cont" id="id01">
         <div class="modal-box">
-            <span class="close" onclick="document.getElementById('id01').style.display='none'" >&times;</span>
-            <form action="Profile" method="post" class="login-box">
+            <span class="close" onclick="document.getElementById('id01').style.display='none'">&times;</span>
+            <form class="login-box">
                 <h1 class="skilltitle"> Add Skill </h1>
                 <label class="skilllabel">Name:</label>
                 <input type="text" class="skillname" id="field1" required>
                 <label class="skilllabel skilllevel">Skill Level:</label>
-                <button name="Nivel" class="basic skilloption" type="button" id="skill_pill">Basic</button>
-                <button name="Nivel" class="medium skilloption" type="button" id="skill_pill">Medium</button>
-                <button name="Nivel" class="advanced skilloption" type="button" id="skill_pill">Advanced</button>
-                <button name="Nivel" class="expert skilloption" type="button" id="skill_pill">Expert</button>
+                <button name="Nivel" class="basic skilloption" type="button" id="skill_pill" value=1>Basic</button>
+                <button name="Nivel" class="medium skilloption" type="button" id="skill_pill" value=2>Medium</button>
+                <button name="Nivel" class="advanced skilloption" type="button" id="skill_pill" value=3>Advanced</button>
+                <button name="Nivel" class="expert skilloption" type="button" id="skill_pill" value=4>Expert</button>
 
-                <button type="submit" class="save-button">Save</button>
+                <button id="new_skill" type="submit" class="save-button">Save</button>
             </form>
         </div>
     </div>

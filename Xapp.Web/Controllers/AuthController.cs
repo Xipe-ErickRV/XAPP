@@ -45,7 +45,7 @@ namespace Xapp.Web.Controllers
             {
                 var user = (User)output.Result;
                 _session.AttachAccountToContext(user.Token);
-                string page = $"/Home/ProfileModoVista?email={user.Email}";
+                string page = $"/Home/ProfileModoVista";
                 return Redirect(page);
             }
             else
