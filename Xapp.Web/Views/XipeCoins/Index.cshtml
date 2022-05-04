@@ -10,8 +10,8 @@
   <meta charset="UTF-8">
   <title>XipeCoins Management</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link rel="stylesheet" href="../wwwroot/css/styleindex.css">
-  <link rel="stylesheet" href="../wwwroot/css/sidebar.css">
+  <link rel="stylesheet" href="~/css/styleindex.css">
+  <link rel="stylesheet" href="~/css/sidebar.css">
 
 </head>
 <body>
@@ -39,13 +39,13 @@
 		</div>
 		<div class="app-header-navigation">
 			<div class="tabs">
-				<a href="../Views/XipeCoins/Index.cshtml" class="active">
+				<a class="page-scroll" href="/XipeCoins/Index">
 					General
 				</a>
-				<a href="../Views/XipeCoins/transaction.cshtml" class="active">
+				<a class="page-scroll" href="/XipeCoins/transaction">
 					Transferencia
 				</a>
-				<a href="../Views/XipeCoins/account.cshtml">
+				<a class="page-scroll" href="/XipeCoins/account">
 					Cuenta  
 				</a>
 			</div>
@@ -69,9 +69,9 @@
 		</div>
 		<div class="app-header-mobile">
 				<ul class="dropdown-menu" role="menu">
-					<li><a href="../Views/XipeCoins/Index.cshtml">General</a></li>
-					<li><a href="../Views/XipeCoins/transaction.cshtml">Transferencia</a></li>
-					<li><a href="../Views/XipeCoins/account.cshtml">Cuenta</a></li>
+					<li><a class="page-scroll" href="/XipeCoins/Index">General</a></li>
+					<li><a class="page-scroll" href="/XipeCoins/transaction">Transferencia</a></li>
+					<li><a class="page-scroll" href="/XipeCoins/account">Cuenta</a></li>
 				</ul>
 		</div>
 
@@ -90,7 +90,7 @@
 							
 						</div>
 						<div>
-							<a href="../Views/XipeCoins/account.cshtml">
+							<a class="page-scroll" href="/XipeCoins/account">
 								<span class="icon-button">
 								<i class="ph-caret-right-bold"></i>
 							</span>
@@ -106,14 +106,14 @@
 			<section class="service-section">
 				<h2>Convenios</h2>
 				<div class="service-section-header">
-					<a href="../Views/XipeCoins/convenios.cshtml">
+					<a class="page-scroll" href="/XipeCoins/convenios">
 					<button class="flat-button">
 						Search
 					</button>
 				</a>
 				</div>
 				<div class="mobile-only">
-					<a href="../Views/XipeCoins/convenios.cshtml">
+					<a class="page-scroll" href="/XipeCoins/convenios">
 					<button class="flat-button">
 						Toggle search
 					</button>
@@ -128,7 +128,7 @@
 								<span>Ver sucursales</span>
 							</h3>
 						</div>
-						<a href="../Views/XipeCoins/convenios.cshtml"">
+						<a class="page-scroll" href="/XipeCoins/convenios">
 							<span>Ir a convenio</span>
 							<span class="icon-button">
 								<i class="ph-caret-right-bold"></i>
@@ -143,7 +143,7 @@
 								<span>Ver sucursales</span>
 							</h3>
 						</div>
-						<a href="../Views/XipeCoins/convenios.cshtml"">
+						<a class="page-scroll" href="/XipeCoins/convenios">
 							<span>Ir a convenio</span>
 							<span class="icon-button">
 								<i class="ph-caret-right-bold"></i>
@@ -158,7 +158,7 @@
 								<span>Ver sucursales</span>
 							</h3>
 						</div>
-						<a href="../Views/XipeCoins/convenios.cshtml"">
+						<a class="page-scroll" href="/XipeCoins/convenios">
 							<span>Ir a convenio</span>
 							<span class="icon-button">
 								<i class="ph-caret-right-bold"></i>
@@ -179,7 +179,7 @@
 						<button class="icon-button">
 							<i class="ph-funnel"></i>
 						</button>
-						<a href = "../Views/XipeCoins/account.cshtml"">
+						<a class="page-scroll" href="/XipeCoins/account">
 						<button class="icon-button">
 							<i class="ph-plus"></i>
 						</button>
