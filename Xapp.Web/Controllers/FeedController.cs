@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xapp.Domain.DTOs;
 using Xapp.Web.Services;
@@ -38,7 +39,7 @@ namespace Xapp.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetPost(int id)
+        public async Task<IActionResult> Post(int id)
         {
             var obj = new FeedService();
             var output = await obj.GetPost(id);

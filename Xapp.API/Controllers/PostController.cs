@@ -95,7 +95,14 @@ namespace Xapp.API.Controllers
                 return BadRequest(outputError);
 
             }
-            return Ok(outpost);
+
+            var output = new ApiResponse<PostOutput>
+            {
+                StatusCode = 200,
+                Message = "Ok",
+                Result = outpost
+            };
+            return Ok(output);
 
         }
 
@@ -109,6 +116,13 @@ namespace Xapp.API.Controllers
                 .ToListAsync();
 
             var listPosts = posts.Select(x => x.Output()).ToList();
+
+            var output = new ApiResponse<List<PostOutput>>
+            {
+                StatusCode = 200,
+                Message = "Ok",
+                Result = listPosts
+            };
 
             return Ok(listPosts);
         }

@@ -3,7 +3,7 @@
     Layout = null;
 
 }
-
+@model Xapp.Domain.DTOs.PostOutput
 <!DOCTYPE html>
 
 <html>
@@ -58,31 +58,16 @@
                 </div>
 
                 <div class="post_title_tag">
-                    <h2 class="post_title">Title #1</h2>
-                    <span class="post_tag">Tag Name</span>
+                    <h2 class="post_title">@Model.Title</h2>
+                    <span class="post_tag">@Model.Tag</span>
                 </div>
 
                 <div class="profile_elements">
-                    <img src="pic_example.jpg" class="user_pic">
-                    <h3 class="author">Author Name</h3>
+                    <img src=@Model.URLProfile class="user_pic">
+                    <h3 class="author">@Model.UserName</h3>
                 </div>
 
-                <p class="post_content">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                    praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-                    occaecati
-                    cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est
-                    laborum et
-                    dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum
-                    soluta
-                    nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus,
-                    omnis
-                    voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis
-                    aut
-                    rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
-                    Itaque
-                    earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias
-                    consequatur
-                    aut perferendis doloribus asperiores repellat.
+                <p class="post_content">@Model.Content
                 </p>
 
                 <span style="color:rgb(226, 36, 50)">2 COMMENTS</span>
@@ -91,36 +76,21 @@
 
         <!-- post comments -->
         <div id="comment_container">
-            <div class="comment_block">
+            @foreach (var comment in @Model.Comments)
+           {
+               <div class="comment_block">
                 <div class="comment_elements">
 
                     <div class="profile_elements">
                         <img src="pic_example.jpg" class="user_pic">
-                        <h3 class="comment_author">Author Name</h3>
+                        <h3 class="comment_author">@comment.User</h3>
                     </div>
 
-                    <p class="comment_content">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                        veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                    <p class="comment_content">@comment.Content
                     </p>
                 </div>
             </div>
-
-            <div class="comment_block">
-                <div class="comment_elements">
-
-                    <div class="profile_elements">
-                        <img src="pic_example.jpg" class="user_pic">
-                        <h3 class="comment_author">Author Name</h3>
-                    </div>
-
-                    <p class="comment_content">But I must explain to you how all this mistaken idea of denouncing
-                        pleasure and praising pain was born and I will give you a complete account of the system, and
-                        expound the actual teachings of the great explorer of the truth, the master-builder of human
-                        happiness.
-                    </p>
-                </div>
-            </div>
+           }
 
         </div>
 
