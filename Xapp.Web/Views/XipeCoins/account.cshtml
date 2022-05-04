@@ -10,15 +10,15 @@
   <meta charset="UTF-8">
   <title>Cuenta</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link rel="stylesheet" href="../wwwroot/css/stylecuenta.css">
-  <link rel="stylesheet" href="../wwwroot/css/sidebar.css">
-  <link rel="stylesheet" type="text/css" href="../wwwroot/css/xipecoinstabla/animate.css">
-  <link rel="stylesheet" type="text/css" href="../wwwroot/css/xipecoinstabla/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="../wwwroot/css/xipecoinstabla/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="../wwwroot/css/xipecoinstabla/perfect-scrollbar.css">
-  <link rel="stylesheet" type="text/css" href="../wwwroot/css/xipecoinstabla/select2.min.css">
-  <link rel="stylesheet" type="text/css" href="../wwwroot/css/xipecoinstabla/tabla.css">
-  <link rel="stylesheet" type="text/css" href="../wwwroot/css/xipecoinstabla/util.css">
+  <link rel="stylesheet" href="~/css/stylecuenta.css">
+  <link rel="stylesheet" href="~/css/sidebar.css">
+  <link rel="stylesheet" type="text/css" href="~/css/xipecoinstabla/animate.css">
+  <link rel="stylesheet" type="text/css" href="~/css/xipecoinstabla/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="~/css/xipecoinstabla/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="~/css/xipecoinstabla/perfect-scrollbar.css">
+  <link rel="stylesheet" type="text/css" href="~/css/xipecoinstabla/select2.min.css">
+  <link rel="stylesheet" type="text/css" href="~/css/xipecoinstabla/tabla.css">
+  <link rel="stylesheet" type="text/css" href="~/css/xipecoinstabla/util.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
   
 
@@ -48,13 +48,13 @@
 		</div>
 		<div class="app-header-navigation">
 			<div class="tabs">
-				<a href="../Views/XipeCoins/Index.cshtml" class="active">
+				<a class="page-scroll" href="/XipeCoins/Index">
 					General
 				</a>
-				<a href="../Views/XipeCoins/transaction.cshtml" class="active">
+				<a class="page-scroll" href="/XipeCoins/transaction">
 					Transferencia
 				</a>
-				<a href="../Views/XipeCoins/account.cshtml">
+				<a class="page-scroll" href="/XipeCoins/account">
 					Cuenta  
 				</a>
 
@@ -79,9 +79,9 @@
 		</div>
 		<div class="app-header-mobile">
 				<ul>
-					<li><a href="../Views/XipeCoins/Index.cshtml">General</a></li>
-					<li><a href="../Views/XipeCoins/transaction.cshtml">Transferencia</a></li>
-					<li><a href="../Views/XipeCoins/account.cshtml">Cuenta</a></li>
+					<li><a class="page-scroll" href="/XipeCoins/Index">General</a></li>
+					<li><a class="page-scroll" href="/XipeCoins/transaction">Transferencia</a></li>
+					<li><a class="page-scroll" href="/XipeCoins/account">Cuenta</a></li>
 				</ul>
 			
 		</div>
