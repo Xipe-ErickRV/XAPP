@@ -214,6 +214,7 @@ namespace Xapp.API.XipeCoinsController
                 {
                     StatusCode = 400,
                     Message = "El Usuario no tiene movimientos registrados",
+                    Result= "El usuario no tiene movimientos registrados"
                 };
                 return BadRequest(output);
             }
@@ -265,9 +266,10 @@ namespace Xapp.API.XipeCoinsController
                 };
                 return Ok(output);
             }
-
-
-            return BadRequest();
+            else
+            {
+                return BadRequest();
+            }
 
         }
 

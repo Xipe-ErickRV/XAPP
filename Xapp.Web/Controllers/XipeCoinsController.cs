@@ -11,7 +11,7 @@ namespace Xapp.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var obj = new XipeCoinsService();
-            var output = await obj.GetProfile(id);
+            var output = await obj.GetProfile(6);
 
             if (output.StatusCode == 200) 
             {
