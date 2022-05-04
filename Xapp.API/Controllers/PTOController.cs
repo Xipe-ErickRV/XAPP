@@ -22,9 +22,7 @@ namespace Xapp.API.Controllers
         {
             _db = db;
         }
-        // GET: PTOController
-        //No funciona
-        //Cambios en la entidad PTO rompeiron algo en la bd
+
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
@@ -131,18 +129,45 @@ namespace Xapp.API.Controllers
             return Ok(output);
         }
 
-        // GET: PTOController/Edit/5
-        //[HttpGet("Edit")]
-        //public ActionResult Edit(int id)
-        //{
-            //return View();
-        //}
+        [HttpPatch("EditPTO")]
+        public async Task<IActionResult> EditPTO(EditPTO dto, int userId, int ptoId)
+        {
+            var user = await _db.Perfiles
+                .FirstOrDefaultAsync(x => x.Id == userId);
+            if (user == null)
+                return BadRequest();
 
-        // GET: PTOController/Delete/5
-        //[HttpGet("Delete")]
-        //public ActionResult Delete(int id)
-        //{
-            //return View();
-        //}
+            var pto = await _db.PTOs
+                .FirstOrDefaultAsync(x => x.Id == ptoId);
+            if (pto == null)
+                return BadRequest();
+
+            pto.IsPTO = dto.IsPTO;
+            pto.IsVacation = dto.IsVacation;
+            pto.Description = dto.Description;
+            pto.StartDate = dto.StartDate;
+            pto.EndDate = dto.EndDate;
+
+            await _db.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpDelete("DeletePTO")]
+        public async Task<IActionResult> DeletePTO(int userId, int ptoId)
+        {
+            var user = await _db.Perfiles
+                .Include(x => x.User)
+                .ThenInclude(x => x.PTOs)
+                .FirstOrDefaultAsync(x => x.Id == userId);
+
+            var ptos = user.User.PTOs
+                .Find(x => x.UserId == user.Id && x.Id == ptoId);
+            if (ptos == null)
+                return BadRequest();
+
+            ptos.Delete();
+            await _db.SaveChangesAsync();
+            return Ok();
+        }
     }
 }

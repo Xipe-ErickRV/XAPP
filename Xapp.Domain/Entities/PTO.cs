@@ -28,7 +28,8 @@ namespace Xapp.Domain.Entities
                 StartTime = StartDate,
                 EndTime = EndDate,
                 Description = Description,
-                UserId = UserId
+                UserId = UserId,
+                PTOId = Id
             };
         }
     }

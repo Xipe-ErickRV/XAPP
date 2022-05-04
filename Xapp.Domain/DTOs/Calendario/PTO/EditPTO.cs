@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace Xapp.Domain.DTOs
 {
-    public class PTOInput
+    public class EditPTO
     {
-        public int PTOId { get; set; }
-        public int UserId { get; set; }
         public bool IsPTO { get; set; }
         public bool IsVacation { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
         public string Description { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+
     }
 }
