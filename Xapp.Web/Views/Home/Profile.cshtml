@@ -42,9 +42,16 @@
                 <div class="profileInfo-personal">
                     <div class="profileInfo-personal-data">
                         <div class="profile-pic">
-                            <img src="@Model.UrlImage"
+                            @if(@Model.UrlImage != null)
+                            {
+                                <img src="@Model.UrlImage"
                                  id="photo" />
-                            <input type="file" id="file">
+                            } else
+                            {
+                                <img src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" 
+                                id="photo" />
+                            }
+                            <input name="UrlImage" type="file" id="file">
                             <label for="file" id="uploadBtn"> Change Photo </label>
 
                         </div>

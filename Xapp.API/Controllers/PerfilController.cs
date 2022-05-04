@@ -275,7 +275,7 @@ namespace Xapp.API.Controllers
             {
 
                 IFormFile file = dto.File;
-                if (file == null) { 
+                if (file != null) { 
                     file = Request.Form.Files["uploadfile"];
                     var blobSection = _config.GetSection("BlobSettings");
                     var connectionString = blobSection.GetSection("ConnectionString").Value;
