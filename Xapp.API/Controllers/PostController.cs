@@ -126,7 +126,15 @@ namespace Xapp.API.Controllers
                 list.Add(outpost);
             }
             plist.Posts = list;
-            return Ok(plist);
+
+            var output = new ApiResponse<PostList>
+            {
+                StatusCode = 200,
+                Message = "OK",
+                Result = plist
+            };
+
+            return Ok(output);
         }
 
         [HttpPatch("Update")]

@@ -36,7 +36,7 @@ namespace Xapp.Web.Controllers
             var output = await obj.GetAllPosts();
 
             if (output.StatusCode == 200)
-            {
+                {
                 var resultOutput = (PostList)output.Result;
                 return View(resultOutput);
             }
