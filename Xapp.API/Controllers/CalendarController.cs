@@ -131,18 +131,16 @@ namespace Xapp.API.Controllers
             return Ok(output);
         }
 
-        //BadRequest, no funciona
         [HttpPatch("EditEvent")]
-        public async Task<IActionResult> EditEvent(EditEvent dto, int id, int Eid)
+        public async Task<IActionResult> EditEvent(EditEvent dto, int userId, int eventId)
         {
             var user = await _db.Users
-                .FirstOrDefaultAsync(x => x.UserId == id);
-
+                .FirstOrDefaultAsync(x => x.UserId == userId);
             if (user == null)
                 return BadRequest();
 
             var evento = await _db.Eventos
-               .FirstOrDefaultAsync(x => x.Id == Eid);
+               .FirstOrDefaultAsync(x => x.Id == eventId);
             if (evento == null)
                 return BadRequest();
 
@@ -154,17 +152,16 @@ namespace Xapp.API.Controllers
             return Ok();
         }
 
-        //No borra
         [HttpDelete("DeleteEvent")]
-        public async Task<IActionResult> DeleteEvent(int Uid, string titulo)
+        public async Task<IActionResult> DeleteEvent(int userId, int eventId)
         {
             var user = await _db.Users
                 .Include(x => x.PerfilUser)
                 .ThenInclude(x => x.Eventos)
-                .FirstOrDefaultAsync(x => x.UserId == Uid);
+                .FirstOrDefaultAsync(x => x.UserId == userId);
 
             var events = user.PerfilUser.Eventos
-                .Find(x => x.UserId == user.UserId && x.Title == titulo);
+                .Find(x => x.UserId == user.UserId && x.Id == eventId);
             if (events == null)
                 return BadRequest();
 
