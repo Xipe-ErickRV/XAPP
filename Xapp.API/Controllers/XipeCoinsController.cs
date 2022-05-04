@@ -244,25 +244,31 @@ namespace Xapp.API.XipeCoinsController
         [HttpGet("GetProfile")]
         public async Task<IActionResult> GetProfile (int id)
         {
-            var balance = await _db.Wallets
-                //.Include(x => x.Balance) 
-                .Include (x => x.User)
-                .ThenInclude (x => x.PerfilUser)              
+            var balance = await _db.Users
+                .Include (x => x.PerfilUser)
+                .Include (x => x.WalletlUser)              
                 .FirstOrDefaultAsync(x => x.UserId == id);
 
             var userOutput = new WalletUser();
-            userOutput.Balance = balance.Balance;
-            userOutput.UserName = balance.User.Username;
-            userOutput.UrlProfile = balance.User.PerfilUser.UrlFoto;
+            userOutput.Balance = balance.WalletlUser.Balance;
+            userOutput.Nombre = balance.PerfilUser.Nombre;
+            userOutput.Apellido = balance.PerfilUser.Apellido;
+            userOutput.UrlProfile = balance.PerfilUser.UrlFoto;
 
-            var output = new ApiResponse<WalletUser>
+            if (userOutput != null)
             {
-                StatusCode = 200,
-                Message = "OK",
-                Result = userOutput
-            };
+                var output = new ApiResponse<WalletUser>
+                {
+                    StatusCode = 200,
+                    Message = "OK",
+                    Result = userOutput
+                };
+                return Ok(output);
+            }
 
-            return Ok(output);
+
+            return BadRequest();
+
         }
 
     }
