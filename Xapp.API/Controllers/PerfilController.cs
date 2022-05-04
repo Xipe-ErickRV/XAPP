@@ -273,26 +273,6 @@ namespace Xapp.API.Controllers
 
             if (user != null)
             {
-
-                IFormFile file = dto.File;
-                if (file != null) { 
-                    file = Request.Form.Files["uploadfile"];
-                    var blobSection = _config.GetSection("BlobSettings");
-                    var connectionString = blobSection.GetSection("ConnectionString").Value;
-                    var sourceContainerName = blobSection.GetSection("Container").Value;
-                    var fileName = $"{file.FileName}";
-                    BlobServiceClient blobServiceClient = new(connectionString);
-                    BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(sourceContainerName);
-                    BlobHttpHeaders blobHttpHeader = new()
-                    {
-                        ContentType = file.ContentType
-                    };
-                    BlobClient blobClient = containerClient.GetBlobClient(fileName);
-                    await blobClient.UploadAsync(file.OpenReadStream(), blobHttpHeader);
-                    string url = $"https://xipeappstorgae.blob.core.windows.net/xapp/{fileName}";
-                    dto.UrlCv = url;
-                }
-
                 user.PerfilUser.MetodoEdit(dto);
 
                 if (dto.Skills != null)
@@ -361,6 +341,39 @@ namespace Xapp.API.Controllers
             skill.Delete();
             await _db.SaveChangesAsync();
             return Ok(skill);
+        }
+
+        [HttpPost("UploadResume")]
+        public async Task<IActionResult> UploadResume()
+        {
+            var resume = Request.Form.Files["resume"];
+
+            IFormFile file = resume;
+            if (file != null)
+            {
+                var blobSection = _config.GetSection("BlobSettings");
+                var connectionString = blobSection.GetSection("ConnectionString").Value;
+                var sourceContainerName = blobSection.GetSection("Container").Value;
+                var fileName = $"{file.FileName}";
+                BlobServiceClient blobServiceClient = new(connectionString);
+                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(sourceContainerName);
+                BlobHttpHeaders blobHttpHeader = new()
+                {
+                    ContentType = file.ContentType
+                };
+                BlobClient blobClient = containerClient.GetBlobClient(fileName);
+                await blobClient.UploadAsync(file.OpenReadStream(), blobHttpHeader);
+                string url = $"https://xipeappstorgae.blob.core.windows.net/xapp/{fileName}";
+                var output = new ApiResponse<string>
+                {
+                    StatusCode = 200,
+                    Message = "Resume uploaded",
+                    Result = url
+                };
+                return Ok(output);
+            }
+
+            return Ok();
         }
     }
 }

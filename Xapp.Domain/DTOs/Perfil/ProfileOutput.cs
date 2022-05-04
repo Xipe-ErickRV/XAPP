@@ -22,7 +22,7 @@ namespace Xapp.Domain.DTOs.Perfil
         public DateTime FechaCumple { get; set; }
         public List<Skill> Skills { get; set; }
 
-        [Required(ErrorMessage = "Please select file")]
+        //[Required(ErrorMessage = "Please select file")]
         public IFormFile File { get; set; }
     }
 }

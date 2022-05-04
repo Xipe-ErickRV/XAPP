@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Xapp.Domain.DTOs;
@@ -58,6 +60,11 @@ namespace Xapp.Web.Services
 
         public async Task<ApiResponse<Perfil>> PatchPerfil(string email, ProfileOutput dto)
         {
+            //Primero mando el file, lo subo y me regresa el url y lo adjunto al dto
+            var urlresume = await UploadResume(dto.File);
+            dto.UrlCv = urlresume;
+            dto.File = null;
+
             var url = $"{_baseUrl}/patchPerfil?email={email}";
             var client = new RestClient(url);
             var request = new RestRequest() { Method = Method.Patch };
@@ -75,6 +82,24 @@ namespace Xapp.Web.Services
                 var output = JsonConvert.DeserializeObject<ApiResponse<Perfil>>(response.Content);
                 return output;
             }
+        }
+
+        public async Task<string> UploadResume(IFormFile file)
+        {
+            var client = new RestClient(_baseUrl);
+            var request = new RestRequest($"UploadResume", Method.Post) { AlwaysMultipartFormData = true };
+
+            using (var ms = new MemoryStream())
+            {
+                file.CopyTo(ms);
+                var fileBytes = ms.ToArray();
+                request.AddFile("resume", fileBytes, file.FileName);
+            }
+
+            var response = await client.ExecuteAsync(request);
+
+            var output = JsonConvert.DeserializeObject<ApiResponse<string>>(response.Content);
+            return output.Result;
         }
     }
 }

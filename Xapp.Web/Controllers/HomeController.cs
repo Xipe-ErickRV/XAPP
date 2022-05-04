@@ -102,6 +102,12 @@ namespace Xapp.Web.Controllers
             }
         }
 
+        public IActionResult DeleteSkill(int id)
+        {
+            var test = id;
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
