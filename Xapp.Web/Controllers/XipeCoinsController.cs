@@ -1,12 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using Xapp.Domain.DTOs;
+using Xapp.Web.Services;
 
 namespace Xapp.Web.Controllers
 {
     public class XipeCoinsController : Controller
     {
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var obj = new XipeCoinsService();
+            var output = await obj.GetProfile(6);
+
+            if (output.StatusCode == 200) 
+            {
+                var resultOutput = (WalletUser)output.Result;
+                return View(resultOutput);
+            }
+            else
+            {
+                var message = output.Message;
+                return View();
+            }
         }
 
         public IActionResult account()

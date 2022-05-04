@@ -23,7 +23,7 @@ namespace Xapp.API.XipeCoinsController
         }
 
         [HttpGet("GetWallets")]
-        public async Task<IActionResult> GetWallets( )
+        public async Task<IActionResult> GetWallets()
         {
             var list = await _db.Wallets.ToListAsync();
             return Ok(list);
@@ -33,11 +33,11 @@ namespace Xapp.API.XipeCoinsController
         public async Task<IActionResult> GetXipeCoins(int id)
         {
 
-            var balance = await _db.Users 
+            var balance = await _db.Users
                 .Include(x => x.WalletlUser)
                 .FirstOrDefaultAsync(x => x.UserId == id);
 
-            return Ok(balance.WalletlUser.Balance); 
+            return Ok(balance.WalletlUser.Balance);
         }
 
         [HttpPatch("TransferXipeCoins")] //Checao:)
@@ -52,6 +52,7 @@ namespace Xapp.API.XipeCoinsController
                 {
                     StatusCode = 400,
                     Message = "No se encontró el receptor",
+                    Result = "No se encontró el receptor "
                 };
                 return BadRequest(output);
             }
@@ -65,6 +66,7 @@ namespace Xapp.API.XipeCoinsController
                 {
                     StatusCode = 400,
                     Message = "No se encontró el emisor",
+                    Result = "No se encontró el emisor"
                 };
                 return BadRequest(output);
             }
@@ -74,7 +76,8 @@ namespace Xapp.API.XipeCoinsController
                 var output = new ApiResponse<string>
                 {
                     StatusCode = 400,
-                    Message = "El emisor no tiene saldo suficinente",
+                    Message = "El emisor no tiene saldo suficiente",
+                    Result = "El emisor no tiene saldo suficiente"
                 };
                 return BadRequest(output);
             }
@@ -105,7 +108,7 @@ namespace Xapp.API.XipeCoinsController
             transferReceiver.CreateEntity();
             transferSender.CreateEntity();
 
-            receiver.Transfers.Add(transferReceiver); //Aquí peta, marca nulo
+            receiver.Transfers.Add(transferReceiver); 
             sender.Transfers.Add(transferSender);
 
             await _db.Transfers.AddAsync(transferReceiver);
@@ -117,6 +120,7 @@ namespace Xapp.API.XipeCoinsController
             {
                 StatusCode = 200,
                 Message = "Se transfirió correctamente",
+                Result = "Transferencia realizada"
             };
             return Ok(outputOk);
         }
@@ -128,7 +132,7 @@ namespace Xapp.API.XipeCoinsController
 
             var lista = await _db.Transfers
                 .FirstOrDefaultAsync(x => x.Id == id);
-                
+
 
             var outtransfer = new TransferOutput();
 
@@ -158,7 +162,7 @@ namespace Xapp.API.XipeCoinsController
             //    Sender = x.Sender
             //}).ToListAsync();
 
-            if (lista == null) 
+            if (lista == null)
             {
                 var output = new ApiResponse<string>
                 {
@@ -197,6 +201,7 @@ namespace Xapp.API.XipeCoinsController
                 {
                     StatusCode = 400,
                     Message = "El Usuario no tiene Wallet registrada",
+                    Result = "El usuario no tiene Wallet  registrada"
                 };
                 return BadRequest(output);
             }
@@ -229,11 +234,36 @@ namespace Xapp.API.XipeCoinsController
                 {
                     StatusCode = 400,
                     Message = "El Usuario no tiene movimientos registrados donde reciba XipeCoins",
+                    Result = "El usuario no ha recibido XipeCoins"
                 };
                 return BadRequest(output);
             }
 
             return Ok(XPearn);
         }
+        [HttpGet("GetProfile")]
+        public async Task<IActionResult> GetProfile (int id)
+        {
+            var balance = await _db.Wallets
+                //.Include(x => x.Balance) 
+                .Include (x => x.User)
+                .ThenInclude (x => x.PerfilUser)              
+                .FirstOrDefaultAsync(x => x.UserId == id);
+
+            var userOutput = new WalletUser();
+            userOutput.Balance = balance.Balance;
+            userOutput.UserName = balance.User.Username;
+            userOutput.UrlProfile = balance.User.PerfilUser.UrlFoto;
+
+            var output = new ApiResponse<WalletUser>
+            {
+                StatusCode = 200,
+                Message = "OK",
+                Result = userOutput
+            };
+
+            return Ok(output);
+        }
+
     }
 }
