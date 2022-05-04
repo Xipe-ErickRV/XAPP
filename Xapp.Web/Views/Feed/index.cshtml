@@ -3,6 +3,9 @@
     Layout = null;
 
 }
+
+@model Xapp.Domain.DTOs.PostList
+
 <!DOCTYPE html>
 <html>
 
@@ -43,9 +46,12 @@
         <h1 id="title">FORUM</h1>
         <button type="button" id="btn_create_post" onclick=show_popup()>+</button>
 
+        
         <!-- post miniature container -->
         <div id="post_mini_container">
-            <div class="post_mini">
+            @foreach(var post in Model.Posts)
+            {
+                <div class="post_mini">
                 <div class="post_elements">
                     <div class="btn_icons">
                         <div class="interactions_container">
@@ -60,116 +66,20 @@
                     </div>
 
                     <div class="post_title_tag">
-                        <h2 class="post_title">Title #1</h2>
+                        <h2 class="post_title">@post.Title</h2>
                         <span class="post_tag">Tag Name</span>
                     </div>
 
                     <div class="profile_elements">
                         <img src="pic_example.jpg" class="user_pic">
-                        <h3 class="author">Author Name</h3>
+                        <h3 class="author">@post.UserName</h3>
                     </div>
 
-                    <p class="post_content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p class="post_content">@post.Content</p>
                 </div>
-            </div>
-
-            <div class="post_mini">
-                <div class="post_elements">
-                    <div class="btn_icons">
-                        <div class="interactions_container">
-                            <button class="like_btn" onclick=change_like_color(like02)><i
-                                    class="material-icons thumbs_up" id="like02">thumb_up</i></button>
-                            <span>7</span>
-                        </div>
-                        <div class="interactions_container">
-                            <i class="material-icons">chat</i>
-                            <span>2</span>
-                        </div>
-                    </div>
-
-                    <div class="post_title_tag">
-                        <h2 class="post_title">Title #2</h2>
-                        <span class="post_tag">Tag Name</span>
-                    </div>
-
-                    <div class="profile_elements">
-                        <img src="pic_example.jpg" class="user_pic">
-                        <h3 class="author">Author Name</h3>
-                    </div>
-
-                    <p class="post_content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat.</p>
                 </div>
-            </div>
-
-            <div class="post_mini">
-                <div class="post_elements">
-                    <div class="btn_icons">
-                        <div class="interactions_container">
-                            <button class="like_btn" onclick=change_like_color(like03)><i
-                                    class="material-icons thumbs_up" id="like03">thumb_up</i></button>
-                            <span>7</span>
-                        </div>
-                        <div class="interactions_container">
-                            <i class="material-icons">chat</i>
-                            <span>2</span>
-                        </div>
-                    </div>
-
-                    <div class="post_title_tag">
-                        <h2 class="post_title">Title #3</h2>
-                        <span class="post_tag">Tag Name</span>
-                    </div>
-
-                    <div class="profile_elements">
-                        <img src="pic_example.jpg" class="user_pic">
-                        <h3 class="author">Author Name</h3>
-                    </div>
-
-                    <p class="post_content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </div>
-            </div>
-
-            <div class="post_mini">
-                <div class="post_elements">
-                    <div class="btn_icons">
-                        <div class="interactions_container">
-                            <button class="like_btn" onclick=change_like_color(like04)><i
-                                    class="material-icons thumbs_up" id="like04">thumb_up</i></button>
-                            <span>7</span>
-                        </div>
-                        <div class="interactions_container">
-                            <i class="material-icons">chat</i>
-                            <span>2</span>
-                        </div>
-                    </div>
-
-                    <div class="post_title_tag">
-                        <h2 class="post_title">Title #4</h2>
-                        <span class="post_tag">Tag Name</span>
-                    </div>
-
-                    <div class="profile_elements">
-                        <img src="pic_example.jpg" class="user_pic">
-                        <h3 class="author">Author Name</h3>
-                    </div>
-
-                    <p class="post_content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </div>
-            </div>
-
-        </div>
+            }
+          </div>
     </div>
 
     <!-- create post modal -->

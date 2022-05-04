@@ -1,22 +1,32 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Xapp.Domain.DTOs;
+using Xapp.Domain.DTOs.Perfil;
+using Xapp.Web.Models;
 using Xapp.Web.Services;
 
 namespace Xapp.Web.Controllers
 {
     public class FeedController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<FeedController> _logger;
         private readonly JWTMiddlewareService _session;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public FeedController(ILogger<HomeController> logger, JWTMiddlewareService session, IHttpContextAccessor httpContextAccessor)
+
+        public FeedController(ILogger<FeedController> logger, JWTMiddlewareService session, IHttpContextAccessor httpContextAccessor)
         {
             _logger = logger;
             _session = session;
             _httpContextAccessor = httpContextAccessor;
+        }
+
+
+        public IActionResult Post()
+        {
+            return View();
         }
 
         [HttpGet]
@@ -26,9 +36,9 @@ namespace Xapp.Web.Controllers
             var output = await obj.GetAllPosts();
 
             if (output.StatusCode == 200)
-            {
-                var post = (PostOutput)output.Result;
-                return View(post);
+                {
+                var resultOutput = (PostList)output.Result;
+                return View(resultOutput);
             }
             else
             {
@@ -37,22 +47,10 @@ namespace Xapp.Web.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetPost(int id)
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
         {
-            var obj = new FeedService();
-            var output = await obj.GetPost(id);
-
-            if (output.StatusCode == 200)
-            {
-                var post = (PostOutput)output.Result;
-                return View(post);
-            }
-            else
-            {
-                var message = output.Message;
-                return View();
-            }
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

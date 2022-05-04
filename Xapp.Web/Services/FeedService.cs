@@ -11,7 +11,7 @@ namespace Xapp.Web.Services
     {
         private readonly string _baseUrl = "https://localhost:44331/api/Post";
 
-        public async Task<ApiResponse<PostOutput>> GetAllPosts()
+        public async Task<ApiResponse<PostList>> GetAllPosts()
         {
             var url = $"{_baseUrl}/GetAll";
             var client = new RestClient(url);
@@ -21,12 +21,12 @@ namespace Xapp.Web.Services
             var response = await client.ExecuteAsync(request);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                var output = JsonConvert.DeserializeObject<ApiResponse<PostOutput>>(response.Content);
+                var output = JsonConvert.DeserializeObject<ApiResponse<PostList>>(response.Content);
                 return output;
             }
             else
             {
-                var output = JsonConvert.DeserializeObject<ApiResponse<PostOutput>>(response.Content);
+                var output = JsonConvert.DeserializeObject<ApiResponse<PostList>>(response.Content);
                 return output;
             }
         }

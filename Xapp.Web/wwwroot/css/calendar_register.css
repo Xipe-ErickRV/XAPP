@@ -1,0 +1,112 @@
+﻿.modal-cont {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.47);
+    top: 0;
+    left: 0;
+    overflow: auto
+}
+
+.modal-box {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    width: 40%;
+    height: auto;
+    margin: 30px auto;
+    background-color: white;
+    position: center;
+    text-align: left;
+    animation-name: zoom;
+    animation-duration: .7s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+}
+
+    .modal-box .close {
+        position: absolute;
+        right: 16px;
+        top: 5px;
+        font-size: 25px;
+        font-weight: bolder;
+        cursor: pointer
+    }
+
+        .modal-box .close:hover, .modal-box .close:focus {
+            color: #c6c6c6
+        }
+
+    .modal-box img {
+        width: 30%;
+        border-radius: 50%;
+        display: block;
+        margin: auto;
+        padding: 14px;
+        margin-bottom: 30px;
+        min-width: 150px;
+        max-width: 230px
+    }
+
+
+.close-forgot {
+    background-color:white
+}
+
+.modal-box .close-forgot {
+    width: 100%;
+    padding: 30px;
+}
+
+.modal-box .cancel {
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    width: 180px;
+    height: 50px;
+    border-style: hidden;
+    border-radius: 15px;
+    background-color: #e22432;
+    cursor: pointer;
+    float: right;
+}
+
+.modal-box span {
+    float: right
+}
+
+.modal-cont {
+    display: none
+}
+
+.modal-box {
+    animation-name: zoom;
+    animation-duration: .7s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+}
+
+@keyframes zoom {
+    from{transform: scale(0);}
+    to{transform: scale(1);}
+}
+
+.check {
+    height: 22px;
+    width: 22px;
+    display: inline-block;
+    margin-left: 16px;
+    vertical-align: baseline;
+}
+
+.date {
+    margin: .4rem 0;
+    width: 80px;
+    display: block;
+}
+
+.comments {
+    margin: 16px;
+    width: 80%;
+    height: 80%;
+}

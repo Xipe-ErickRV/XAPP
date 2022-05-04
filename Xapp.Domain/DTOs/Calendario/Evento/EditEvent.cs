@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace Xapp.Domain.DTOs
 {
-    public class EventInput
+    public class EditEvent
     {
-        public int EventId { get; set; }
-        public int UserId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public bool IsPublic { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime DateTime { get; set; }
+
     }
 }

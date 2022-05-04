@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "Calendar";
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href="~/css/calendar.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/calendar_register.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <main>
+        <section>
+            <!--corregir-->
+            <div class="month">      
+              <ul>
+                <li class="prev">&#10094;</li>
+                <li class="next">&#10095;</li>
+                <li style="color:#1c1b1b">
+                  APRIL<br>
+                </li>
+              </ul>
+            </div>
+
+            <button class="btn btn-primary register" type="button">Register</button>
+
+
+            <ul class="weekdays">
+              <li>Su</li>
+              <li>Mo</li>
+              <li>Tu</li>
+              <li>We</li>
+              <li>Th</li>
+              <li>Fr</li>
+              <li>Sa</li>
+            </ul>
+
+            <ul class="days">
+              <li>27</li>
+              <li>28</li>
+              <li>29</li>
+              <li>30</li>
+              <li>31</li>
+              <li>1</li>
+              <li>2</li>
+              <li>3</li>
+              <li>4</li>
+              <li>5</li>
+              <li>6</li>
+              <li>7</li>
+              <li>8</li>
+              <li>9</li>
+              <li>10</li>
+              <li>11</li>
+              <li>12</li>
+              <li>13</li>
+              <li>14</li>
+              <li>15</li>
+              <li>16</li>
+              <li>17</li>
+              <li>18</li>
+              <li>19</li>
+              <li>20</li>
+              <li>21</li>
+              <li>22</li>
+              <li>23</li>
+              <li>24</li>
+              <li>25</li>
+              <li>26</li>
+              <li>27</li>
+              <li>28</li>
+              <li>29</li>
+              <li>30</li>
+            </ul>
+
+            <div class="resume">
+                <p style="font-size: 27px; color: #343434; font-weight: 600">My Resume</p>
+                <p class="res_data">PTO'S LEFT</p>
+                <p style="font-size: 55px; color: #212121; font-weight: 600">4</p>
+                <p class="res_data">VACATIONS LEFT</p>
+                <p style="font-size: 55px; color: #212121; font-weight: 600">10</p>
+                <p class="res_data">EXPIRATION DAY</p>
+
+                <p style="font-size: 22px; color: #212121">05/03/2023</p>
+            </div>
+
+            <div style="position: absolute; right: 120px; top: 600px; font-size: 16px">
+                <span class="dot" style="background: #24b5e2"></span>    PTO
+                <span class="dot" style="background: #e22432"></span>    Holidays
+                <span class="dot" style="background: #1492e6"></span>    Vacations
+            </div>
+        </section>
+
+        <div class="modal-cont">
+            <div class="modal-box">
+                <span class="close">&times;</span>
+                <form action="" class="login-box">
+                  <h1 style="font-size: 45px"><b> Choose your time off </b></h1>
+                  <p> Select your record </p>
+                    <div>
+                        <input id="pto" class="check" type="checkbox" required>
+                        <label for="pto">PTO</label>
+                        <input id="vacation" class="check" type="checkbox" required>
+                        <label for="vacation">Vacation Day</label>
+                    </div>
+                    <div>
+                        <label for="start">Start date</label>
+                        <input class="date" type="date" id="start" min="2018-01-01" max="2024-01-01">
+                    </div>
+                    <div>
+                        <label for="end">End date</label>
+                        <input class="date" type="date" id="end" min="2018-01-01" max="2024-01-01">
+                    </div>
+                    <div>
+                        <label for="comments">Comments</label>
+                        <input class="comments" type="text" id="comments" />
+                    </div>
+                    <div class="close-forgot">
+                        <button class="cancel" type="button">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+<script src="~/js/calendar_register.js"></script>
+</html>

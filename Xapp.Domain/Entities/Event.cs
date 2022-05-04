@@ -30,7 +30,8 @@ namespace Xapp.Domain.Entities
                 Description = Description,
                 Date = DateTime,
                 IsPublic = IsPublic,
-                UserId = UserId
+                UserId = UserId,
+                EventId = Id
             };
         }
     }
