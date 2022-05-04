@@ -44,7 +44,6 @@ namespace Xapp.Web.Controllers
             return View();
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Profile()
         {
@@ -64,7 +63,6 @@ namespace Xapp.Web.Controllers
             }
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Profile(ProfileOutput dto)
         {
@@ -85,7 +83,6 @@ namespace Xapp.Web.Controllers
            
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> ProfileModoVista()
         {
