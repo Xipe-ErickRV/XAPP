@@ -36,7 +36,13 @@ file.addEventListener('change', function () {       // Refiere al archivo
 // PopUp de Skills
 var closeBut = document.getElementsByClassName('close')[0],
     modal = document.getElementsByClassName('modal-cont')[0],
-    loginBut = document.getElementsByClassName('skill-button')[0];
+    loginBut = document.getElementsByClassName('skill-button')[0],
+    skillList = document.getElementsById("skill_list"),
+
+    //New skill info
+    name = document.getElementById("field1"),
+    save = document.getElementById("new_skill"),
+    level = null;
 
 //close
 
@@ -58,4 +64,17 @@ window.onclick = function (e) {
     if (e.target.className === 'modal-cont') {
         e.target.style.display = 'inline-block';
     }
+    if (e.target.className === 'basic skilloption') {
+        level = 1;
+    }
+    else if (e.target.className === 'medium skilloption') {
+        level = 2;
+    }
+    else if (e.target.className === 'advanced skilloption') {
+        level = 3;
+    }
+    else if (e.target.className === 'expert skilloption') {
+        level = 4;
+    }
+
 }

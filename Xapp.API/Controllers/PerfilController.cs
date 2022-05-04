@@ -16,6 +16,8 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.Extensions.Configuration;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 
 namespace Xapp.API.Controllers
 {
@@ -23,15 +25,14 @@ namespace Xapp.API.Controllers
     [ApiController]
     public class PerfilController : ControllerBase
     {
+        private IConfiguration _config { get; }
+
         private readonly DbService _db;
-        private readonly IConfiguration _configuration;
 
-
-        public PerfilController(DbService db, IConfiguration configuration)
+        public PerfilController(IConfiguration config, DbService db)
         {
+            _config = config;
             _db = db;
-            _configuration = configuration;
-
         }
 
         [HttpGet("getUser")]
@@ -114,7 +115,7 @@ namespace Xapp.API.Controllers
             if (user != null)
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(_configuration.GetSection("AppSettings")["Secret"]);
+                var key = Encoding.ASCII.GetBytes(_config.GetSection("AppSettings")["Secret"]);
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(new Claim[]
@@ -147,6 +148,7 @@ namespace Xapp.API.Controllers
                 return BadRequest(output);
             } 
         }
+
 
         [HttpPost("addUser")]
         public async Task<IActionResult> AddUser(UserInput dto)
@@ -279,7 +281,7 @@ namespace Xapp.API.Controllers
 
                     _db.Skills.AddRange(dto.Skills);
                 }
-
+               
                 await _db.SaveChangesAsync();
 
                 var output = new ApiResponse<Perfil>
@@ -302,7 +304,7 @@ namespace Xapp.API.Controllers
             }
         }
         
-        //INCOMPLETE?
+
         [HttpDelete("userDelete")]
         public async Task<IActionResult> UserDelete(string email)
         {
@@ -340,5 +342,40 @@ namespace Xapp.API.Controllers
             await _db.SaveChangesAsync();
             return Ok(skill);
         }
+
+        [HttpPost("UploadResume")]
+        public async Task<IActionResult> UploadResume()
+        {
+            var resume = Request.Form.Files["resume"];
+
+            IFormFile file = resume;
+            if (file != null)
+            {
+                var blobSection = _config.GetSection("BlobSettings");
+                var connectionString = blobSection.GetSection("ConnectionString").Value;
+                var sourceContainerName = blobSection.GetSection("Container").Value;
+                var fileName = $"{file.FileName}";
+                BlobServiceClient blobServiceClient = new(connectionString);
+                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(sourceContainerName);
+                BlobHttpHeaders blobHttpHeader = new()
+                {
+                    ContentType = file.ContentType
+                };
+                BlobClient blobClient = containerClient.GetBlobClient(fileName);
+                await blobClient.UploadAsync(file.OpenReadStream(), blobHttpHeader);
+                string url = $"https://xipeappstorgae.blob.core.windows.net/xapp/{fileName}";
+                var output = new ApiResponse<string>
+                {
+                    StatusCode = 200,
+                    Message = "Resume uploaded",
+                    Result = url
+                };
+                return Ok(output);
+            }
+
+            return Ok();
+        }
     }
 }
+
+

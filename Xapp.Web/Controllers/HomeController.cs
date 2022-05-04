@@ -16,9 +16,10 @@ using Xapp.Web.Services;
 
 namespace Xapp.Web.Controllers
 {
-
+    [Authorize]
     public class HomeController : Controller
     {
+        
         private readonly ILogger<HomeController> _logger;
         private readonly JWTMiddlewareService _session;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -35,7 +36,6 @@ namespace Xapp.Web.Controllers
             return View();
         }
 
-        [Authorize]
         public IActionResult Privacy()
         {
             var test = User.Identity;
@@ -44,7 +44,6 @@ namespace Xapp.Web.Controllers
             return View();
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Profile()
         {
@@ -64,7 +63,6 @@ namespace Xapp.Web.Controllers
             }
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Profile(ProfileOutput dto)
         {
@@ -85,7 +83,6 @@ namespace Xapp.Web.Controllers
            
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> ProfileModoVista()
         {
@@ -103,6 +100,12 @@ namespace Xapp.Web.Controllers
                 var message = output.Message; 
                 return View();
             }
+        }
+
+        public IActionResult DeleteSkill(int id)
+        {
+            var test = id;
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

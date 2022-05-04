@@ -5,140 +5,158 @@
 
 }
 <!DOCTYPE html>
-    <html>
-        <head>
-            <!-- Importar CSS -->
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-            <link rel="preconnect" href="https://fonts.googleapis.com">
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-            <!-- Libreria de Iconos -->
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <link href="~/css/ProfileModoVista.css" rel="stylesheet" type="text/css"  asp-append-version="true">
-        </head>
+<html>
+<head>
+    <!-- Importar CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Libreria de Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/css/ProfileModoVista.css" rel="stylesheet" type="text/css" asp-append-version="true">
+</head>
 
-    <body>
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <img src="https://drive.google.com/uc?export=view&id=17qRly_RNtO7moC4aSQkWyQjI5xKTv4Ft" id="logo">
-            <a href="#Perfil"> Profile</a>
-            <a href="#Feed"> Feed</a>
-            <a href="#XipeCoins"> XipeCoins</a>
-            <a href="#Calendar"> Calendar</a>
-        </div>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="https://drive.google.com/uc?export=view&id=17qRly_RNtO7moC4aSQkWyQjI5xKTv4Ft" id="logo">
+        <a href="#Perfil"> Profile</a>
+        <a href="#Feed"> Feed</a>
+        <a href="#XipeCoins"> XipeCoins</a>
+        <a href="#Calendar"> Calendar</a>
+    </div>
 
-        <main>
-            <!-- Grid Profile-->
-            <section class="profilesection">
-                <h2 class="myprofiletext bgColor">My Profile</h2>
-                <a href="/Home/Profile?email=@Model.Email" class="edit-button" type="button">Edit Profile</a>
-                <div class="profileWrapper">
+    <main>
+        <!-- Grid Profile-->
+        <section class="profilesection">
+            <h2 class="myprofiletext bgColor">My Profile</h2>
+            <a href="/Home/Profile" class="edit-button" type="button">Edit Profile</a>
+            <div class="profileWrapper">
 
-                    <div class="profileInfo-personal">
-                        <div class="profileInfo-personal-data">
-                            <div class="profile-pic">
-                                <img src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" 
-                                id="photo" />
-                                <input type="file" id="file">
-                                <label for="file" id="uploadBtn"> Change Photo </label>
+                <div class="profileInfo-personal">
+                    <div class="profileInfo-personal-data">
+                        <div class="profile-pic">
+                            @if (@Model.UrlImage != null)
+                            {
+                                <img src="@Model.UrlImage"
+                                 id="photo" />
+                            }
+                            else
+                            {
+                                <img src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
+                                 id="photo" />
+                            }
+                            <input type="file" id="file">
+                            <label for="file" id="uploadBtn"> Change Photo </label>
 
-                            </div>
-                            <form  action="Home/ProfileModoVista" method="get" class="profileInfo-personal-data-afterimg">
-                                <div class="col-md-12 afterimg"><label class="labels">First Name</label>
-                                    <p>@Model.Nombre</p>
-                                </div><br>
-                                <div class="col-md-12 afterimg"><label class="labels">Last Name</label>
-                                    <p> @Model.Apellido </p>
-                                </div><br>
-                                <div class="col-md-12 afterimg"><label class="labels">Area</label>
-                                    <p> @Model.Area </p>
-                                </div><br>
-                                <div class="col-md-12 afterimg"><label class="labels">Phone Number</label>
-                                    <p> @Model.Telefono </p>
-                                </div><br>
-                                <div class="col-md-12 afterimg"><label class="labels">Email</label>
-                                    <p> @Model.Email  </p>
-                                </div><br>
-                                <div class="col-md-12 afterimg"><label class="labels">Birthday</label>
-                                    <p> @Model.FechaCumple.ToShortDateString() </p>
-                                </div><br>
-                                <div class="col-md-12 afterimg"><label class="labels">Bio</label>
-                                    <p> @Model.Bio </p>
-                                </div><br>
-                            </form>
                         </div>
-
+                        <form action="Home/ProfileModoVista" method="get" class="profileInfo-personal-data-afterimg">
+                            <div class="col-md-12 afterimg">
+                                <label class="labels">First Name</label>
+                                <p>@Model.Nombre</p>
+                            </div><br>
+                            <div class="col-md-12 afterimg">
+                                <label class="labels">Last Name</label>
+                                <p> @Model.Apellido </p>
+                            </div><br>
+                            <div class="col-md-12 afterimg">
+                                <label class="labels">Area</label>
+                                <p> @Model.Area </p>
+                            </div><br>
+                            <div class="col-md-12 afterimg">
+                                <label class="labels">Phone Number</label>
+                                <p> @Model.Telefono </p>
+                            </div><br>
+                            <div class="col-md-12 afterimg">
+                                <label class="labels">Email</label>
+                                <p> @Model.Email  </p>
+                            </div><br>
+                            <div class="col-md-12 afterimg">
+                                <label class="labels">Birthday</label>
+                                <p> @Model.FechaCumple.ToShortDateString() </p>
+                            </div><br>
+                            <div class="col-md-12 afterimg">
+                                <label class="labels">Bio</label>
+                                <p> @Model.Bio </p>
+                            </div><br>
+                        </form>
                     </div>
-                    <!-- Skills -->
-                    <div class="profileInfo-skills">
-                        <div class="p-1 py-5">
-                            <h2>
-                                <span class="skills_title">Skills</span>
-                            </h2><br>
+
+                </div>
+                <!-- Skills -->
+                <div class="profileInfo-skills">
+                    <div class="p-1 py-5">
+                        <h2>
+                            <span class="skills_title">Skills</span>
+                        </h2><br>
                         <div class="skillsmenu-outer">
-  
-                                <ul class="horizontallist">
+
+                            <ul class="horizontallist">
                                 @foreach (var skill in Model.Skills)
                                 {
-                                        @if(@skill.Nivel == Xapp.Domain.Enums.Nivel.Basico)
-                                        {
-                                            <li id="skill_pill" class="basic">@skill.Nombre</li>
-                                        } else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Intermedio)
-                                        {
-                                            <li id="skill_pill" class="medium">@skill.Nombre</li>
-                                        } else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Avanzado)
-                                        {
-                                            <li id="skill_pill" class="advanced">@skill.Nombre</li>
-                                        }  else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Experto)
-                                        {
-                                            <li id="skill_pill" class="expert">@skill.Nombre</li>
-                                        }
-
+                                    @if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Basico)
+                                    {
+                                        <li id="skill_pill" class="basic">@skill.Nombre</li>
                                     }
-                                </ul>
-                          
+                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Intermedio)
+                                    {
+                                        <li id="skill_pill" class="medium">@skill.Nombre</li>
+                                    }
+                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Avanzado)
+                                    {
+                                        <li id="skill_pill" class="advanced">@skill.Nombre</li>
+                                    }
+                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Experto)
+                                    {
+                                        <li id="skill_pill" class="expert">@skill.Nombre</li>
+                                    }
+
+                                }
+                            </ul>
+
                         </div>
                     </div>
-                    </div>
-                    <!-- Resume -->
-                    <div class="profileInfo-resume">
-                        <div class="d-flex flex-column p-3 py-5">
-                            <h2 class="resume_title">Resume</h2>
-                            <div id="boton_icono_pdf"></div>
-                            <div id="PDF_Btn">
+                </div>
+                <!-- Resume -->
+                <div class="profileInfo-resume">
+                    <div class="d-flex flex-column p-3 py-5">
+                        <h2 class="resume_title">Resume</h2>
+                        <div id="boton_icono_pdf"></div>
+                        <div id="PDF_Btn">
                             <label for="file-input">
                                 <img src="https://cdn-user-icons.flaticon.com/59414/59414620/1651430171458.svg?token=exp=1651431071~hmac=cd9652168e08c8c7abc59e8826af3ed2" />
                             </label>
 
                         </div>
-                        </div>
                     </div>
                 </div>
-            </section>
-        </main>
-
-        <!-- PopUp -->
-        <div class="modal-cont">
-            <div class="modal-box">
-                <span class="close">&times;</span>
-                <form action="" class="login-box">
-                    <h1 class="skilltitle"> Add Skill </h1>
-                    <label class="skilllabel">Name:</label>
-                    <input type="text" class="skillname" id="field1" required>
-                    <label class="skilllabel skilllevel">Skill Level:</label>
-                    <button class=" basic" type="button" id="skill_pill">Basic</button>
-                    <button class="medium" type="button" id="skill_pill">Medium</button>
-                    <button class="advanced" type="button" id="skill_pill">Advanced</button>
-                    <button class="expert" type="button" id="skill_pill">Expert</button>
-
-              
-                    <button class="save-button">Save</button>
-                </form>
             </div>
-        </div>
+        </section>
+    </main>
 
-        <!-- Archivo de Javascript -->
-        <script src="~/js/perfil_code_modo_vista.js"></script>
-    </body>
+    <!-- PopUp -->
+    <div class="modal-cont">
+        <div class="modal-box">
+            <span class="close">&times;</span>
+            <form action="" class="login-box">
+                <h1 class="skilltitle"> Add Skill </h1>
+                <label class="skilllabel">Name:</label>
+                <input type="text" class="skillname" id="field1" required>
+                <label class="skilllabel skilllevel">Skill Level:</label>
+                <button class=" basic" type="button" id="skill_pill">Basic</button>
+                <button class="medium" type="button" id="skill_pill">Medium</button>
+                <button class="advanced" type="button" id="skill_pill">Advanced</button>
+                <button class="expert" type="button" id="skill_pill">Expert</button>
+
+
+                <button class="save-button">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Archivo de Javascript -->
+    <script src="~/js/perfil_code_modo_vista.js"></script>
+</body>
 </html>

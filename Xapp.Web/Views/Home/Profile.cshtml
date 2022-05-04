@@ -25,7 +25,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <img src="https://drive.google.com/uc?export=view&id=17qRly_RNtO7moC4aSQkWyQjI5xKTv4Ft" id="logo">
-        <a href="#Perfil"> Profile</a>
+        <a href="#Profile"> Profile</a>
         <a href="#Feed"> Feed</a>
         <a href="#XipeCoins"> XipeCoins</a>
         <a href="#Calendar"> Calendar</a>
@@ -36,138 +36,155 @@
         <section class="profilesection">
             <h2 class="myprofiletext bgColor">My Profile</h2>
             <input class="profile-button" type="submit" form="perfil" value="Guardar Cambios" />
+            <form id="perfil" action="Profile" method="post" enctype="multipart/form-data">
 
-            <div class="profileWrapper">
+                <div class="profileWrapper">
 
-                <div class="profileInfo-personal">
-                    <div class="profileInfo-personal-data">
-                        <div class="profile-pic">
-                            <img src="@Model.UrlImage"
-                                 id="photo" />
-                            <input type="file" id="file">
-                            <label for="file" id="uploadBtn"> Change Photo </label>
-
-                        </div>
-                        <form id="perfil" action="Profile" method="post" class="profileInfo-personal-data-afterimg">
-                            <div class="col-md-12 afterimg">
-                                <label class="labels">First Name</label>
-                                <input name="Nombre" type="text" class="form-control" placeholder="Name" value="@Model.Nombre">
-                            </div><br>
-                            <div class="col-md-12 afterimg">
-                                <label class="labels">Last Name</label>
-                                <input name="Apellido" type="text" class="form-control" placeholder="Last Name" value="@Model.Apellido">
-                            </div><br>
-                            <div class="col-md-12 afterimg">
-                                <label class="labels">Area</label>
-                                <input name="Area" type="text" class="form-control" placeholder="Area" value="@Model.Area">
-                            </div><br>
-                            <div class="col-md-12 afterimg">
-                                <label class="labels">Phone Number</label>
-                                <input name="Telefono" type="tel" class="form-control" placeholder="XXX-XXXX-XXXX" value="@Model.Telefono">
-                            </div><br>
-                            <div class="col-md-12 afterimg">
-                                <label class="labels">Email</label>
-                                <input name="Email" type="email" class="form-control" placeholder="example@example.com" value="@Model.Email">
-                            </div><br>
-                            <div class="col-md-12 afterimg">
-                                <label class="labels">Birthday</label>
-                                @Html.TextBoxFor(m => m.FechaCumple, "{0:yyyy-MM-dd}", new {@type = "date", @class = "form-control", @placeholder="mm/dd/aaaa"})
-                            </div><br>
-                            <div class="col-md-12 afterimg">
-                                <label class="labels">Bio</label>
-                                <input name="Bio" type="text" class="form-control" placeholder="Description" value="@Model.Bio" style="height:fit-content">
-                            </div><br>
-                        </form>
-                    </div>
-
-                </div>
-                <!-- Skills -->
-                <div class="profileInfo-skills">
-                    <div class="p-1 py-5">
-                        <h2>
-                            <span class="skills_title">Skills</span>
-                        </h2><br>
-                        <div class="skillsmenu-outer">
-
-                            <ul class="horizontallist">
-                                @foreach (var skill in Model.Skills)
+                    <div class="profileInfo-personal">
+                        <div class="profileInfo-personal-data">
+                            <div class="profile-pic">
+                                @if (@Model.UrlImage != null)
                                 {
-                                    @if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Basico)
-                                    {
-                                        <li id="skill_pill" class="basic">
-                                            @skill.Nombre
-                                            <span class="close closeskill">&times;</span>
-                                        </li>
-
-                                    }
-                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Intermedio)
-                                    {
-                                        <li id="skill_pill" class="medium">
-                                            @skill.Nombre
-                                            <span class="close closeskill">&times;</span>
-                                        </li>
-                                    }
-                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Avanzado)
-                                    {
-                                        <li id="skill_pill" class="advanced">
-                                            @skill.Nombre
-                                            <span class="close closeskill">&times;</span>
-                                        </li>
-                                    }
-                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Experto)
-                                    {
-                                        <li id="skill_pill" class="expert">
-                                            @skill.Nombre
-                                            <span class="close closeskill">&times;</span>
-                                        </li>
-                                    }
-
+                                    <img src="@Model.UrlImage"
+                                         id="photo" />
                                 }
-                            </ul>
+                                else
+                                {
+                                    <img src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
+                                         id="photo" />
+                                }
+                                <input name="UrlImage" type="file" id="file">
+                                <label for="file" id="uploadBtn"> Change Photo </label>
 
+                            </div>
+                            <div class="profileInfo-personal-data-afterimg">
+                                <div class="col-md-12 afterimg">
+                                    <label class="labels">First Name</label>
+                                    <input name="Nombre" type="text" class="form-control" placeholder="Name" value="@Model.Nombre">
+                                </div><br>
+                                <div class="col-md-12 afterimg">
+                                    <label class="labels">Last Name</label>
+                                    <input name="Apellido" type="text" class="form-control" placeholder="Last Name" value="@Model.Apellido">
+                                </div><br>
+                                <div class="col-md-12 afterimg">
+                                    <label class="labels">Area</label>
+                                    <input name="Area" type="text" class="form-control" placeholder="Area" value="@Model.Area">
+                                </div><br>
+                                <div class="col-md-12 afterimg">
+                                    <label class="labels">Phone Number</label>
+                                    <input name="Telefono" type="tel" class="form-control" placeholder="XXX-XXXX-XXXX" value="@Model.Telefono">
+                                </div><br>
+                                <div class="col-md-12 afterimg">
+                                    <label class="labels">Email</label>
+                                    <input name="Email" type="email" class="form-control" placeholder="example@example.com" value="@Model.Email">
+                                </div><br>
+                                <div class="col-md-12 afterimg">
+                                    <label class="labels">Birthday</label>
+                                    @Html.TextBoxFor(m => m.FechaCumple, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control", @placeholder = "mm/dd/aaaa" })
+                                </div><br>
+                                <div class="col-md-12 afterimg">
+                                    <label class="labels">Bio</label>
+                                    <input name="Bio" type="text" class="form-control" placeholder="Description" value="@Model.Bio" style="height:fit-content">
+                                </div><br>
+                            </div>
                         </div>
-                        <button class="skill-button" type="button">+ Add Skill</button>
+
+                    </div>
+                    <!-- Skills -->
+                    <div class="profileInfo-skills">
+                        <div class="p-1 py-5">
+                            <h2>
+                                <span class="skills_title">Skills</span>
+                            </h2><br>
+                            <div class="skillsmenu-outer">
+
+                                <ul class="horizontallist">
+                                    @foreach (var skill in Model.Skills)
+                                    {
+                                        @if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Basico && @skill.IsActive)
+                                        {
+                                            <li id="skill_pill" class="basic">
+                                                @skill.Nombre
+                                                <span class="close closeskill">&times;</span>
+                                            </li>
+
+                                        }
+                                        else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Intermedio && @skill.IsActive)
+                                        {
+                                            <li id="skill_pill" class="medium">
+                                                @skill.Nombre
+                                                <span class="close closeskill">&times;</span>
+                                            </li>
+                                        }
+                                        else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Avanzado && @skill.IsActive)
+                                        {
+                                            <li id="skill_pill" class="advanced">
+                                                @skill.Nombre
+                                                <span class="close closeskill">&times;</span>
+                                            </li>
+                                        }
+                                        else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Experto && @skill.IsActive)
+                                        {
+                                            <li id="skill_pill" class="expert">
+                                                @skill.Nombre
+                                                <span class="close closeskill">&times;</span>
+                                            </li>
+                                        }
+
+                                    }
+                                </ul>
+
+                            </div>
+                            <button class="skill-button" type="button">+ Add Skill</button>
+                        </div>
+                    </div>
+                    <!-- Resume -->
+                    <div class="profileInfo-resume">
+                        <div class="d-flex flex-column p-3 py-5">
+                            <h2 class="resume_title">Resume</h2>
+                            <div id="boton_icono_pdf">
+                                <span class="close closeresume">&times;</span>
+                            </div>
+
+                            <div id="PDF_Btn">
+                                <label for="file-input">
+                                    <img src="https://cdn-icons.flaticon.com/png/512/3720/premium/3720346.png?token=exp=1651430351~hmac=afcc66046de6dc129839e40be7e7df76" />
+                                </label>
+                                    <input type="file" asp-for="File" id="file-input" accept=".pdf" />
+                            </div>
+                            <!--
+                        <form id="perfil"  asp-controller="Home" asp-action="Profile" method="post" enctype="multipart/form-data">
+                            <div class="row mt-2">
+                                <div class="col-12">
+                                    <label class="col-form-label">Select File</label>
+                                    <input asp-for="File" class="form-control" />
+                                    <span asp-validation-for="File" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </form>
+                    -->
+                        </div>
                     </div>
                 </div>
-                <!-- Resume -->
-                <div class="profileInfo-resume">
-                    <div class="d-flex flex-column p-3 py-5">
-                        <h2 class="resume_title">Resume</h2>
-                        <div id="boton_icono_pdf">
-                            <span class="close closeresume">&times;</span>
-                        </div>
-                        <div id="PDF_Btn">
-                            <label for="file-input">
-                                <img src="https://cdn-icons.flaticon.com/png/512/3720/premium/3720346.png?token=exp=1651430351~hmac=afcc66046de6dc129839e40be7e7df76" />
-                            </label>
-
-                            <form enctype="multipart/form-data" method="post">
-                                <input type="file" id="file-input" accept=".pdf" />
-                            </form>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            </form>
         </section>
     </main>
 
     <!-- PopUp -->
-    <div class="modal-cont" id="id01" >
+    <div class="modal-cont" id="id01">
         <div class="modal-box">
             <span class="close" onclick="document.getElementById('id01').style.display='none'" >&times;</span>
-            <form class="login-box">
+            <form action="Profile" method="post" class="login-box">
                 <h1 class="skilltitle"> Add Skill </h1>
                 <label class="skilllabel">Name:</label>
                 <input type="text" class="skillname" id="field1" required>
                 <label class="skilllabel skilllevel">Skill Level:</label>
-                <button name="Nivel" class="basic skilloption" type="button" id="skill_pill">Basic</button>
-                <button name="Nivel" class="medium skilloption" type="button" id="skill_pill">Medium</button>
-                <button name="Nivel" class="advanced skilloption" type="button" id="skill_pill">Advanced</button>
-                <button name="Nivel" class="expert skilloption" type="button" id="skill_pill">Expert</button>
+                <button name="Nivel" class="basic skilloption" type="button" id="skill_pill" value=1>Basic</button>
+                <button name="Nivel" class="medium skilloption" type="button" id="skill_pill" value=2>Medium</button>
+                <button name="Nivel" class="advanced skilloption" type="button" id="skill_pill" value=3>Advanced</button>
+                <button name="Nivel" class="expert skilloption" type="button" id="skill_pill" value=4>Expert</button>
 
-                <button type="submit" class="save-button">Save</button>
+                <button id="new_skill" type="submit" class="save-button">Save</button>
             </form>
         </div>
     </div>

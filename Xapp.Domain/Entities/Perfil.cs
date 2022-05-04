@@ -40,6 +40,8 @@ namespace Xapp.Domain.Entities
             FechaCumple = dto.FechaCumple;
             Area = dto.Area;
             Bio = dto.Bio;
+            UrlCv = dto.UrlCv;
+            UrlFoto = dto.UrlImage;
         }
         public void CreateEntity()
         {
@@ -78,7 +80,9 @@ namespace Xapp.Domain.Entities
                 Bio = Bio,
                 Email = User.Email,
                 FechaCumple = FechaCumple,
-                Skills = Skills
+                Skills = Skills,
+                UrlCv = UrlCv,
+                UrlImage = UrlFoto
             };
 
         }

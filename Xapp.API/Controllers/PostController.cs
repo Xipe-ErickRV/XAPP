@@ -115,16 +115,33 @@ namespace Xapp.API.Controllers
                 .ThenInclude(x => x.PerfilUser)
                 .ToListAsync();
 
-            var listPosts = posts.Select(x => x.Output()).ToList();
+            var plist = new PostList();
+            var list= new List<PostOutput>();
+            foreach (var post in posts)
+            {
+                var outpost = new PostOutput();
+                outpost.Title = post.Title;
+                outpost.Content = post.Content;
+                outpost.Multimedia = post.Multimedia;
+                outpost.Tag = post.Tag;
+                outpost.UserId = post.UserId;
+                outpost.URLProfile = post.User.PerfilUser.UrlFoto;
+                outpost.Likes = post.Likes;
+                outpost.Comments = post.Comments;
+                outpost.UserName = post.User.Username;
 
-            var output = new ApiResponse<List<PostOutput>>
+                list.Add(outpost);
+            }
+            plist.Posts = list;
+
+            var output = new ApiResponse<PostList>
             {
                 StatusCode = 200,
-                Message = "Ok",
-                Result = listPosts
+                Message = "OK",
+                Result = plist
             };
 
-            return Ok(listPosts);
+            return Ok(output);
         }
 
         [HttpPatch("Update")]

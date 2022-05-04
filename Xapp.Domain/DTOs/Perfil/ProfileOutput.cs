@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +12,7 @@ namespace Xapp.Domain.DTOs.Perfil
     public class ProfileOutput
     {
         public string UrlImage { get; set; }
-        public string UrlCV { get; set; }
+        public string UrlCv { get; set; }
         public string Telefono { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
@@ -19,5 +21,8 @@ namespace Xapp.Domain.DTOs.Perfil
         public string Bio { get; set; }
         public DateTime FechaCumple { get; set; }
         public List<Skill> Skills { get; set; }
+
+        //[Required(ErrorMessage = "Please select file")]
+        public IFormFile File { get; set; }
     }
 }
