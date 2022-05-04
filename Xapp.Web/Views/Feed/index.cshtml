@@ -57,21 +57,21 @@
                         <div class="interactions_container">
                             <button class="like_btn" onclick=change_like_color(like01)><i
                                     class="material-icons thumbs_up" id="like01">thumb_up</i></button>
-                            <span>7</span>
+                            <span>@post.Likes</span>
                         </div>
                         <div class="interactions_container">
                             <i class="material-icons">chat</i>
-                            <span>2</span>
+                            <span>@post.Comments.Count()</span>
                         </div>
                     </div>
 
                     <div class="post_title_tag">
                         <h2 class="post_title">@post.Title</h2>
-                        <span class="post_tag">Tag Name</span>
+                        <span class="post_tag">@post.Tag</span>
                     </div>
 
                     <div class="profile_elements">
-                        <img src="pic_example.jpg" class="user_pic">
+                        <img src=@post.URLProfile class="user_pic">
                         <h3 class="author">@post.UserName</h3>
                     </div>
 
