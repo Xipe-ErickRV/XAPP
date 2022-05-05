@@ -13,6 +13,5 @@ namespace Xapp.Domain.DTOs
         public string Content { get; set; }
         public string Multimedia { get; set; }
         public Enums.Tags Tag { get; set; }
-        public int UserId { get; set; }
     }
 }
