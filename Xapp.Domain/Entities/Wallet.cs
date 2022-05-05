@@ -22,7 +22,7 @@ namespace Xapp.Domain.Entities
 
         public void Sub(int amount) //Restar al balance
         {
-            Balance += amount;
+            Balance -= amount;
         }
     }
 }
