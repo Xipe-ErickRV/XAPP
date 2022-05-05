@@ -95,19 +95,19 @@
                             <ul class="horizontallist">
                                 @foreach (var skill in Model.Skills)
                                 {
-                                    @if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Basico)
+                                    @if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Basico && @skill.IsActive)
                                     {
                                         <li id="skill_pill" class="basic">@skill.Nombre</li>
                                     }
-                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Intermedio)
+                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Intermedio && @skill.IsActive)
                                     {
                                         <li id="skill_pill" class="medium">@skill.Nombre</li>
                                     }
-                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Avanzado)
+                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Avanzado && @skill.IsActive)
                                     {
                                         <li id="skill_pill" class="advanced">@skill.Nombre</li>
                                     }
-                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Experto)
+                                    else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Experto && @skill.IsActive)
                                     {
                                         <li id="skill_pill" class="expert">@skill.Nombre</li>
                                     }

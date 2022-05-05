@@ -66,8 +66,15 @@ namespace Xapp.Web.Services
                 var urlresume = await UploadResume(dto.File);
                 dto.UrlCv = urlresume;
             }
-            
+            if (dto.Image != null)
+            {
+                var urlphoto = await UploadImage(dto.Image);
+                dto.UrlImage = urlphoto;
+            }
+
             dto.File = null;
+
+            dto.Image = null;
 
             var url = $"{_baseUrl}/patchPerfil?email={email}";
             var client = new RestClient(url);
@@ -98,6 +105,24 @@ namespace Xapp.Web.Services
                 file.CopyTo(ms);
                 var fileBytes = ms.ToArray();
                 request.AddFile("resume", fileBytes, file.FileName);
+            }
+
+            var response = await client.ExecuteAsync(request);
+
+            var output = JsonConvert.DeserializeObject<ApiResponse<string>>(response.Content);
+            return output.Result;
+        }
+
+        public async Task<string> UploadImage(IFormFile file)
+        {
+            var client = new RestClient(_baseUrl);
+            var request = new RestRequest($"UploadImage", Method.Post) { AlwaysMultipartFormData = true };
+
+            using (var ms = new MemoryStream())
+            {
+                file.CopyTo(ms);
+                var fileBytes = ms.ToArray();
+                request.AddFile("photo", fileBytes, file.FileName);
             }
 
             var response = await client.ExecuteAsync(request);

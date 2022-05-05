@@ -277,14 +277,11 @@ namespace Xapp.API.Controllers
                 {
                     dto.UrlCv = user.PerfilUser.UrlCv;
                 }
-                user.PerfilUser.MetodoEdit(dto);
-
-                if (dto.Skills != null)
+                if (user.PerfilUser.UrlFoto != null)
                 {
-                    _db.Skills.RemoveRange(user.PerfilUser.Skills);
-
-                    _db.Skills.AddRange(dto.Skills);
+                    dto.UrlImage = user.PerfilUser.UrlFoto;
                 }
+                user.PerfilUser.MetodoEdit(dto);
                
                 await _db.SaveChangesAsync();
 
@@ -391,6 +388,39 @@ namespace Xapp.API.Controllers
                 {
                     StatusCode = 200,
                     Message = "Resume uploaded",
+                    Result = url
+                };
+                return Ok(output);
+            }
+
+            return Ok();
+        }
+
+        [HttpPost("UploadImage")]
+        public async Task<IActionResult> UploadImage()
+        {
+            var photo = Request.Form.Files["photo"];
+
+            IFormFile file = photo;
+            if (file != null)
+            {
+                var blobSection = _config.GetSection("BlobSettings");
+                var connectionString = blobSection.GetSection("ConnectionString").Value;
+                var sourceContainerName = blobSection.GetSection("Container").Value;
+                var fileName = $"{file.FileName}";
+                BlobServiceClient blobServiceClient = new(connectionString);
+                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(sourceContainerName);
+                BlobHttpHeaders blobHttpHeader = new()
+                {
+                    ContentType = file.ContentType
+                };
+                BlobClient blobClient = containerClient.GetBlobClient(fileName);
+                await blobClient.UploadAsync(file.OpenReadStream(), blobHttpHeader);
+                string url = $"https://xipeappstorgae.blob.core.windows.net/xapp/{fileName}";
+                var output = new ApiResponse<string>
+                {
+                    StatusCode = 200,
+                    Message = "Profile photo uploaded",
                     Result = url
                 };
                 return Ok(output);
