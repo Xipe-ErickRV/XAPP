@@ -268,14 +268,14 @@ namespace Xapp.API.XipeCoinsController
             userOutput.Apellido = balance.PerfilUser.Apellido;
             userOutput.UrlProfile = balance.PerfilUser.UrlFoto;
 
-            var output = new ApiResponse<WalletUser>
+            var outputOk = new ApiResponse<WalletUser>
             {
                 StatusCode = 200,
                 Message = "OK",
                 Result = userOutput
             };
 
-            return Ok(output);
+            return Ok(outputOk);
         }
 
     }
