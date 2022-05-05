@@ -33,7 +33,7 @@ namespace Xapp.API.Controllers
                 Content = dto.Content,
                 PostId = dto.PostId,
                 UserId = dto.UserId,
-                
+                Likes = 0
                 
             };
             comment.CreateEntity();
@@ -41,6 +41,9 @@ namespace Xapp.API.Controllers
             var post = await _db.Posts
                 .Include(x => x.Comments)
                 .FirstOrDefaultAsync(x => x.Id == comment.PostId);
+
+            
+
             if (post == null)
             {
                 var output = new ApiResponse<string>
@@ -52,7 +55,27 @@ namespace Xapp.API.Controllers
                 return BadRequest(output);
             }
 
+            var user = await _db.Users
+                .FirstOrDefaultAsync(x => x.UserId == comment.UserId);
+
+            if (user == null)
+            {
+                var output = new ApiResponse<string>
+                {
+                    StatusCode = 400,
+                    Message = "Error",
+                    Result = "No existe el usuario"
+                };
+                return BadRequest(output);
+            }
+
+            comment.User = user;
+
+
+            comment.Post = post;
             post.Comments.Add(comment);
+
+            
 
             await _db.Comments.AddAsync(comment);
             await _db.SaveChangesAsync();
