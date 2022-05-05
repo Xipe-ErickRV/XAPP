@@ -23,7 +23,7 @@ namespace Xapp.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(PostInput dto)
+        public async Task<IActionResult> Create(int id,PostInput dto)
         {
             var post = new Post()
             {
@@ -31,7 +31,7 @@ namespace Xapp.API.Controllers
                 Content = dto.Content,
                 Multimedia = dto.Multimedia,
                 Tag = dto.Tag,
-                UserId = dto.UserId,
+                UserId = id,
                 
             };
             post.CreateEntity();

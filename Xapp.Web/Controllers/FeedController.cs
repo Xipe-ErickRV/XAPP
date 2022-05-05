@@ -60,6 +60,24 @@ namespace Xapp.Web.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreatePost(PostInput dto)
+        {
+            var obj = new FeedService();
+            var output = await obj.CreatePost(10, dto);
+
+            if (output.StatusCode == 200)
+            {
+                var resultOutput = output.Result;
+                return View(resultOutput);
+            }
+            else
+            {
+                var message = output.Message;
+                return View();
+            }
+        }
+
         [HttpGet]
         public async Task<IActionResult> Error()
         {
