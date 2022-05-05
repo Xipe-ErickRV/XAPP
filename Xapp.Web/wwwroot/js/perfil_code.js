@@ -37,7 +37,6 @@ file.addEventListener('change', function () {       // Refiere al archivo
 var closeBut = document.getElementsByClassName('close')[0],
     modal = document.getElementsByClassName('modal-cont')[0],
     loginBut = document.getElementsByClassName('skill-button')[0],
-    skillList = document.getElementsById("skill_list"),
 
     //New skill info
     name = document.getElementById("field1"),

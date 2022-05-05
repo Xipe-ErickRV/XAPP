@@ -214,6 +214,7 @@ namespace Xapp.API.XipeCoinsController
                 {
                     StatusCode = 400,
                     Message = "El Usuario no tiene movimientos registrados",
+                    Result= "El usuario no tiene movimientos registrados"
                 };
                 return BadRequest(output);
             }
@@ -247,7 +248,7 @@ namespace Xapp.API.XipeCoinsController
         {
             var balance = await _db.Users
                 .Include (x => x.PerfilUser)
-                .Include (x => x.WalletlUser)
+                .Include (x => x.WalletlUser)              
                 .FirstOrDefaultAsync(x => x.UserId == id);
 
             if (balance == null)
@@ -267,19 +268,14 @@ namespace Xapp.API.XipeCoinsController
             userOutput.Apellido = balance.PerfilUser.Apellido;
             userOutput.UrlProfile = balance.PerfilUser.UrlFoto;
 
-            if (userOutput != null)
+            var output = new ApiResponse<WalletUser>
             {
-                var output = new ApiResponse<WalletUser>
-                {
-                    StatusCode = 200,
-                    Message = "OK",
-                    Result = userOutput
-                };
-                return Ok(output);
-            }
+                StatusCode = 200,
+                Message = "OK",
+                Result = userOutput
+            };
 
-            
-            return BadRequest();
+            return Ok(output);
         }
 
     }
