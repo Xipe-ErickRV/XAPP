@@ -24,10 +24,22 @@ namespace Xapp.Web.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
-
-        public IActionResult Post()
+        [HttpGet]
+        public async Task<IActionResult> Post(int id)
         {
-            return View();
+            var obj = new FeedService();
+            var output = await obj.GetPost(id);
+
+            if (output.StatusCode == 200)
+            {
+                var resultOutput = (PostOutput)output.Result;
+                return View(resultOutput);
+            }
+            else
+            {
+                var message = output.Message;
+                return View();
+            }
         }
 
         [HttpGet]
@@ -49,7 +61,7 @@ namespace Xapp.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Post(int id)
+        public async Task<IActionResult> Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
