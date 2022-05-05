@@ -18,7 +18,7 @@ namespace Xapp.Domain.DTOs
         public string UserName { get; set; }
         public string URLProfile { get; set; }
         public int Likes { get; set; }
-        public List<Comment> Comments { get; set; }
+        public List<CommentOutput> Comments { get; set; }
     }
 
     public class PostList

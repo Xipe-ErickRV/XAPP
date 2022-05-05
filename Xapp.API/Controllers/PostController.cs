@@ -23,7 +23,7 @@ namespace Xapp.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(PostInput dto)
+        public async Task<IActionResult> Create(int id,PostInput dto)
         {
             var post = new Post()
             {
@@ -31,9 +31,18 @@ namespace Xapp.API.Controllers
                 Content = dto.Content,
                 Multimedia = dto.Multimedia,
                 Tag = dto.Tag,
-                UserId = dto.UserId,
+                Likes = 0,
+                UserId = id,
+                Comments = new List<Comment>()
+
                 
             };
+
+
+            var User = await _db.Users.FirstOrDefaultAsync(x => x.UserId == id);
+
+            post.User = User;
+
             post.CreateEntity();
 
             await _db.Posts.AddAsync(post);
@@ -69,9 +78,12 @@ namespace Xapp.API.Controllers
         {
             var post = await _db.Posts
                 .Include(x => x.Comments)
+                .ThenInclude(x => x.User)
+                .ThenInclude(x => x.PerfilUser)
                 .Include(x => x.User)
                 .ThenInclude(x => x.PerfilUser)
                 .FirstOrDefaultAsync(x => x.Id == id);
+
             var outpost = new PostOutput();
             
             outpost.Title = post.Title;
@@ -81,10 +93,24 @@ namespace Xapp.API.Controllers
             outpost.UserId = post.UserId;
             outpost.URLProfile = post.User.PerfilUser.UrlFoto;
             outpost.Likes = post.Likes;
-            outpost.Comments = post.Comments;
             outpost.UserName = post.User.Username;
+            outpost.Comments = new List<CommentOutput>();
 
-            if(outpost == null)
+            foreach (var comment in post.Comments)
+            {
+                var outcomment = new CommentOutput();
+
+                outcomment.UserName = comment.User.Username;
+                outcomment.Content = comment.Content;
+                outcomment.UserId = comment.UserId;
+                outcomment.PostId = comment.PostId;
+                outpost.Likes = comment.Likes;
+                outpost.URLProfile = comment.User.PerfilUser.UrlFoto;
+
+                outpost.Comments.Add(outcomment);
+            }
+
+            if (outpost == null)
             {
                 var outputError = new ApiResponse<string>
                 {
@@ -111,6 +137,8 @@ namespace Xapp.API.Controllers
         {
             var posts = await _db.Posts
                 .Include(x => x.Comments)
+                .ThenInclude(x => x.User)
+                .ThenInclude(x => x.PerfilUser)
                 .Include(x => x.User)
                 .ThenInclude(x => x.PerfilUser)
                 .ToListAsync();
@@ -127,8 +155,22 @@ namespace Xapp.API.Controllers
                 outpost.UserId = post.UserId;
                 outpost.URLProfile = post.User.PerfilUser.UrlFoto;
                 outpost.Likes = post.Likes;
-                outpost.Comments = post.Comments;
                 outpost.UserName = post.User.Username;
+                outpost.Comments = new List<CommentOutput>();
+
+                foreach (var comment in post.Comments)
+                {
+                    var outcomment = new CommentOutput();
+
+                    outcomment.Content = comment.Content;
+                    outcomment.UserName = comment.User.Username;
+                    outcomment.UserId = comment.UserId;
+                    outcomment.PostId = comment.PostId;
+                    outpost.Likes = comment.Likes;
+                    outpost.URLProfile = comment.User.PerfilUser.UrlFoto;
+
+                    outpost.Comments.Add(outcomment);
+                }
 
                 list.Add(outpost);
             }

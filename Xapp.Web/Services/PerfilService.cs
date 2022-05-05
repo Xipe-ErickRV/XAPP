@@ -61,8 +61,12 @@ namespace Xapp.Web.Services
         public async Task<ApiResponse<Perfil>> PatchPerfil(string email, ProfileOutput dto)
         {
             //Primero mando el file, lo subo y me regresa el url y lo adjunto al dto
-            var urlresume = await UploadResume(dto.File);
-            dto.UrlCv = urlresume;
+            if(dto.File != null)
+            {
+                var urlresume = await UploadResume(dto.File);
+                dto.UrlCv = urlresume;
+            }
+            
             dto.File = null;
 
             var url = $"{_baseUrl}/patchPerfil?email={email}";
@@ -100,6 +104,48 @@ namespace Xapp.Web.Services
 
             var output = JsonConvert.DeserializeObject<ApiResponse<string>>(response.Content);
             return output.Result;
+        }
+
+        public async Task<ApiResponse<User>> AddSkill(string email, SkillInput dto)
+        {
+            var url = $"{_baseUrl}/newSkill?email={email}";
+            var client = new RestClient(url);
+            var request = new RestRequest() { Method = Method.Post };
+            request.RequestFormat = RestSharp.DataFormat.Json;
+            request.AddHeader("Content-Type", "application/json");
+            request.AddJsonBody(dto);
+            var response = await client.ExecuteAsync(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var output = JsonConvert.DeserializeObject<ApiResponse<User>>(response.Content);
+                return output;
+            }
+            else
+            {
+                var output = JsonConvert.DeserializeObject<ApiResponse<User>>(response.Content);
+                return output;
+            }
+        }
+
+        public async Task<ApiResponse<Skill>> DeleteSkill(string email, int id)
+        {
+            var url = $"{_baseUrl}/skillDelete?ID={id}&email={email}";
+            var client = new RestClient(url);
+            var request = new RestRequest() { Method = Method.Delete };
+            request.RequestFormat = RestSharp.DataFormat.Json;
+            request.AddHeader("Content-Type", "application/json");
+            //request.AddJsonBody(dto);
+            var response = await client.ExecuteAsync(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var output = JsonConvert.DeserializeObject<ApiResponse<Skill>>(response.Content);
+                return output;
+            }
+            else
+            {
+                var output = JsonConvert.DeserializeObject<ApiResponse<Skill>>(response.Content);
+                return output;
+            }
         }
     }
 }

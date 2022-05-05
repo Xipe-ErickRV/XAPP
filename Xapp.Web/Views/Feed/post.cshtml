@@ -70,7 +70,7 @@
                 <p class="post_content">@Model.Content
                 </p>
 
-                <span style="color:rgb(226, 36, 50)">2 COMMENTS</span>
+                <span style="color:rgb(226, 36, 50)">@Model.Comments.Count() COMMENTS</span>
             </div>
         </div>
 
@@ -82,8 +82,8 @@
                 <div class="comment_elements">
 
                     <div class="profile_elements">
-                        <img src="pic_example.jpg" class="user_pic">
-                        <h3 class="comment_author">@comment.User</h3>
+                        <img src=@comment.URLProfile class="user_pic">
+                        <h3 class="comment_author">@comment.UserName</h3>
                     </div>
 
                     <p class="comment_content">@comment.Content

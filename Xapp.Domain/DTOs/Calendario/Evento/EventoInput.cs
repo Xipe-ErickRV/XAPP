@@ -15,4 +15,9 @@ namespace Xapp.Domain.DTOs
         public bool IsPublic { get; set; }
         public DateTime Date { get; set; }
     }
+
+    public class EventList
+    {
+        public List<EventInput> Events { get; set; }
+    }
 }

@@ -1,0 +1,58 @@
+﻿@model Xapp.Domain.DTOs.SkillInput
+@{
+    ViewData["Title"] = "Add skill";
+    Layout = null;  
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Importar CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Libreria de Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel=preload href="~/css/Profile.css" as="style">
+    <link href="~/css/Profile.css" rel="stylesheet" type="text/css" asp-append-version="true">
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="~/img/xipe_logo.jpg" id="logo">
+        <a href="#Profile"> Profile</a>
+        <a href="#Feed"> Feed</a>
+        <a href="#XipeCoins"> XipeCoins</a>
+        <a href="#Calendar"> Calendar</a>
+    </div>
+
+    <main>
+        <form action="AddSkillWindow" method="post" class="login-box" style="margin-left: 30%">
+                <h1 class="skilltitle"> Add Skill </h1>
+                </br></br></br></br></br></br></br>
+
+                <label class="skilllabel">Name:</label>
+                <input name="Nombre" style="width: 50%" type="text" class="skillname" required>
+                </br>
+
+                <label class="skilllabel skilllevel">Skill Level:</label>
+                <select name="Nivel" id="level">
+                  <option value="1">Basic</option>
+                  <option value="2">Medium</option>
+                  <option value="3">Advanced</option>
+                  <option value="4">Expert</option>
+                </select>
+
+                <button class="basic skilloption" type="button" id="skill_pill">Basic</button>
+                <button class="medium skilloption" type="button" id="skill_pill">Medium</button>
+                <button class="advanced skilloption" type="button" id="skill_pill">Advanced</button>
+                <button class="expert skilloption" type="button" id="skill_pill">Expert</button>
+
+                <button id="new_skill" type="submit" class="save-button">Save</button>
+            </form>
+    </main>
+</body>
+</html>

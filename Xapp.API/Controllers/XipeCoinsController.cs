@@ -253,13 +253,13 @@ namespace Xapp.API.XipeCoinsController
 
             if (balance == null)
             {
-                var output = new ApiResponse <string>
+                var output1 = new ApiResponse <string>
                 {
                     StatusCode = 400,
                     Message = "No se encontró al usuario",
                     Result = ""
                 };
-                return BadRequest(output);
+                return BadRequest(output1);
             }
 
             var userOutput = new WalletUser();

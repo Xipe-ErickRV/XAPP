@@ -24,7 +24,7 @@
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <img src="https://drive.google.com/uc?export=view&id=17qRly_RNtO7moC4aSQkWyQjI5xKTv4Ft" id="logo">
+        <img src="~/img/xipe_logo.jpg" id="logo">
         <a href="#Profile"> Profile</a>
         <a href="#Feed"> Feed</a>
         <a href="#XipeCoins"> XipeCoins</a>
@@ -46,12 +46,12 @@
                                 @if (@Model.UrlImage != null)
                                 {
                                     <img src="@Model.UrlImage"
-                                         id="photo" />
+                                     id="photo" />
                                 }
                                 else
                                 {
-                                    <img src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
-                                         id="photo" />
+                                    <img src="~/img/profilepic.png"
+                                     id="photo" />
                                 }
                                 <input name="UrlImage" type="file" id="file">
                                 <label for="file" id="uploadBtn"> Change Photo </label>
@@ -105,7 +105,7 @@
                                         {
                                             <li id="skill_pill" class="basic">
                                                 @skill.Nombre
-                                                <span class="close closeskill">&times;</span>
+                                                <a asp-controller="Home" asp-action="DeleteSkill" asp-route-id="@skill.Id" class="close closeskill">&times;</a>
                                             </li>
 
                                         }
@@ -113,21 +113,21 @@
                                         {
                                             <li id="skill_pill" class="medium">
                                                 @skill.Nombre
-                                                <span class="close closeskill">&times;</span>
+                                                <a asp-controller="Home" asp-action="DeleteSkill" asp-route-id="@skill.Id" class="close closeskill">&times;</a>
                                             </li>
                                         }
                                         else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Avanzado && @skill.IsActive)
                                         {
                                             <li id="skill_pill" class="advanced">
                                                 @skill.Nombre
-                                                <span class="close closeskill">&times;</span>
+                                                <a asp-controller="Home" asp-action="DeleteSkill" asp-route-id="@skill.Id" class="close closeskill">&times;</a>
                                             </li>
                                         }
                                         else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Experto && @skill.IsActive)
                                         {
                                             <li id="skill_pill" class="expert">
                                                 @skill.Nombre
-                                                <span class="close closeskill">&times;</span>
+                                                <a asp-controller="Home" asp-action="DeleteSkill" asp-route-id="@skill.Id" class="close closeskill">&times;</a>
                                             </li>
                                         }
 
@@ -135,34 +135,32 @@
                                 </ul>
 
                             </div>
-                            <button class="skill-button" type="button">+ Add Skill</button>
+                            <!--<button class="skill-button" type="button">+ Add Skill</button>-->
+                            <button class="skill-button" type="button" onclick="window.location.href='/Home/AddSkillWindow';" value="Go to">+ Add Skill</button>
                         </div>
                     </div>
                     <!-- Resume -->
                     <div class="profileInfo-resume">
                         <div class="d-flex flex-column p-3 py-5">
                             <h2 class="resume_title">Resume</h2>
-                            <div id="boton_icono_pdf">
-                                <span class="close closeresume">&times;</span>
+                            <div>
+                                @if (@Model.UrlCv != null)
+                                {
+                                    <img id="boton_icono_pdf" src="~/img/pdf.png" alt="pdf" />
+                                    <span class="close closeresume">&times;</span>
+                                }
+                                else
+                                {
+                                    <img id="boton_icono_pdf" src="~/img/pdf.png" style="visibility:hidden;" alt="pdf" />
+                                }
                             </div>
 
                             <div id="PDF_Btn">
                                 <label for="file-input">
-                                    <img src="https://cdn-icons.flaticon.com/png/512/3720/premium/3720346.png?token=exp=1651430351~hmac=afcc66046de6dc129839e40be7e7df76" />
+                                    <img src="~/img/upload.png" />
                                 </label>
-                                    <input type="file" asp-for="File" id="file-input" accept=".pdf" />
+                                <input type="file" asp-for="File" id="file-input" accept=".pdf" />
                             </div>
-                            <!--
-                        <form id="perfil"  asp-controller="Home" asp-action="Profile" method="post" enctype="multipart/form-data">
-                            <div class="row mt-2">
-                                <div class="col-12">
-                                    <label class="col-form-label">Select File</label>
-                                    <input asp-for="File" class="form-control" />
-                                    <span asp-validation-for="File" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </form>
-                    -->
                         </div>
                     </div>
                 </div>
@@ -173,7 +171,7 @@
     <!-- PopUp -->
     <div class="modal-cont" id="id01">
         <div class="modal-box">
-            <span class="close" onclick="document.getElementById('id01').style.display='none'" >&times;</span>
+            <span class="close" onclick="document.getElementById('id01').style.display='none'">&times;</span>
             <form action="Profile" method="post" class="login-box">
                 <h1 class="skilltitle"> Add Skill </h1>
                 <label class="skilllabel">Name:</label>

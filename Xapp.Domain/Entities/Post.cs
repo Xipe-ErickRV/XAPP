@@ -21,20 +21,6 @@ namespace Xapp.Domain.Entities
         public List<Comment> Comments { get; set; }
 
 
-        public PostOutput Output()
-        {
-            return new PostOutput
-            {
-                Title = Title,
-                Content = Content,
-                Multimedia = Multimedia,
-                Tag = Tag,
-                UserId = UserId,
-                UserName = User.Username,
-                URLProfile = User.PerfilUser.UrlFoto,
-                Likes = Likes,
-                Comments = Comments
-            };
-        }
+       
     }
 }

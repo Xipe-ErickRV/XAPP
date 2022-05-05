@@ -21,7 +21,7 @@
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <img src="https://drive.google.com/uc?export=view&id=17qRly_RNtO7moC4aSQkWyQjI5xKTv4Ft" id="logo">
+        <img src="~/img/xipe_logo.jpg" id="logo">
         <a href="#Perfil"> Profile</a>
         <a href="#Feed"> Feed</a>
         <a href="#XipeCoins"> XipeCoins</a>
@@ -45,11 +45,10 @@
                             }
                             else
                             {
-                                <img src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
+                                <img src="~/img/profilepic.png"
                                  id="photo" />
                             }
-                            <input type="file" id="file">
-                            <label for="file" id="uploadBtn"> Change Photo </label>
+
 
                         </div>
                         <form action="Home/ProfileModoVista" method="get" class="profileInfo-personal-data-afterimg">
@@ -123,10 +122,20 @@
                 <div class="profileInfo-resume">
                     <div class="d-flex flex-column p-3 py-5">
                         <h2 class="resume_title">Resume</h2>
-                        <div id="boton_icono_pdf"></div>
+                        <div>
+                            @if(@Model.UrlCv != null)
+                            {
+                                <img id="boton_icono_pdf" src="~/img/pdf.png" alt="pdf" />
+                            } else
+                            {
+                                <img id="boton_icono_pdf" src="~/img/pdf.png" style="visibility:hidden;"alt="pdf" />
+                            }
+                        </div>
                         <div id="PDF_Btn">
                             <label for="file-input">
-                                <img src="https://cdn-user-icons.flaticon.com/59414/59414620/1651430171458.svg?token=exp=1651431071~hmac=cd9652168e08c8c7abc59e8826af3ed2" />
+                                <a href="@Model.UrlCv" target="_blank">
+                                    <img src="~/img/download.png" />
+                                </a>
                             </label>
 
                         </div>
