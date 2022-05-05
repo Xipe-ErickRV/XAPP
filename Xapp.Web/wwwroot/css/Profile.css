@@ -1,10 +1,10 @@
-﻿﻿* {
+﻿* {
     font-family: 'Poppins', sans-serif;
 }
 
-*:focus {
-    outline: 0 !important;
-}
+    *:focus {
+        outline: 0 !important;
+    }
 
 /**COLORS**/
 :root {

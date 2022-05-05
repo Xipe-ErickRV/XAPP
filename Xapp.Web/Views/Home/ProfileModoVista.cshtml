@@ -123,7 +123,13 @@
                     <div class="d-flex flex-column p-3 py-5">
                         <h2 class="resume_title">Resume</h2>
                         <div>
-                            <img id="boton_icono_pdf" src="~/img/pdf.png" alt="pdf" />
+                            @if(@Model.UrlCv != null)
+                            {
+                                <img id="boton_icono_pdf" src="~/img/pdf.png" alt="pdf" />
+                            } else
+                            {
+                                <img id="boton_icono_pdf" src="~/img/pdf.png" style="visibility:hidden;"alt="pdf" />
+                            }
                         </div>
                         <div id="PDF_Btn">
                             <label for="file-input">
