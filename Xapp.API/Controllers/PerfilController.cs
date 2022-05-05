@@ -226,6 +226,9 @@ namespace Xapp.API.Controllers
                 };
                 return BadRequest(output);
             }
+
+           
+
         }
 
         [HttpPatch("passwordChange")]
@@ -274,12 +277,6 @@ namespace Xapp.API.Controllers
                 {
                     dto.UrlCv = user.PerfilUser.UrlCv;
                 }
-
-                if (user.PerfilUser.UrlFoto != null)
-                {
-                    dto.UrlCv = user.PerfilUser.UrlFoto;
-                }
-
                 user.PerfilUser.MetodoEdit(dto);
 
                 if (dto.Skills != null)
@@ -325,6 +322,7 @@ namespace Xapp.API.Controllers
             user.Delete();
             user.PerfilUser.Delete();
             user.WalletlUser.Delete();
+            //Execute every Delete() in child entities like PTO?
 
             await _db.SaveChangesAsync();
             return Ok(user);
@@ -337,6 +335,9 @@ namespace Xapp.API.Controllers
                 .ThenInclude(x=> x.Skills)
                 .FirstOrDefaultAsync(x => x.Email == email);
 
+            //validación bla bla
+            // validación ...
+
             var skill = user.PerfilUser.Skills
                 .Find(x => x.User == user.UserId && x.Id == ID);
             if (skill == null) return BadRequest();
@@ -345,23 +346,6 @@ namespace Xapp.API.Controllers
             await _db.SaveChangesAsync();
             return Ok(skill);
         }
-
-        [HttpDelete("resumeDelete")]
-        public async Task<IActionResult> resumeDelete(string email)
-        {
-            var user = await _db.Users
-                .Include(x => x.PerfilUser)
-                .ThenInclude(x => x.UrlCv)
-                .FirstOrDefaultAsync(x => x.Email == email);
-
-            var resumeUrl = user.PerfilUser.UrlCv;
-            if (resumeUrl == null) return BadRequest();
-
-            resumeUrl = null;
-            await _db.SaveChangesAsync();
-            return Ok(resumeUrl);
-        }
-
 
         [HttpPost("UploadResume")]
         public async Task<IActionResult> UploadResume()
@@ -388,41 +372,6 @@ namespace Xapp.API.Controllers
                 {
                     StatusCode = 200,
                     Message = "Resume uploaded",
-                    Result = url
-                };
-                return Ok(output);
-            }
-
-            return Ok();
-        }
-
-
-
-        [HttpPost("UploadImage")]
-        public async Task<IActionResult> UploadImage()
-        {
-            var resume = Request.Form.Files["image"];
-
-            IFormFile file = resume;
-            if (file != null)
-            {
-                var blobSection = _config.GetSection("BlobSettings");
-                var connectionString = blobSection.GetSection("ConnectionString").Value;
-                var sourceContainerName = blobSection.GetSection("Container").Value;
-                var fileName = $"{file.FileName}";
-                BlobServiceClient blobServiceClient = new(connectionString);
-                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(sourceContainerName);
-                BlobHttpHeaders blobHttpHeader = new()
-                {
-                    ContentType = file.ContentType
-                };
-                BlobClient blobClient = containerClient.GetBlobClient(fileName);
-                await blobClient.UploadAsync(file.OpenReadStream(), blobHttpHeader);
-                string url = $"https://xipeappstorgae.blob.core.windows.net/xapp/{fileName}";
-                var output = new ApiResponse<string>
-                {
-                    StatusCode = 200,
-                    Message = "Profile image uploaded",
                     Result = url
                 };
                 return Ok(output);
