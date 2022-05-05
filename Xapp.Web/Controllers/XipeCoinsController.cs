@@ -13,7 +13,7 @@ namespace Xapp.Web.Controllers
             var obj = new XipeCoinsService();
             var output = await obj.GetProfile(12);
 
-            if (output.StatusCode == 200) 
+            if (output.StatusCode == 200)
             {
                 var resultOutput = (WalletUser)output.Result;
                 return View(resultOutput);
@@ -25,6 +25,7 @@ namespace Xapp.Web.Controllers
             }
         }
 
+        [HttpGet]
         public async Task<IActionResult> account()
         {
             var obj = new XipeCoinsService();
@@ -40,17 +41,52 @@ namespace Xapp.Web.Controllers
                 var message = output.Message;
                 return View();
             }
-           
+
         }
-        public IActionResult convenios()
+        public async Task<IActionResult> convenios()
         {
-            return View();
+            var obj = new XipeCoinsService();
+            var output = await obj.GetProfile(12);
+
+            if (output.StatusCode == 200)
+            {
+                var resultOutput = (WalletUser)output.Result;
+                return View(resultOutput);
+            }
+            else
+            {
+                var message = output.Message;
+                return View();
+            }
         }
+
+        /*[HttpPost]
+        public async Task<IActionResult> transaction(TransferInput dto)
+        {
+            /*var obj = new XipeCoinsService();
+            var output = await obj.PostTransfer(12, dto);
+
+            if (output.StatusCode == 200)
+            {
+                var resultOutput = output.Result;
+                return View(resultOutput);
+            }
+            else
+            {
+                var message = output.Message;
+                return View();
+            }
+
+        }*/
+
         public IActionResult transaction()
         {
             return View();
         }
-    }   
+        
+    
 
+
+
+    }
 }
-
