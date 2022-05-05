@@ -307,13 +307,13 @@ input[type=date]::placeholder {
     position:absolute;
     top:30%;
 }
-
+/*
     .skill-button:active {
         border: none;
         outline: none;
         color:var(--grey);
     }
-
+*/
 
 
 .profileInfo-resume {
@@ -621,11 +621,12 @@ label.login-box {
         transform: scale(1);
     }
 }
-
+/*
 .skilloption:active, .skilloption:focus{
     background-color: grey;
     border: black;
 }
+*/
 /*SKILLS*/
 .skillsmenu-outer {
     width: 100%;
