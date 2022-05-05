@@ -427,7 +427,6 @@ input[type=text], input[type=tel], input[type=email], textarea[type=input-field]
 
 
 #boton_icono_pdf {
-    background-size: cover;
     background-color: transparent;
     height: 100px;
     width: 100px;

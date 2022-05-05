@@ -61,8 +61,12 @@ namespace Xapp.Web.Services
         public async Task<ApiResponse<Perfil>> PatchPerfil(string email, ProfileOutput dto)
         {
             //Primero mando el file, lo subo y me regresa el url y lo adjunto al dto
-            var urlresume = await UploadResume(dto.File);
-            dto.UrlCv = urlresume;
+            if(dto.File != null)
+            {
+                var urlresume = await UploadResume(dto.File);
+                dto.UrlCv = urlresume;
+            }
+            
             dto.File = null;
 
             var url = $"{_baseUrl}/patchPerfil?email={email}";

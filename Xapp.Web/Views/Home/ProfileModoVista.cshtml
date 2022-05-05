@@ -48,7 +48,7 @@
                                 <img src="~/img/profilepic.png"
                                  id="photo" />
                             }
-                            
+
 
                         </div>
                         <form action="Home/ProfileModoVista" method="get" class="profileInfo-personal-data-afterimg">
@@ -122,10 +122,12 @@
                 <div class="profileInfo-resume">
                     <div class="d-flex flex-column p-3 py-5">
                         <h2 class="resume_title">Resume</h2>
-                        <div id="boton_icono_pdf"></div>
+                        <div>
+                            <img id="boton_icono_pdf" src="~/img/pdf.png" alt="pdf" />
+                        </div>
                         <div id="PDF_Btn">
                             <label for="file-input">
-                                <a href="@Model.UrlCv" target="_blank"> 
+                                <a href="@Model.UrlCv" target="_blank">
                                     <img src="~/img/download.png" />
                                 </a>
                             </label>
