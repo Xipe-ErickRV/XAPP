@@ -273,6 +273,10 @@ namespace Xapp.API.Controllers
 
             if (user != null)
             {
+                if(user.PerfilUser.UrlCv != null)
+                {
+                    dto.UrlCv = user.PerfilUser.UrlCv;
+                }
                 user.PerfilUser.MetodoEdit(dto);
 
                 if (dto.Skills != null)
