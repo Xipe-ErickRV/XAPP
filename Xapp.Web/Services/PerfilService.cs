@@ -69,6 +69,12 @@ namespace Xapp.Web.Services
             
             dto.File = null;
 
+            if (dto.Image != null)
+            {
+                var urlimage = await UploadResume(dto.Image);
+                dto.UrlCv = urlimage;
+            }
+
             var url = $"{_baseUrl}/patchPerfil?email={email}";
             var client = new RestClient(url);
             var request = new RestRequest() { Method = Method.Patch };

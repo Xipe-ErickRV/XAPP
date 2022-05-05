@@ -21,8 +21,7 @@ namespace Xapp.Domain.DTOs.Perfil
         public string Bio { get; set; }
         public DateTime FechaCumple { get; set; }
         public List<Skill> Skills { get; set; }
-
-        //[Required(ErrorMessage = "Please select file")]
         public IFormFile File { get; set; }
+        public IFormFile Image { get; set; }
     }
 }
