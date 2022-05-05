@@ -102,10 +102,47 @@ namespace Xapp.Web.Controllers
             }
         }
 
-        public IActionResult DeleteSkill(int id)
+        [HttpGet]
+        public IActionResult AddSkillWindow()
         {
-            var test = id;
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddSkillWindow(SkillInput dto)
+        {
+            var obj = new PerfilService();
+            var output = await obj.AddSkill(User.Identity.Name, dto);
+
+            if (output.StatusCode == 200)
+            {
+                var perfil = output.Result;
+                string page = $"/Home/Profile";
+                return Redirect(page);
+            }
+            else
+            {
+                var message = output.Message;
+                return View();
+            }
+        }
+
+        [Route("DeleteSkill/{id:int}")]
+        public async Task<IActionResult> DeleteSkill(int id)
+        {
+            var obj = new PerfilService();
+            var output = await obj.DeleteSkill(User.Identity.Name, id);
+
+            if (output.StatusCode == 200)
+            {
+                var message = output.Message;
+                return RedirectToAction("Profile", "Home");
+            }
+            else
+            {
+                var message = output.Message;
+                return RedirectToAction("Profile", "Home");
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

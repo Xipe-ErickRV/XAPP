@@ -32,7 +32,7 @@ file.addEventListener('change', function () {       // Refiere al archivo
 
 
 
-
+/*
 // PopUp de Skills
 var closeBut = document.getElementsByClassName('close')[0],
     modal = document.getElementsByClassName('modal-cont')[0],
@@ -77,3 +77,4 @@ window.onclick = function (e) {
     }
 
 }
+*/

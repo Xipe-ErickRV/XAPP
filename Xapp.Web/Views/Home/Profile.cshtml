@@ -105,7 +105,7 @@
                                         {
                                             <li id="skill_pill" class="basic">
                                                 @skill.Nombre
-                                                <span class="close closeskill">&times;</span>
+                                                <a asp-controller="Home" asp-action="DeleteSkill" asp-route-id="@skill.Id" class="close closeskill">&times;</a>
                                             </li>
 
                                         }
@@ -113,21 +113,21 @@
                                         {
                                             <li id="skill_pill" class="medium">
                                                 @skill.Nombre
-                                                <span class="close closeskill">&times;</span>
+                                                <a asp-controller="Home" asp-action="DeleteSkill" asp-route-id="@skill.Id" class="close closeskill">&times;</a>
                                             </li>
                                         }
                                         else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Avanzado && @skill.IsActive)
                                         {
                                             <li id="skill_pill" class="advanced">
                                                 @skill.Nombre
-                                                <span class="close closeskill">&times;</span>
+                                                <a asp-controller="Home" asp-action="DeleteSkill" asp-route-id="@skill.Id" class="close closeskill">&times;</a>
                                             </li>
                                         }
                                         else if (@skill.Nivel == Xapp.Domain.Enums.Nivel.Experto && @skill.IsActive)
                                         {
                                             <li id="skill_pill" class="expert">
                                                 @skill.Nombre
-                                                <span class="close closeskill">&times;</span>
+                                                <a asp-controller="Home" asp-action="DeleteSkill" asp-route-id="@skill.Id" class="close closeskill">&times;</a>
                                             </li>
                                         }
 
@@ -135,7 +135,8 @@
                                 </ul>
 
                             </div>
-                            <button class="skill-button" type="button">+ Add Skill</button>
+                            <!--<button class="skill-button" type="button">+ Add Skill</button>-->
+                            <button class="skill-button" type="button" onclick="window.location.href='/Home/AddSkillWindow';" value="Go to">+ Add Skill</button>
                         </div>
                     </div>
                     <!-- Resume -->

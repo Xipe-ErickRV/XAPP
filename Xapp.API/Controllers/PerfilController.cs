@@ -209,17 +209,17 @@ namespace Xapp.API.Controllers
 
             if (user.PerfilUser.Skills != null)
             {
-                var output = new ApiResponse<List<Skill>>
+                var output = new ApiResponse<Perfil>
                 {
                     StatusCode = 200,
                     Message = "Añadiste una nueva skill.",
-                    Result = user.PerfilUser.Skills
+                    Result = user.PerfilUser
                 };
                 return Ok(output);
             }
             else
             {
-                var output = new ApiResponse<List<Skill>>
+                var output = new ApiResponse<Perfil>
                 {
                     StatusCode = 400,
                     Message = "Verifica tus campos."
@@ -344,7 +344,26 @@ namespace Xapp.API.Controllers
 
             skill.Delete();
             await _db.SaveChangesAsync();
-            return Ok(skill);
+
+            if (user.PerfilUser.Skills != null)
+            {
+                var output = new ApiResponse<Skill>
+                {
+                    StatusCode = 200,
+                    Message = "Eliminaste una skill.",
+                    Result = skill
+                };
+                return Ok(output);
+            }
+            else
+            {
+                var output = new ApiResponse<Skill>
+                {
+                    StatusCode = 400,
+                    Message = "Verifica tus campos."
+                };
+                return BadRequest(output);
+            }
         }
 
         [HttpPost("UploadResume")]
