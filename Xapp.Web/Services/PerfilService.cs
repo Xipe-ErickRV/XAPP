@@ -172,5 +172,26 @@ namespace Xapp.Web.Services
                 return output;
             }
         }
+
+        public async Task<ApiResponse<Skill>> DeleteCv(string email)
+        {
+            var url = $"{_baseUrl}/CvDelete?email={email}";
+            var client = new RestClient(url);
+            var request = new RestRequest() { Method = Method.Delete };
+            request.RequestFormat = RestSharp.DataFormat.Json;
+            request.AddHeader("Content-Type", "application/json");
+            //request.AddJsonBody(dto);
+            var response = await client.ExecuteAsync(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var output = JsonConvert.DeserializeObject<ApiResponse<Skill>>(response.Content);
+                return output;
+            }
+            else
+            {
+                var output = JsonConvert.DeserializeObject<ApiResponse<Skill>>(response.Content);
+                return output;
+            }
+        }
     }
 }

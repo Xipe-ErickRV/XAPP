@@ -363,6 +363,38 @@ namespace Xapp.API.Controllers
             }
         }
 
+        [HttpDelete("CvDelete")]
+        public async Task<IActionResult> CvDelete(string email)
+        {
+            var user = await _db.Users
+                .Include(x => x.PerfilUser)
+                .FirstOrDefaultAsync(x => x.Email == email);
+
+
+            user.PerfilUser.UrlCv = null;
+            await _db.SaveChangesAsync();
+
+            if (user.PerfilUser.Skills != null)
+            {
+                var output = new ApiResponse<Perfil>
+                {
+                    StatusCode = 200,
+                    Message = "Eliminaste una skill.",
+                    Result = user.PerfilUser
+                };
+                return Ok(output);
+            }
+            else
+            {
+                var output = new ApiResponse<Perfil>
+                {
+                    StatusCode = 400,
+                    Message = "Verifica tus campos."
+                };
+                return BadRequest(output);
+            }
+        }
+
         [HttpPost("UploadResume")]
         public async Task<IActionResult> UploadResume()
         {

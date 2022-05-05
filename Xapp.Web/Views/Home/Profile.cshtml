@@ -147,7 +147,7 @@
                                 @if (@Model.UrlCv != null)
                                 {
                                     <img id="boton_icono_pdf" src="~/img/pdf.png" alt="pdf" />
-                                    <span class="close closeresume">&times;</span>
+                                    <a asp-controller="Home" asp-action="DeleteCv" class="close closeresume">&times;</a>
                                 }
                                 else
                                 {
