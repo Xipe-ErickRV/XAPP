@@ -248,7 +248,8 @@ namespace Xapp.API.XipeCoinsController
         {
             var balance = await _db.Users
                 .Include (x => x.PerfilUser)
-                .Include (x => x.WalletlUser)              
+                .Include (x => x.WalletlUser)
+                .ThenInclude(x => x.Transfers)
                 .FirstOrDefaultAsync(x => x.UserId == id);
 
             if (balance == null)
@@ -262,13 +263,55 @@ namespace Xapp.API.XipeCoinsController
                 return BadRequest(output1);
             }
 
-            var userOutput = new WalletUser();
+            var userOutput = new AccountOutput();
             userOutput.Balance = balance.WalletlUser.Balance;
             userOutput.Nombre = balance.PerfilUser.Nombre;
             userOutput.Apellido = balance.PerfilUser.Apellido;
-            userOutput.UrlProfile = balance.PerfilUser.UrlFoto;
+            userOutput.UrlFoto = balance.PerfilUser.UrlFoto;
 
-            var outputOk = new ApiResponse<WalletUser>
+            var tlist = new List<TransferOutput>();
+
+            foreach(var transfers in balance.WalletlUser.Transfers)
+            {
+                var trasnfer1 = new TransferOutput();
+                trasnfer1.Amount = transfers.Amount;
+                trasnfer1.AmountConcept = transfers.Concept;
+                trasnfer1.IdSender = transfers.Id;
+                
+                var nameSender = _db.Users
+                    .Include(x => x.PerfilUser)
+                    .FirstOrDefault(x => x.UserId == trasnfer1.IdSender);
+                if(nameSender == null)
+                {
+                    trasnfer1.NameSender = "Anon";
+                }
+                else
+                {
+                    trasnfer1.NameSender = nameSender.PerfilUser.Nombre + " " + nameSender.PerfilUser.Apellido;
+                }
+
+                trasnfer1.IdReceiver = transfers.Receiver;
+
+                var nameReceiver = _db.Users
+                   .Include(x => x.PerfilUser)
+                   .FirstOrDefault(x => x.UserId == trasnfer1.IdReceiver);
+                if (nameReceiver == null)
+                {
+                    trasnfer1.NameReceiver = "Anon2";
+                }
+                else
+                {
+                    trasnfer1.NameReceiver = nameReceiver.PerfilUser.Nombre + " " + nameReceiver.PerfilUser.Apellido;
+                }
+
+                trasnfer1.DateTime = transfers.CreationDate;
+
+                tlist.Insert(0, trasnfer1);
+            }
+
+            userOutput.TransferOutputs = tlist;
+
+            var outputOk = new ApiResponse<AccountOutput>
             {
                 StatusCode = 200,
                 Message = "OK",

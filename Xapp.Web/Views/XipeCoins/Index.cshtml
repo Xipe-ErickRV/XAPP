@@ -211,73 +211,28 @@
 							Amount
 						</div>
 					</div>
-					<div class="transfer">
-						<!--<div class="transfer-logo">
-							<img src="https://assets.codepen.io/285131/pinterest.svg" />
-						</div>-->
-						<dl class="transfer-details">
-							<div>
-								<dt>Fernando</dt>
+
+					@foreach(var transfers in Model.TransferOutputs){
+						<div class="transfer">
+							<dl class="transfer-details">
+								<div>
+									<dt>@transfers.NameSender</dt>
+								</div>
+								<div>
+									<dt>@transfers.NameReceiver</dt>
+								</div>
+								<div>
+									<dt>@transfers.AmountConcept</dt>
+								</div>
+								<div>
+									<dt>@transfers.DateTime</dt>
+								</div>
+								<div>
+									<dt>@transfers.Amount</dt>
+								</div>
+							</dl>
 							</div>
-							<div>
-								<dt>Randy</dt>
-							</div>
-							<div>
-								<dt>Ayuda Python</dt>
-							</div>
-							<div>
-								<dt>30/04/22</dt>
-							</div>
-						</dl>
-						<div class="transfer-number">
-							100 XipeCoins
-						</div>
-					</div>
-					<div class="transfer">
-						<!--<div class="transfer-logo">
-							<img src="https://assets.codepen.io/285131/warner-bros.svg" />
-						</div>-->
-						<dl class="transfer-details">
-							<div>
-								<dt>Randy</dt>
-							</div>
-							<div>
-								<dt>Fernando</dt>
-							</div>
-							<div>
-								<dt>AyudaC++</dt>
-							</div>
-							<div>
-								<dt>29/04/22</dt>
-							</div>
-						</dl>
-						<div class="transfer-number">
-							50 XipeCoins
-						</div>
-					</div>
-					<div class="transfer">
-						<!--<div class="transfer-logo">
-							<img src="https://assets.codepen.io/285131/warner-bros.svg" />
-						</div>-->
-						<dl class="transfer-details">
-							<div>
-								<dt>Randy</dt>
-							</div>
-							<div>
-								<dt>Fernando</dt>
-							</div>
-							<div>
-								<dt>AyudaC++</dt>
-							</div>
-							<div>
-								<dt>29/04/22</dt>
-							</div>
-						</dl>
-						<div class="transfer-number">
-							50 XipeCoins
-						</div>
-					</div>
-				</div>
+					}
 			</section>
 		</div>
 <!-- partial -->

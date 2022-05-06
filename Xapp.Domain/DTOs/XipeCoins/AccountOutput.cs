@@ -19,6 +19,7 @@ namespace Xapp.Domain.DTOs
         public string AmountConcept { get; set; }
 
         public DateTime DateTime { get; set; }
+        public List<TransferOutput> TransferOutputs { get; set; }
 
     }
 }

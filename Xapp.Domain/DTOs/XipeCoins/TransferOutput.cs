@@ -10,7 +10,9 @@ namespace Xapp.Domain.DTOs
     {
         public decimal Amount { get; set; }
         public int IdReceiver { get; set; }
+        public string NameReceiver { get; set; }    
         public int IdSender { get; set; }
+        public string NameSender { get; set; }
         public string AmountConcept { get; set; }
 
         public DateTime DateTime { get; set; }
