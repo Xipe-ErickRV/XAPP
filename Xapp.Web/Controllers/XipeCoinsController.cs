@@ -10,8 +10,10 @@ namespace Xapp.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            var user_id = new PerfilService();
+            var user = await user_id.GetPerfil(User.Identity.Name);
             var obj = new XipeCoinsService();
-            var output = await obj.GetProfile(12);
+            var output = await obj.GetProfile(user.Result.Id);
 
             if (output.StatusCode == 200)
             {
@@ -28,8 +30,10 @@ namespace Xapp.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> account()
         {
+            var user_id = new PerfilService();
+            var user = await user_id.GetPerfil(User.Identity.Name);
             var obj = new XipeCoinsService();
-            var output = await obj.GetProfile(12);
+            var output = await obj.GetProfile(user.Result.Id);
 
             if (output.StatusCode == 200)
             {
@@ -45,8 +49,10 @@ namespace Xapp.Web.Controllers
         }
         public async Task<IActionResult> convenios()
         {
+            var user_id = new PerfilService();
+            var user = await user_id.GetPerfil(User.Identity.Name);
             var obj = new XipeCoinsService();
-            var output = await obj.GetProfile(12);
+            var output = await obj.GetProfile(user.Result.Id);
 
             if (output.StatusCode == 200)
             {
@@ -60,11 +66,11 @@ namespace Xapp.Web.Controllers
             }
         }
 
-        /*[HttpPost]
+        [HttpPost]
         public async Task<IActionResult> transaction(TransferInput dto)
         {
-            /*var obj = new XipeCoinsService();
-            var output = await obj.PostTransfer(12, dto);
+            var obj = new XipeCoinsService();
+            var output = await obj.PostTransfer(dto);
 
             if (output.StatusCode == 200)
             {
@@ -77,8 +83,8 @@ namespace Xapp.Web.Controllers
                 return View();
             }
 
-        }*/
-
+        }
+        [HttpGet]
         public IActionResult transaction()
         {
             return View();

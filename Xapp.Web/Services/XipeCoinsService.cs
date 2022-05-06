@@ -31,11 +31,11 @@ namespace Xapp.Web.Services
             }
         }
 
-        /*public async Task<ApiResponse<Transfer>> PostTransfer(int id, TransferInput dto)
+        public async Task<ApiResponse<Transfer>> PostTransfer(TransferInput dto)
         {
-            var url = $"{_baseUrl}/PostTransfer?id={id}";
+            var url = $"{_baseUrl}/TransferXipeCoins";
             var client = new RestClient(url);
-            var request = new RestRequest() { Method = Method.Post};
+            var request = new RestRequest() { Method = Method.Patch};
             request.RequestFormat = RestSharp.DataFormat.Json;
             request.AddHeader("Content-Type", "application/json");
             request.AddJsonBody(dto);
@@ -50,7 +50,7 @@ namespace Xapp.Web.Services
                 var output = JsonConvert.DeserializeObject<ApiResponse<Transfer>>(response.Content);
                 return output;
             }
-        }*/
+        }
 
 
     }
