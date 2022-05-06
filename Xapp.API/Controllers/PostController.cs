@@ -48,7 +48,14 @@ namespace Xapp.API.Controllers
             await _db.Posts.AddAsync(post);
             await _db.SaveChangesAsync();
 
-            return Ok();
+            var output = new ApiResponse<Post>
+            {
+                StatusCode = 200,
+                Message = "OK",
+                Result = post
+            };
+
+            return Ok(output);
         }
 
         [HttpDelete("Delete")]
@@ -95,6 +102,7 @@ namespace Xapp.API.Controllers
             outpost.Likes = post.Likes;
             outpost.UserName = post.User.Username;
             outpost.Comments = new List<CommentOutput>();
+            outpost.PostId = post.Id;
 
             foreach (var comment in post.Comments)
             {
@@ -157,6 +165,7 @@ namespace Xapp.API.Controllers
                 outpost.Likes = post.Likes;
                 outpost.UserName = post.User.Username;
                 outpost.Comments = new List<CommentOutput>();
+                outpost.PostId = post.Id;
 
                 foreach (var comment in post.Comments)
                 {
@@ -172,8 +181,10 @@ namespace Xapp.API.Controllers
                     outpost.Comments.Add(outcomment);
                 }
 
-                list.Add(outpost);
+                list.Insert(0, outpost);
+
             }
+
             plist.Posts = list;
 
             var output = new ApiResponse<PostList>

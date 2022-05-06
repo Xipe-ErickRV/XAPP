@@ -53,7 +53,7 @@ namespace Xapp.Web.Services
 
         public async Task<ApiResponse<Post>> CreatePost(int id, PostInput dto)
         {
-            var url = $"{_baseUrl}/Get?id={id}";
+            var url = $"{_baseUrl}/Create?id={id}";
             var client = new RestClient(url);
             var request = new RestRequest() { Method = Method.Post };
             request.RequestFormat = RestSharp.DataFormat.Json;

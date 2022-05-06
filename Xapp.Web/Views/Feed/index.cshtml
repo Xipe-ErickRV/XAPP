@@ -66,12 +66,21 @@
                     </div>
 
                     <div class="post_title_tag">
-                        <h2 class="post_title">@post.Title</h2>
+                        <a style="text-decoration: none;" href="/Feed/post?id=@post.PostId"><h2 class="post_title">@post.Title</h2></a>
+                        
                         <span class="post_tag">@post.Tag</span>
                     </div>
 
                     <div class="profile_elements">
-                        <img src=@post.URLProfile class="user_pic">
+                            @if (post.URLProfile != null)
+                            {
+                                <img src=@post.URLProfile 
+                                     class="user_pic">
+                            }
+                            else{
+                                 <img src="~/img/profilepic.png"
+                                     class="user_pic"/>
+                            }
                         <h3 class="author">@post.UserName</h3>
                     </div>
 
@@ -94,31 +103,32 @@
 
                         <h1>Create post</h1>
 
-                        <form action="" method="POST">
+                        <form action="CreatePost" method="POST">
 
                             <div class="form-group">
                                 <label for="title">Title<span class="require">*</span></label>
-                                <input type="text" class="form-control" name="title" />
+                                <input type="text" class="form-control" name="Title" />
                             </div>
 
                             <div class="form-group">
                                 <label for="tag">Tag</label>
-                                <select name="tag" class="form-control" id="tag_select">
+                                <select name="Tag" class="form-control" id="tag_select">
                                     <option value="default">Select Tag</option>
-                                    <option value="help">Help</option>
-                                    <option value="tutorial">Tutorial</option>
-                                    <option value="none">None</option>
+                                    <option value="1">News</option>
+                                    <option value="2">Help</option>
+                                    <option value="3">Event</option>
+                                    <option value="4">Activity</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="contenido">Contenido</label>
-                                <textarea rows="7" class="form-control" name="contenido"></textarea>
+                                <textarea rows="7" class="form-control" name="Content"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label for="multimedia">Multimedia</label>
-                                <input type="file" class="form-control" id="multimedia_input">
+                                <input name="Multimedia" type="file" class="form-control" id="multimedia_input">
                             </div>
 
                             <div class="form-group">

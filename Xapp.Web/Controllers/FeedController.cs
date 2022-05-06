@@ -69,17 +69,19 @@ namespace Xapp.Web.Controllers
             if (output.StatusCode == 200)
             {
                 var resultOutput = output.Result;
-                return View(resultOutput);
+                string page = $"/Feed/index";
+                return Redirect(page);
             }
             else
             {
                 var message = output.Message;
-                return View();
+                string page = $"/Feed/index";
+                return Redirect(page);
             }
         }
 
         [HttpGet]
-        public async Task<IActionResult> Error()
+        public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
