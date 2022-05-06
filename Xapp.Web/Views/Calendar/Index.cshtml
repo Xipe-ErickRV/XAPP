@@ -1,6 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Calendar";
     Layout = null;
+
+    int[] week1 = { 1, 2, 3, 4, 5, 6, 7 };
+    int[] week2 = { 8, 9, 10, 11, 12, 13, 14 };
+    int[] week3 = { 15, 16, 17, 18, 19, 20, 21 };
+    int[] week4 = { 22, 23, 24, 25, 26, 27, 28 };
+    int[] week5 = { 29, 30, 31 };
+    int[] nxmonth = { 1, 2, 3, 4 };
 }
 
 @model Xapp.Domain.DTOs.EventList
@@ -9,75 +16,106 @@
 <html>
 
 <head>
+    <link href="~/css/calendar.css" rel="stylesheet" type="text/css">
+    <link href="~/css/calendar_event_popup.css?1" rel="stylesheet" type="text/css">
+    <link href="~/css/calendar_pto_popup.css" rel="stylesheet" type="text/css">
+    <link href="~/css/sidebar.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link href="~/css/calendar.css" rel="stylesheet" type="text/css" />
-    <link href="~/css/calendar_register.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 </head>
 <body>
     <main>
         <section>
-            <!--corregir-->
-            <div class="month">      
-              <ul>
-                <li class="prev">&#10094;</li>
-                <li class="next">&#10095;</li>
-                <li style="color:#1c1b1b">
-                  APRIL<br>
-                </li>
-              </ul>
+            <!-- sidebar -->
+            <div class="sidebar">
+                <img src="~/img/xipe_logo.jpg" id="logo">
+                <a href="~/Home/ProfileModoVista">Profile</a>
+                <a href="~/Feed/index">Feed</a>
+                <a href="~/XipeCoins/Index">XipeCoins</a>
+                <a href="~/Calendar/Index">Calendar</a>
             </div>
 
             <button class="btn btn-primary register" type="button">Register</button>
 
+            <!-- Container -->
+            <div class="container">
 
-            <ul class="weekdays">
-              <li>Su</li>
-              <li>Mo</li>
-              <li>Tu</li>
-              <li>We</li>
-              <li>Th</li>
-              <li>Fr</li>
-              <li>Sa</li>
-            </ul>
+              <!-- Calendar --> 
+              <div class="calendar">
 
-            <ul class="days">
-              <li>27</li>
-              <li>28</li>
-              <li>29</li>
-              <li>30</li>
-              <li>31</li>
-              <li>1</li>
-              <li>2</li>
-              <li>3</li>
-              <li>4</li>
-              <li>5</li>
-              <li>6</li>
-              <li>7</li>
-              <li>8</li>
-              <li>9</li>
-              <li>10</li>
-              <li>11</li>
-              <li>12</li>
-              <li>13</li>
-              <li>14</li>
-              <li>15</li>
-              <li>16</li>
-              <li>17</li>
-              <li>18</li>
-              <li>19</li>
-              <li>20</li>
-              <li>21</li>
-              <li>22</li>
-              <li>23</li>
-              <li>24</li>
-              <li>25</li>
-              <li>26</li>
-              <li>27</li>
-              <li>28</li>
-              <li>29</li>
-              <li>30</li>
-            </ul>
+                <header>
 
+                  <h2>May</h2>
+
+                  <a class="btn-prev" href="#">&#10094</a>
+                  <a class="btn-next" href="#">&#10095</a>
+
+                </header>
+
+                <table>
+
+                  <thead>
+
+                    <tr>
+                      <td>Sun</td>
+                      <td>Mon</td>
+                      <td>Tue</td>
+                      <td>Wed</td>
+                      <td>Thu</td>
+                      <td>Fri</td>
+                      <td>Sat</td>
+                  </tr>
+
+                  </thead>
+
+                  <tbody class="create_event">                       
+
+                    <tr>
+                      @for (int i = 0; i < week1.Length; i++)
+                      {                        
+                          <td>@week1[i]</td>
+                      }
+                    </tr>
+
+                    <tr>
+                      @for (int i = 0; i < week2.Length; i++)
+                      {
+                          <td>@week2[i]</td>
+                      }
+                    </tr>
+                    <tr>
+                      @for (int i = 0; i < week3.Length; i++)
+                      {
+                          <td>@week3[i]</td>
+                      }
+                    </tr>
+
+                    <tr>
+                      @for (int i = 0; i < week4.Length; i++)
+                      {
+                          <td>@week4[i]</td>
+                      }
+                    </tr>
+                    <tr>
+                      @for (int i = 0; i < week5.Length; i++)
+                      {
+                          <td>@week5[i]</td>
+                      }    
+
+                      @for (int i = 0; i < nxmonth.Length; i++)
+                      {
+                          <td class="next-month">@nxmonth[i]</td>
+                      }
+                    </tr>
+
+                  </tbody>
+
+                </table>
+
+              </div>
+
+            </div>
+            <!-- Resume -->
             <div class="resume">
                 <p style="font-size: 27px; color: #343434; font-weight: 600">My Resume</p>
                 <p class="res_data">PTO'S LEFT</p>
@@ -89,46 +127,82 @@
                 <p style="font-size: 22px; color: #212121">05/03/2023</p>
             </div>
 
-            <div style="position: absolute; right: 120px; top: 600px; font-size: 16px">
+            <div style="position: absolute; right: 120px; bottom: 100px; font-size: 16px">
                 <span class="dot" style="background: #24b5e2"></span>    PTO
                 <span class="dot" style="background: #e22432"></span>    Holidays
                 <span class="dot" style="background: #1492e6"></span>    Vacations
             </div>
         </section>
-
-        <div class="modal-cont">
+        <!-- Popup PTO-->
+       <div class="modal-cont">
             <div class="modal-box">
                 <span class="close">&times;</span>
-                <form action="" class="login-box">
                   <h1 style="font-size: 45px"><b> Choose your time off </b></h1>
                   <p> Select your record </p>
-                    <div>
+                   
                         <input id="pto" class="check" type="checkbox" required>
                         <label for="pto">PTO</label>
+                        
                         <input id="vacation" class="check" type="checkbox" required>
-                        <label for="vacation">Vacation Day</label>
-                    </div>
-                    <div>
+                        <label for="vacation">Vacation Day</label>  <br>              
+                  
+                        <div class="center_start">
                         <label for="start">Start date</label>
                         <input class="date" type="date" id="start" min="2018-01-01" max="2024-01-01">
-                    </div>
-                    <div>
+                        </div>
+
+                        <div class="center_end">
                         <label for="end">End date</label>
                         <input class="date" type="date" id="end" min="2018-01-01" max="2024-01-01">
-                    </div>
-                    <div>
-                        <label for="comments">Comments</label>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+
+                        <div class="texto_comment">
+                        <label for="comments">Comments</label> 
+                        </div> 
                         <input class="comments" type="text" id="comments" />
-                    </div>
-                    <div class="close-forgot">
-                        <button class="cancel" type="button">Cancel</button>
-                    </div>
-                </form>
+
+
+                        <button class="cancel">Save</button>
+            </div>
+        </div> 
+
+        <!-- Popup Event-->
+        <div class="modal-cont-event">
+            <div class="modal-box-event">
+                <span class="close-event">&times;</span>
+                  <h1 style="font-size: 45px"><b> Create Event </b></h1>
+                    <form action="CreateEvent" method="POST">
+                        <h1>Title</h1>
+                        <input id="title" type="text" class="texto_comment-event" required>
+                   
+                        <input id="ispublic" class="check-event" type="checkbox" required>
+                        <label for="ispublic">Publish?</label>             
+
+                        <div class="center_end-event">
+                        <label for="datetime">Date</label>
+                        <input class="date-event" type="date" id="end" min="2018-01-01" max="2024-01-01">
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+
+                        <div>
+                        <label for="desc">Description</label> 
+                        </div> 
+                        <input class="comments-event" type="text" id="desc" />
+
+                        <button class="cancel-event">Save</button>
+                   </form>
             </div>
         </div>
+    
     </main>
 
 </body>
 
-<script src="~/js/calendar_register.js"></script>
+<script src="~/js/calendar_event_popup.js"></script>
+<script src="~/js/calendar_pto_popup.js"></script>
 </html>

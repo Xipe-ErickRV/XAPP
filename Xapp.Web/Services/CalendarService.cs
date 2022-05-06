@@ -10,11 +10,11 @@ namespace Xapp.Web.Services
 {
     public class CalendarService
     {
-        private readonly string _baseUrl = "https://localhost:43330/api/Calendar";
+        private readonly string _baseUrl = "https://localhost:44331/api/Calendar";
 
         public async Task<ApiResponse<EventList>> GetEvents()
         {
-            var url = $"{_baseUrl}/GetEventsByUser";
+            var url = $"{_baseUrl}/GetEvents";
             var client = new RestClient(url);
             var request = new RestRequest() { Method = Method.Get };
             request.RequestFormat = RestSharp.DataFormat.Json;
@@ -33,9 +33,9 @@ namespace Xapp.Web.Services
             }
         }
 
-        public async Task<ApiResponse<EventInput>> AddEvent(EventInput dto)
+        public async Task<ApiResponse<Event>> AddEvent(int userId, EventInput dto)
         {
-            var url = $"{_baseUrl}/addEvent";
+            var url = $"{_baseUrl}/AddEvent?id={userId}";
             var client = new RestClient(url);
             var request = new RestRequest() { Method= Method.Post };
             request.RequestFormat = RestSharp.DataFormat.Json;
@@ -45,12 +45,12 @@ namespace Xapp.Web.Services
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                var output = JsonConvert.DeserializeObject<ApiResponse<EventInput>>(response.Content);
+                var output = JsonConvert.DeserializeObject<ApiResponse<Event>>(response.Content);
                 return output;
             }
             else
             {
-                var output = JsonConvert.DeserializeObject<ApiResponse<EventInput>>(response.Content);
+                var output = JsonConvert.DeserializeObject<ApiResponse<Event>>(response.Content);
                 return output;
             }
         }
