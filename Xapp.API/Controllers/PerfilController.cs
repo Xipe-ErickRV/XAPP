@@ -256,7 +256,6 @@ namespace Xapp.API.Controllers
             if (user == null) return BadRequest();
 
             user.Username = dto.Username;
-            //user.Password = dto.Password;
             user.Email = dto.Email;
            
 
@@ -319,7 +318,6 @@ namespace Xapp.API.Controllers
             user.Delete();
             user.PerfilUser.Delete();
             user.WalletlUser.Delete();
-            //Execute every Delete() in child entities like PTO?
 
             await _db.SaveChangesAsync();
             return Ok(user);
@@ -331,9 +329,6 @@ namespace Xapp.API.Controllers
                 .Include(x=> x.PerfilUser)
                 .ThenInclude(x=> x.Skills)
                 .FirstOrDefaultAsync(x => x.Email == email);
-
-            //validación bla bla
-            // validación ...
 
             var skill = user.PerfilUser.Skills
                 .Find(x => x.User == user.UserId && x.Id == ID);
