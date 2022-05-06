@@ -217,7 +217,7 @@
 						</div>
 					</div>
 
-					@foreach(var transfers in Model.TransferOutputs){
+					@foreach(var transfers in Model.TransferOutputs.Take(3)){
 						<div class="transfer">
 							<dl class="transfer-details">
 								<div>

@@ -224,7 +224,6 @@ namespace Xapp.API.XipeCoinsController
                 {
                     StatusCode = 400,
                     Message = "No se encontró al usuario",
-                   // Result = ""
                 };
                 return BadRequest(output1);
             }
