@@ -48,11 +48,11 @@
                     <div class="interactions_container">
                         <button class="like_btn" onclick=change_like_color(like01)><i class="material-icons thumbs_up"
                                 id="like01">thumb_up</i></button>
-                        <span>7</span>
+                        <span>@Model.Likes</span>
                     </div>
                     <div class="interactions_container">
                         <i class="material-icons">chat</i>
-                        <span>2</span>
+                        <span>@Model.Comments.Count()</span>
                     </div>
                 </div>
 
