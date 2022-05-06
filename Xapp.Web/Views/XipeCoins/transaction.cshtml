@@ -5,54 +5,67 @@
 }
 
 <link href="~/css/trans.css" rel="stylesheet">
+
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <legend>XipeBank</legend>
-        </div>
-        <!-- panel preview -->
-        <div class="col-sm-5">
-            <h4>New transaction:</h4>
-            <div class="panel panel-default">
-                <div class="panel-body form-horizontal payment-form">
-                    <form action="transaction" method="post">
-                        <div class="form-group">
-                            <label for="concept" class="col-sm-3 control-label">Account</label>
-                            <div class="col-sm-9">
-                                <input type="number" class="form-control" id="account" name="IdSender">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="concept" class="col-sm-3 control-label">Destination Account</label>
-                            <div class="col-sm-9">
-                                <input type="number" class="form-control" id="destinationAcc" name="IdReceiver">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="concept" class="col-sm-3 control-label">Concept</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="concept" name="AmountConcept">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="amount" class="col-sm-3 control-label">Amount</label>
-                            <div class="col-sm-9">
-                                <input type="number" class="form-control" id="amount" name="amount">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="date" class="col-sm-3 control-label">Date</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">Finish</button>
-                    </form>
-                </div>
+<!------ Include the above in your HEAD tag ---------->
+<body>
+        <div class="row">
+            <div class="col-sm-12">
+                <legend>XipeBank</legend>
             </div>
-        </div> <!-- / panel preview -->
-        </div>
+            <!-- panel preview -->
+            <div class="col-sm-5">
+                <h4>New transaction:</h4>
+                <div class="panel panel-default">
+                    <div class="panel-body form-horizontal payment-form">
+                        <form action="transaction" method="post">
+                            <div class="form-group">
+                                <label for="concept" class="col-sm-3 control-label">Account</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="account" name="IdSender">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="concept" class="col-sm-3 control-label">Destination Account</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="destinationAcc" name="IdReceiver">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="concept" class="col-sm-3 control-label">Concept</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="concept" name="AmountConcept">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount" class="col-sm-3 control-label">Amount</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="amount" name="amount">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="date" class="col-sm-3 control-label">Date</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Finish</button>
+                        </form>
+                    </div>
+                   
+                </div>
+             <a href="~/Home/ProfileModoVista">
+             <button type="submit" class="btn-secundary">Profile</button>
+             </a>
+             <a href="~/XipeCoins/Index">
+             <button type="submit" class="btn-secundary">General</button>
+             </a>
+             <a href="~/XipeCoins/Account">
+             <button type="submit" class="btn-secundary">Account</button>
+             </a>
+             
+            </div> <!-- / panel preview -->
+            </div>
     
     <!--<script  src="~/js/trans.js"></script>-->
-</div>
+      </div>
+</body>
