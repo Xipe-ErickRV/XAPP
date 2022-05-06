@@ -63,8 +63,10 @@ namespace Xapp.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatePost(PostInput dto)
         {
+            var user_id = new PerfilService();
+            var user = await user_id.GetPerfil(User.Identity.Name);
             var obj = new FeedService();
-            var output = await obj.CreatePost(10, dto);
+            var output = await obj.CreatePost(user.Result.Id, dto);
 
             if (output.StatusCode == 200)
             {
@@ -76,6 +78,28 @@ namespace Xapp.Web.Controllers
             {
                 var message = output.Message;
                 string page = $"/Feed/index";
+                return Redirect(page);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateComment(CommentInput dto)
+        {
+            var user_id = new PerfilService();
+            var user = await user_id.GetPerfil(User.Identity.Name);
+            var obj = new FeedService();
+            var output = await obj.CreateComment(user.Result.Id, dto);
+
+            if (output.StatusCode == 200)
+            {
+                var resultOutput = output.Result;
+                string page = $"/Feed/Post?id={dto.PostId}";
+                return Redirect(page);
+            }
+            else
+            {
+                var message = output.Message;
+                string page = $"/Feed/Post?id={dto.PostId}";
                 return Redirect(page);
             }
         }

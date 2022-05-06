@@ -11,6 +11,5 @@ namespace Xapp.Domain.DTOs
         //Comment
         public string Content { get; set; }
         public int PostId { get; set; }
-        public int UserId { get; set; }
     }
 }

@@ -5,7 +5,6 @@
 }
 @model Xapp.Domain.DTOs.PostOutput
 <!DOCTYPE html>
-
 <html>
 
 <head>
@@ -65,7 +64,7 @@
                 <div class="profile_elements">
                     @if (Model.URLProfile != null)
                     {
-                        <img src=@Model.URLProfile class="user_pic">
+                        <img src="@Model.URLProfile" class="user_pic">
                     }
                     else{
                             <img src="~/img/profilepic.png"
@@ -88,11 +87,12 @@
         </div>
 
                 <!-- add comment -->
+        <form action="CreateComment" method="POST">
         <div id="add_comment" class="w3-display-container form-group">
-            <textarea id="comment_input" placeholder="Add a comment"></textarea>
-            <button type="submit" class="w3-button w3-round-large w3-display-bottomright">Send</button>
+            <textarea name="Content" id="comment_input" placeholder="Add a comment"></textarea>
+            <button name="PostId" value="@Model.PostId" type="submit" class="w3-button w3-round-large w3-display-bottomright">Send</button>
         </div>
-
+        </form>
         <!-- post comments -->
         <div id="comment_container">
             @foreach (var comment in @Model.Comments)
@@ -101,9 +101,9 @@
                 <div class="comment_elements">
 
                     <div class="profile_elements">
-                        @if (Model.URLProfile != null)
+                        @if (comment.URLProfile != null)
                         {
-                            <img src=@Model.URLProfile class="user_pic">
+                            <img src="@comment.URLProfile" class="user_pic">
                         }
                         else{
                                 <img src="~/img/profilepic.png"

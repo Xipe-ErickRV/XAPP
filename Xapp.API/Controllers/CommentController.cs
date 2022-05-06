@@ -26,13 +26,13 @@ namespace Xapp.API.Controllers
 
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(CommentInput dto)
+        public async Task<IActionResult> Create(int id,CommentInput dto)
         {
             var comment = new Comment()
             {
                 Content = dto.Content,
                 PostId = dto.PostId,
-                UserId = dto.UserId,
+                UserId = id,
                 Likes = 0
                 
             };
@@ -80,7 +80,13 @@ namespace Xapp.API.Controllers
             await _db.Comments.AddAsync(comment);
             await _db.SaveChangesAsync();
 
-            return Ok();
+            var outputf = new ApiResponse<Comment>
+            {
+                StatusCode = 200,
+                Message = "Error",
+                Result = comment
+            };
+            return Ok(outputf);
         }
 
         [HttpDelete("Delete")]

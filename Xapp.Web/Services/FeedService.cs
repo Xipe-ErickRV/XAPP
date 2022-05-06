@@ -10,6 +10,7 @@ namespace Xapp.Web.Services
     public class FeedService
     {
         private readonly string _baseUrl = "https://localhost:44331/api/Post";
+        private readonly string _comment = "https://localhost:44331/api/Comment";
 
         public async Task<ApiResponse<PostList>> GetAllPosts()
         {
@@ -68,6 +69,27 @@ namespace Xapp.Web.Services
             else
             {
                 var output = JsonConvert.DeserializeObject<ApiResponse<Post>>(response.Content);
+                return output;
+            }
+        }
+
+        public async Task<ApiResponse<Comment>> CreateComment(int id,CommentInput dto)
+        {
+            var url = $"{_comment}/Create?id={id}";
+            var client = new RestClient(url);
+            var request = new RestRequest() { Method = Method.Post };
+            request.RequestFormat = RestSharp.DataFormat.Json;
+            request.AddHeader("Content-Type", "application/json");
+            request.AddJsonBody(dto);
+            var response = await client.ExecuteAsync(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var output = JsonConvert.DeserializeObject<ApiResponse<Comment>>(response.Content);
+                return output;
+            }
+            else
+            {
+                var output = JsonConvert.DeserializeObject<ApiResponse<Comment>>(response.Content);
                 return output;
             }
         }

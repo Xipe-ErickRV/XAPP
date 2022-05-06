@@ -100,7 +100,7 @@ namespace Xapp.API.Controllers
             outpost.UserId = post.UserId;
             outpost.URLProfile = post.User.PerfilUser.UrlFoto;
             outpost.Likes = post.Likes;
-            outpost.UserName = post.User.Username;
+            outpost.UserName = post.User.PerfilUser.Nombre + " " + post.User.PerfilUser.Apellido;
             outpost.Comments = new List<CommentOutput>();
             outpost.PostId = post.Id;
 
@@ -108,12 +108,12 @@ namespace Xapp.API.Controllers
             {
                 var outcomment = new CommentOutput();
 
-                outcomment.UserName = comment.User.Username;
+                outcomment.UserName = comment.User.PerfilUser.Nombre + " " + comment.User.PerfilUser.Apellido;
                 outcomment.Content = comment.Content;
                 outcomment.UserId = comment.UserId;
                 outcomment.PostId = comment.PostId;
-                outpost.Likes = comment.Likes;
-                outpost.URLProfile = comment.User.PerfilUser.UrlFoto;
+                outcomment.Likes = comment.Likes;
+                outcomment.URLProfile = comment.User.PerfilUser.UrlFoto;
 
                 outpost.Comments.Add(outcomment);
             }
@@ -144,10 +144,10 @@ namespace Xapp.API.Controllers
         public async Task<IActionResult> GetAll()
         {
             var posts = await _db.Posts
+                .Include(x => x.User)
+                .ThenInclude(x => x.PerfilUser)
                 .Include(x => x.Comments)
                 .ThenInclude(x => x.User)
-                .ThenInclude(x => x.PerfilUser)
-                .Include(x => x.User)
                 .ThenInclude(x => x.PerfilUser)
                 .ToListAsync();
 
@@ -163,7 +163,7 @@ namespace Xapp.API.Controllers
                 outpost.UserId = post.UserId;
                 outpost.URLProfile = post.User.PerfilUser.UrlFoto;
                 outpost.Likes = post.Likes;
-                outpost.UserName = post.User.Username;
+                outpost.UserName = post.User.PerfilUser.Nombre + " " + post.User.PerfilUser.Apellido;
                 outpost.Comments = new List<CommentOutput>();
                 outpost.PostId = post.Id;
 
@@ -172,11 +172,11 @@ namespace Xapp.API.Controllers
                     var outcomment = new CommentOutput();
 
                     outcomment.Content = comment.Content;
-                    outcomment.UserName = comment.User.Username;
+                    outcomment.UserName = comment.User.PerfilUser.Nombre + " " + comment.User.PerfilUser.Apellido;
                     outcomment.UserId = comment.UserId;
                     outcomment.PostId = comment.PostId;
-                    outpost.Likes = comment.Likes;
-                    outpost.URLProfile = comment.User.PerfilUser.UrlFoto;
+                    outcomment.Likes = comment.Likes;
+                    outcomment.URLProfile = comment.User.PerfilUser.UrlFoto;
 
                     outpost.Comments.Add(outcomment);
                 }
