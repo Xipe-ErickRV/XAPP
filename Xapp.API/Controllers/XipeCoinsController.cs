@@ -142,26 +142,6 @@ namespace Xapp.API.XipeCoinsController
             outtransfer.AmountConcept = lista.Concept;
             outtransfer.DateTime = lista.CreationDate;
 
-
-            //var wallet = await _db.Wallets.FirstOrDefaultAsync(m => m.UserId == id);
-            //var list1 = await _db.Transfers.Where(m => m.WalletId == wallet.Id).Select(x => new Transfer
-            //{
-            //    Id = x.Id,
-            //    Amount = x.Amount,
-            //    Concept = x.Concept,
-            //    Receiver = x.Receiver,
-            //    Sender = x.Sender
-            //}).ToListAsync();
-
-            //var list2 = await _db.Transfers.Include(m => m.Wallet).Where(m => m.Wallet.UserId == id).Select(x => new Transfer
-            //{
-            //    Id = x.Id,
-            //    Amount = x.Amount,
-            //    Concept = x.Concept,
-            //    Receiver = x.Receiver,
-            //    Sender = x.Sender
-            //}).ToListAsync();
-
             if (lista == null)
             {
                 var output = new ApiResponse<string>
@@ -171,17 +151,6 @@ namespace Xapp.API.XipeCoinsController
                 };
                 return BadRequest(output);
             };
-
-            //List<Transfer> ab = lista.WalletlUser.Transfers;
-
-            //for (int i = 0; i < ab.Count; i++)
-            //{
-            //    Console.WriteLine(ab[i].Receiver);
-            //    Console.WriteLine(ab[i].Sender);
-            //    Console.WriteLine(ab[i].Concept);
-            //    Console.WriteLine(ab[i].Amount);
-            //    Console.WriteLine(ab[i].WalletId);
-            //}
 
             return Ok(outtransfer);
         }

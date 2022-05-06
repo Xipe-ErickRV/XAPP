@@ -27,27 +27,6 @@ namespace Xapp.Web.Controllers
             }
         }
 
-        /*[HttpGet]
-        public async Task<IActionResult> account()
-        {
-            var user_id = new PerfilService();
-            var user = await user_id.GetPerfil(User.Identity.Name);
-            var obj = new XipeCoinsService();
-            var output = await obj.GetProfile(user.Result.Id);
-
-            if (output.StatusCode == 200)
-            {
-                var resultOutput = (WalletUser)output.Result;
-                return View(resultOutput);
-            }
-            else
-            {
-                var message = output.Message;
-                return View();
-            }
-
-        }*/
-
         [HttpGet]
         public async Task<IActionResult> account(AccountOutput dto)
         {
