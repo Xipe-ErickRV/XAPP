@@ -24,5 +24,7 @@ namespace Xapp.Domain.DTOs.Perfil
 
         //[Required(ErrorMessage = "Please select file")]
         public IFormFile File { get; set; }
+
+        public IFormFile Image { get; set; }
     }
 }

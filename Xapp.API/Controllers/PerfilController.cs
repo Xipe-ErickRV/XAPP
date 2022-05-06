@@ -277,14 +277,11 @@ namespace Xapp.API.Controllers
                 {
                     dto.UrlCv = user.PerfilUser.UrlCv;
                 }
-                user.PerfilUser.MetodoEdit(dto);
-
-                if (dto.Skills != null)
+                if (user.PerfilUser.UrlFoto != null)
                 {
-                    _db.Skills.RemoveRange(user.PerfilUser.Skills);
-
-                    _db.Skills.AddRange(dto.Skills);
+                    dto.UrlImage = user.PerfilUser.UrlFoto;
                 }
+                user.PerfilUser.MetodoEdit(dto);
                
                 await _db.SaveChangesAsync();
 
@@ -366,6 +363,38 @@ namespace Xapp.API.Controllers
             }
         }
 
+        [HttpDelete("CvDelete")]
+        public async Task<IActionResult> CvDelete(string email)
+        {
+            var user = await _db.Users
+                .Include(x => x.PerfilUser)
+                .FirstOrDefaultAsync(x => x.Email == email);
+
+
+            user.PerfilUser.UrlCv = null;
+            await _db.SaveChangesAsync();
+
+            if (user.PerfilUser.Skills != null)
+            {
+                var output = new ApiResponse<Perfil>
+                {
+                    StatusCode = 200,
+                    Message = "Eliminaste una skill.",
+                    Result = user.PerfilUser
+                };
+                return Ok(output);
+            }
+            else
+            {
+                var output = new ApiResponse<Perfil>
+                {
+                    StatusCode = 400,
+                    Message = "Verifica tus campos."
+                };
+                return BadRequest(output);
+            }
+        }
+
         [HttpPost("UploadResume")]
         public async Task<IActionResult> UploadResume()
         {
@@ -391,6 +420,39 @@ namespace Xapp.API.Controllers
                 {
                     StatusCode = 200,
                     Message = "Resume uploaded",
+                    Result = url
+                };
+                return Ok(output);
+            }
+
+            return Ok();
+        }
+
+        [HttpPost("UploadImage")]
+        public async Task<IActionResult> UploadImage()
+        {
+            var photo = Request.Form.Files["photo"];
+
+            IFormFile file = photo;
+            if (file != null)
+            {
+                var blobSection = _config.GetSection("BlobSettings");
+                var connectionString = blobSection.GetSection("ConnectionString").Value;
+                var sourceContainerName = blobSection.GetSection("Container").Value;
+                var fileName = $"{file.FileName}";
+                BlobServiceClient blobServiceClient = new(connectionString);
+                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(sourceContainerName);
+                BlobHttpHeaders blobHttpHeader = new()
+                {
+                    ContentType = file.ContentType
+                };
+                BlobClient blobClient = containerClient.GetBlobClient(fileName);
+                await blobClient.UploadAsync(file.OpenReadStream(), blobHttpHeader);
+                string url = $"https://xipeappstorgae.blob.core.windows.net/xapp/{fileName}";
+                var output = new ApiResponse<string>
+                {
+                    StatusCode = 200,
+                    Message = "Profile photo uploaded",
                     Result = url
                 };
                 return Ok(output);

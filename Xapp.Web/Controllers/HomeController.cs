@@ -145,6 +145,24 @@ namespace Xapp.Web.Controllers
             }
         }
 
+        [Route("DeleteCv")]
+        public async Task<IActionResult> DeleteCv()
+        {
+            var obj = new PerfilService();
+            var output = await obj.DeleteCv(User.Identity.Name);
+
+            if (output.StatusCode == 200)
+            {
+                var message = output.Message;
+                return RedirectToAction("Profile", "Home");
+            }
+            else
+            {
+                var message = output.Message;
+                return RedirectToAction("Profile", "Home");
+            }
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
