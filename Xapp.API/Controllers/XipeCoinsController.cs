@@ -127,17 +127,17 @@ namespace Xapp.API.XipeCoinsController
 
 
         [HttpGet("GetTransfers")]
-        public async Task<IActionResult> GetTransfers(int id)
+        public async Task<IActionResult> GetTransfers(int WalletId)
         {
 
             var lista = await _db.Transfers
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == WalletId);
 
 
-            var outtransfer = new TransferOutput();
+            var outtransfer = new AccountOutput();
 
-            outtransfer.IdSender = lista.Sender;
-            outtransfer.IdReceiver = lista.Receiver;
+            outtransfer.Sender = lista.Sender;
+            outtransfer.Receiver = lista.Receiver;
             outtransfer.Amount = lista.Amount;
             outtransfer.AmountConcept = lista.Concept;
             outtransfer.DateTime = lista.CreationDate;

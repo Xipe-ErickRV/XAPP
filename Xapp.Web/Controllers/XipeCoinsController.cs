@@ -17,7 +17,7 @@ namespace Xapp.Web.Controllers
 
             if (output.StatusCode == 200)
             {
-                var resultOutput = (WalletUser)output.Result;
+                var resultOutput = (AccountOutput)output.Result;
                 return View(resultOutput);
             }
             else
@@ -27,7 +27,7 @@ namespace Xapp.Web.Controllers
             }
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public async Task<IActionResult> account()
         {
             var user_id = new PerfilService();
@@ -46,6 +46,27 @@ namespace Xapp.Web.Controllers
                 return View();
             }
 
+        }*/
+
+        [HttpGet]
+        public async Task<IActionResult> account(AccountOutput dto)
+        {
+            var user_id = new PerfilService();
+            var user = await user_id.GetPerfil(User.Identity.Name);
+            var obj = new XipeCoinsService();
+            var output = await obj.GetProfile(user.Result.Id);
+
+            if (output.StatusCode == 200)
+            {
+                var resultAccOutput = (AccountOutput)output.Result;
+                return View(resultAccOutput);
+            }
+            else
+            {
+                var message = output.Message;
+                return View();
+            }
+
         }
         public async Task<IActionResult> convenios()
         {
@@ -56,7 +77,7 @@ namespace Xapp.Web.Controllers
 
             if (output.StatusCode == 200)
             {
-                var resultOutput = (WalletUser)output.Result;
+                var resultOutput = (AccountOutput)output.Result;
                 return View(resultOutput);
             }
             else

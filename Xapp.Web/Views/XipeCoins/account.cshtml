@@ -3,7 +3,7 @@
     Layout = null;
 
 }
-@model Xapp.Domain.DTOs.WalletUser  
+@model Xapp.Domain.DTOs.AccountOutput  
 
 <!DOCTYPE html>
 <html lang="en" >
@@ -66,7 +66,7 @@
 			<button class="user-profile">
 				<span>@Model.Nombre @Model.Apellido</span>
 				<span>
-					@Model.UrlProfile
+					@Model.UrlFoto
 				</span>
 			</button>
 			<div class="app-header-actions-buttons">
@@ -175,11 +175,11 @@
 						<table>
 						<tbody>
 						<tr class="row100 body">
-						<td class="cell100 column1">Fernando</td>
-						<td class="cell100 column2">Randy</td>
-						<td class="cell100 column3">Ayuda C#</td>
-						<td class="cell100 column4">50</td>
-						<td class="cell100 column5">31/04/22</td>
+						<td class="cell100 column1">@Model.Sender</td>
+						<td class="cell100 column2">@Model.Receiver</td>
+						<td class="cell100 column3">@Model.AmountConcept</td>
+						<td class="cell100 column4">@Model.Amount</td>
+						<td class="cell100 column5">@Model.DateTime</td>
 
 						</tr>
 						<tr class="row100 body">
