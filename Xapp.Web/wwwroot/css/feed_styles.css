@@ -256,30 +256,10 @@ h1 {
 }
 
 .imagepost {
-    width: 40px;
-    height: 40px;
-}
-
-
-/* COMMENT CONTAINER*/
-
-#comment_container {
-    width: 90%;
-}
-
-.comment_block {
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-color: rgb(52, 52, 52);
-}
-
-.comment_elements {
-    padding: 10px;
-}
-
-.comment_author {
-    color: rgb(28, 27, 27);
-    padding-left: 1%;
+    width: 100%;
+    height: auto;
+    margin 0 auto;
+    border-radius: 1rem;
 }
 
 /* ADD COMMENT */
@@ -287,7 +267,6 @@ h1 {
 #add_comment {
     width: 90%;
     height: 145px;
-    margin-bottom: 2%;
 }
 
 #comment_input {
@@ -307,6 +286,27 @@ h1 {
     color: rgb(255, 255, 255);
 }
 
+/* COMMENT CONTAINER*/
+
+#comment_container {
+    width: 90%;
+    margin-bottom: 5%;
+}
+
+.comment_block {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(52, 52, 52);
+}
+
+.comment_elements {
+    padding: 10px;
+}
+
+.comment_author {
+    color: rgb(28, 27, 27);
+    padding-left: 1%;
+}
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
