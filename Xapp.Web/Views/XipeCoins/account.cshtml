@@ -61,12 +61,20 @@
 
 			</div>
 		</div>
-		<div class="app-header-actions">
-			<a href="#Perfil" class="active"></a>
+		<div class="app-header-actions"> 
+			<a href="/Home/ProfileModoVista" class="active"></a>  <!-- Hacer que vaya a perfil -->
 			<button class="user-profile">
 				<span>@Model.Nombre @Model.Apellido</span>
 				<span>
-					@Model.UrlFoto
+					 @if (@Model.UrlFoto != null)
+                            {
+                                <img src="@Model.UrlFoto" 
+                                     class="user_pic">
+                            }
+                            else{
+                                 <img src="~/img/profilepic.png"
+                                     class="user_pic"/>
+                            }
 				</span>
 			</button>
 			<div class="app-header-actions-buttons">
@@ -174,161 +182,20 @@
 						<div class="table100-body js-pscroll">
 						<table>
 						<tbody>
-						<tr class="row100 body">
-						<td class="cell100 column1">@Model.Sender</td>
-						<td class="cell100 column2">@Model.Receiver</td>
-						<td class="cell100 column3">@Model.AmountConcept</td>
-						<td class="cell100 column4">@Model.Amount</td>
-						<td class="cell100 column5">@Model.DateTime</td>
-
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Fernando</td>
-						<td class="cell100 column2">Randy</td>
-						<td class="cell100 column3">Ayuda Python</td>
-						<td class="cell100 column4">100</td>
-						<td class="cell100 column5">30/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Randy</td>
-						<td class="cell100 column2">Fernando</td>
-						<td class="cell100 column3">Ayuda C++</td>
-						<td class="cell100 column4">50</td>
-						<td class="cell100 column5">29/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Fernando</td>
-						<td class="cell100 column2">Randy</td>
-						<td class="cell100 column3">Ayuda en LOL</td>
-						<td class="cell100 column4">100</td>
-						<td class="cell100 column5">28/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Randy</td>
-						<td class="cell100 column2">Fernado</td>
-						<td class="cell100 column3">Ayuda SCSS</td>
-						<td class="cell100 column4">25</td>
-						<td class="cell100 column5">27/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Randy</td>
-						<td class="cell100 column2">Fernando</td>
-						<td class="cell100 column3">Ayuda HTML</td>
-						<td class="cell100 column4">25</td>
-						<td class="cell100 column5">26/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Cardio Blast</td>
-						<td class="cell100 column2">Gym</td>
-						<td class="cell100 column3">5:00 PM - 7:00 PM</td>
-						<td class="cell100 column4">Randy Porter</td>
-						<td class="cell100 column5">25/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Pilates Reformer</td>
-						<td class="cell100 column2">Gym</td>
-						<td class="cell100 column3">8:00 AM - 9:00 AM</td>
-						<td class="cell100 column4">Randy Porter</td>
-						<td class="cell100 column5">24/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Supple Spine and Shoulders</td>
-						<td class="cell100 column2">Yoga</td>
-						<td class="cell100 column3">6:30 AM - 8:00 AM</td>
-						<td class="cell100 column4">Randy Porter</td>
-						<td class="cell100 column5">23/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Yoga for Divas</td>
-						<td class="cell100 column2">Yoga</td>
-						<td class="cell100 column3">9:00 AM - 11:00 AM</td>
-						<td class="cell100 column4">Donna Wilson</td>
-						<td class="cell100 column5">22/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Virtual Cycle</td>
-						<td class="cell100 column2">Gym</td>
-						<td class="cell100 column3">8:00 AM - 9:00 AM</td>
-						<td class="cell100 column4">Randy Porter</td>
-						<td class="cell100 column5">21/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Like a butterfly</td>
-						<td class="cell100 column2">Boxing</td>
-						<td class="cell100 column3">9:00 AM - 11:00 AM</td>
-						<td class="cell100 column4">Aaron Chapman</td>
-						<td class="cell100 column5">20/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Mind & Body</td>
-						<td class="cell100 column2">Yoga</td>
-						<td class="cell100 column3">8:00 AM - 9:00 AM</td>
-						<td class="cell100 column4">Adam Stewart</td>
-						<td class="cell100 column5">19/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Crit Cardio</td>
-						<td class="cell100 column2">Gym</td>
-						<td class="cell100 column3">9:00 AM - 10:00 AM</td>
-						<td class="cell100 column4">Aaron Chapman</td>
-						<td class="cell100 column5">18/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Wheel Pose Full Posture</td>
-						<td class="cell100 column2">Yoga</td>
-						<td class="cell100 column3">7:00 AM - 8:30 AM</td>
-						<td class="cell100 column4">Donna Wilson</td>
-						<td class="cell100 column5">17/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Playful Dancer's Flow</td>
-						<td class="cell100 column2">Yoga</td>
-						<td class="cell100 column3">8:00 AM - 9:00 AM</td>
-						<td class="cell100 column4">Donna Wilson</td>
-						<td class="cell100 column5">16/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Zumba Dance</td>
-						<td class="cell100 column2">Dance</td>
-						<td class="cell100 column3">5:00 PM - 7:00 PM</td>
-						<td class="cell100 column4">Donna Wilson</td>
-						<td class="cell100 column5">15/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Cardio Blast</td>
-						<td class="cell100 column2">Gym</td>
-						<td class="cell100 column3">5:00 PM - 7:00 PM</td>
-						<td class="cell100 column4">Randy Porter</td>
-						<td class="cell100 column5">14/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Pilates Reformer</td>
-						<td class="cell100 column2">Gym</td>
-						<td class="cell100 column3">8:00 AM - 9:00 AM</td>
-						<td class="cell100 column4">Randy Porter</td>
-						<td class="cell100 column5">13/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Supple Spine and Shoulders</td>
-						<td class="cell100 column2">Yoga</td>
-						<td class="cell100 column3">6:30 AM - 8:00 AM</td>
-						<td class="cell100 column4">Randy Porter</td>
-						<td class="cell100 column5">12/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Yoga for Divas</td>
-						<td class="cell100 column2">Yoga</td>
-						<td class="cell100 column3">9:00 AM - 11:00 AM</td>
-						<td class="cell100 column4">Donna Wilson</td>
-						<td class="cell100 column5">11/04/22</td>
-						</tr>
-						<tr class="row100 body">
-						<td class="cell100 column1">Virtual Cycle</td>
-						<td class="cell100 column2">Gym</td>
-						<td class="cell100 column3">8:00 AM - 9:00 AM</td>
-						<td class="cell100 column4">Randy Porter</td>
-						<td class="cell100 column5">10/04/22</td>
-						</tr>
+					
+						@foreach(var transfers in Model.TransferOutputs)
+						{
+							<tr class="row100 body">
+							<td class="cell100 column1">@transfers.NameSender</td>
+							<td class="cell100 column2">@transfers.NameReceiver</td>
+							<td class="cell100 column3">@transfers.AmountConcept</td>
+							<td class="cell100 column4">@transfers.Amount</td>
+							<td class="cell100 column5">@transfers.DateTime</td>
+							
+							</tr>
+						}				
+						
+									
 						</tbody>
 						</table>
 						</div>

@@ -56,7 +56,15 @@
 			<button class="user-profile">
 				<span>@Model.Nombre @Model.Apellido</span>
 				<span>
-					@Model.UrlFoto
+					   @if (@Model.UrlFoto != null)
+                            {
+                                <img src="@Model.UrlFoto" 
+                                     class="user_pic">
+                            }
+                            else{
+                                 <img src="~/img/profilepic.png"
+                                     class="user_pic"/>
+                            }
 				</span>
 			</button>
 			<div class="app-header-actions-buttons">
@@ -189,10 +197,7 @@
 				</div>
 
 				<div class="transfers">
-					<div class="transfer1">
-						<!--<div class="transfer-logo">
-							<img src="https://assets.codepen.io/285131/apple.svg" />
-						</div>-->					
+					<div class="transfer1">					
 						<dl class="transfer-details">
 							<div>
 								<dt>Sender</dt>
