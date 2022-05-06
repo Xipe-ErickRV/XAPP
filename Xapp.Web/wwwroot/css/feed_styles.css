@@ -255,6 +255,12 @@ h1 {
         align-items: center;
     }
 
+.imagepost {
+    width: 40px;
+    height: 40px;
+}
+
+
 /* COMMENT CONTAINER*/
 
 #comment_container {
@@ -330,3 +336,4 @@ h1 {
         font-size: 12px;
     }
 }
+
