@@ -53,7 +53,7 @@
                                     <img src="~/img/profilepic.png"
                                      id="photo" />
                                 }
-                                <input asp-for="Image" type="file" id="file">
+                                <input asp-for="Image" type="file" accept="image/*" id="file">
                                 <label for="file" id="uploadBtn"> Change Photo </label>
 
                             </div>
@@ -76,7 +76,7 @@
                                 </div><br>
                                 <div class="col-md-12 afterimg">
                                     <label class="labels">Email</label>
-                                    <input name="Email" type="email" class="form-control" placeholder="example@example.com" value="@Model.Email">
+                                    <input name="Email" type="email" class="form-control" placeholder="example@example.com" value="@Model.Email" required>
                                 </div><br>
                                 <div class="col-md-12 afterimg">
                                     <label class="labels">Birthday</label>
