@@ -51,8 +51,7 @@ namespace Xapp.API.XipeCoinsController
                 var output = new ApiResponse<string>
                 {
                     StatusCode = 400,
-                    Message = "No se encontró el receptor",
-                    Result = "No se encontró el receptor "
+                    Message = "No se encontró el receptor"
                 };
                 return BadRequest(output);
             }
@@ -65,8 +64,7 @@ namespace Xapp.API.XipeCoinsController
                 var output = new ApiResponse<string>
                 {
                     StatusCode = 400,
-                    Message = "No se encontró el emisor",
-                    Result = "No se encontró el emisor"
+                    Message = "No se encontró el emisor"
                 };
                 return BadRequest(output);
             }
@@ -76,8 +74,7 @@ namespace Xapp.API.XipeCoinsController
                 var output = new ApiResponse<string>
                 {
                     StatusCode = 400,
-                    Message = "El emisor no tiene saldo suficiente",
-                    Result = "El emisor no tiene saldo suficiente"
+                    Message = "El emisor no tiene saldo suficiente"
                 };
                 return BadRequest(output);
             }
@@ -119,8 +116,8 @@ namespace Xapp.API.XipeCoinsController
             var outputOk = new ApiResponse<string>
             {
                 StatusCode = 200,
-                Message = "Se transfirió correctamente",
-                Result = "Transferencia realizada"
+                Message = "Se transfirió correctamente"
+                //Result = "Transferencia realizada"
             };
             return Ok(outputOk);
         }
@@ -170,7 +167,7 @@ namespace Xapp.API.XipeCoinsController
                 {
                     StatusCode = 400,
                     Message = "El Usuario no tiene Wallet registrada",
-                    Result = "El usuario no tiene Wallet  registrada"
+                 //   Result = "El usuario no tiene Wallet  registrada"
                 };
                 return BadRequest(output);
             }
@@ -183,7 +180,7 @@ namespace Xapp.API.XipeCoinsController
                 {
                     StatusCode = 400,
                     Message = "El Usuario no tiene movimientos registrados",
-                    Result= "El usuario no tiene movimientos registrados"
+                   // Result= "El usuario no tiene movimientos registrados"
                 };
                 return BadRequest(output);
             }
@@ -204,7 +201,7 @@ namespace Xapp.API.XipeCoinsController
                 {
                     StatusCode = 400,
                     Message = "El Usuario no tiene movimientos registrados donde reciba XipeCoins",
-                    Result = "El usuario no ha recibido XipeCoins"
+                   // Result = "El usuario no ha recibido XipeCoins"
                 };
                 return BadRequest(output);
             }
@@ -227,7 +224,7 @@ namespace Xapp.API.XipeCoinsController
                 {
                     StatusCode = 400,
                     Message = "No se encontró al usuario",
-                    Result = ""
+                   // Result = ""
                 };
                 return BadRequest(output1);
             }
