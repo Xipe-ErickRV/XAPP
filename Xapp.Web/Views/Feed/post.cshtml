@@ -79,21 +79,21 @@
 
                 @if (@Model.Multimedia != null)
                 {
-                    <img src="@Model.Multimedia"
-                        class="imagepost"/>
+                    <img class="imagepost" src="@Model.Multimedia"/>
                 }
 
-                <span style="color:rgb(226, 36, 50)">@Model.Comments.Count() COMMENTS</span>
+                
             </div>
         </div>
 
-                <!-- add comment -->
+         <!-- add comment -->  
         <div id="add_comment" class="w3-display-container form-group">
             <textarea id="comment_input" placeholder="Add a comment"></textarea>
             <button type="submit" class="w3-button w3-round-large w3-display-bottomright">Send</button>
         </div>
 
         <!-- post comments -->
+        <span style="color:rgb(226, 36, 50)">@Model.Comments.Count() COMMENTS</span>
         <div id="comment_container">
             @foreach (var comment in @Model.Comments)
            {
